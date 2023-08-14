@@ -151,11 +151,12 @@ public class ConsOrdemServico extends javax.swing.JFrame {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         if (((List<Usuario>) new UsuaFactory().consultar(this.idUsuario)).get(0).getTipo() == 'C') {
             int idCliente = 
-                ((Cliente) (new ClienteFactory()
-                    .consultar("from Cliente where idUsuario = " + this.idUsuario)).get(0)).getId();          
-            lstOS = new OrdemServFactory().consultar("from OrdemServico where idCliente = "+idCliente+" and status = 0");
+                ((Cliente)
+                    ((List<Object>) 
+                        (new ClienteFactory().consultar("from Cliente where idUsuario = " + this.idUsuario))).get(0)).getId();          
+            lstOS = (List<Object>) new OrdemServFactory().consultar("from OrdemServico where idCliente = "+idCliente+" and status = 0");
         } else {
-            lstOS = new OrdemServFactory().consultar("from OrdemServico");
+            lstOS = (List<Object>) new OrdemServFactory().consultar("from OrdemServico");
         } 
         this.carregarTabela("");
     }//GEN-LAST:event_formWindowOpened

@@ -56,9 +56,12 @@ public class TesteUsuario {
         });*/
         
         // Está logado
-        Usuario usua4 = new Usuario();
+        /*Usuario usua4 = new Usuario();
         usua4.setUsuario("user");
         usua4.setSenha("pass");
-        System.out.println("Logado? " + ((new UsuaFactory().isLogged(usua4)).size() > 0));
+        System.out.println("Logado? " + ((new UsuaFactory().isLogged(usua4)).size() > 0));*/
+        
+        // Exclusão
+        new UsuaFactory().excluir(3);  
     }
 }

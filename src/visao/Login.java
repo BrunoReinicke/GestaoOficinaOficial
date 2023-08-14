@@ -128,7 +128,7 @@ public class Login extends JFrame {
         u.setUsuario(jTextField1.getText());
         u.setSenha(senha);
        
-        if (new UsuaFactory().isLogged(u).size() > 0) {
+        if (!new UsuaFactory().isLogged(u).isEmpty()) {
             this.idUsuario = ((Usuario) new UsuaFactory().isLogged(u).get(0)).getId();
             
             if (((Usuario) new UsuaFactory().isLogged(u).get(0)).getTipo() == 'A') {

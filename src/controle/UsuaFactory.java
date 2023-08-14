@@ -18,12 +18,13 @@ public class UsuaFactory extends Factory {
         super.salvar(obj, "UsuarioPU");
     }
     
-    public Object consultar() {
-        return super.consultar("from Usuario");
+    @Override
+    public Object consultar(String sql) {
+        return super.consultar("from Usuario" + sql);
     }
     
-    public List<Object> isLogged(Usuario u) {
-        return super.consultar(
+    public List<Usuario> isLogged(Usuario u) {
+        return (List<Usuario>) super.consultar(
             "from Usuario where usuario = '"+u.getUsuario()+"' and senha = '"+u.getSenha()+"'"); 
     }
     

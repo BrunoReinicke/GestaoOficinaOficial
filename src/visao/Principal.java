@@ -57,7 +57,7 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Cosultar OS");
+        jButton2.setText("Consultar OS");
         jButton2.setName("btnConsultar"); // NOI18N
         jButton2.addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {

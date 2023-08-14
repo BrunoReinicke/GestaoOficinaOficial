@@ -130,7 +130,7 @@ public class ConsUsuario extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
-        List<Usuario> list = (List<Usuario>) new UsuaFactory().consultar();
+        List<Usuario> list = (List<Usuario>) new UsuaFactory().consultar("");
         String colunas[]   = {"ID", "Usuário", "Senha", "Tipo"};
         DefaultTableModel modelo = new DefaultTableModel(colunas, 0);
         

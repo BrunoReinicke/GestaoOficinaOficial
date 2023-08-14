@@ -12,6 +12,7 @@ import controle.PecaFactory;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.List;
 import modelo.bean.Carro;
 import modelo.bean.Cliente;
 import modelo.bean.OrdemServico;
@@ -161,14 +162,14 @@ public class CadOrdemServico extends javax.swing.JFrame {
         OrdemServico os = new OrdemServico();
         
         os.setCliente(
-            ((Cliente) new ClienteFactory()
-                .consultar("from Cliente where nome like '" + jTextField1.getText() + "'").get(0)));
+            ((Cliente) ((List<Cliente>) new ClienteFactory()
+                .consultar("from Cliente where nome like '" + jTextField1.getText() + "'")).get(0)));
         os.setCarro(
-            ((Carro) new CarroFactory()
-                .consultar("from Carro where nome like '" + jTextField9.getText() + "'").get(0)));
+            ((Carro) ((List<Carro>) new CarroFactory()
+                .consultar("from Carro where nome like '" + jTextField9.getText() + "'")).get(0)));
         os.setPeca(
-            ((Peca) new PecaFactory()
-                .consultar("from Peca where nome like '" + jTextField10.getText() + "'").get(0)));
+            ((Peca) ((List<Peca>) new PecaFactory()
+                .consultar("from Peca where nome like '" + jTextField10.getText() + "'")).get(0)));
         
         try {
             os.setDtAbertura(formato.parse(jTextField11.getText()));

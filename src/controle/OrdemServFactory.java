@@ -17,7 +17,7 @@ public class OrdemServFactory extends Factory {
 
     public void salvar(Object obj) {
         List<Object> lstOS = 
-            super.consultar(
+            (List<Object>) super.consultar(
                 "from OrdemServico where idCarro = " + ((OrdemServico) obj).getCarro().getId() + " and status = 0");
         
         if (lstOS.size() > 0) {
