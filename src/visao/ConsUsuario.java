@@ -8,6 +8,7 @@ package visao;
 import controle.UsuaFactory;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import modelo.bean.Usuario;
 
 /**
@@ -19,10 +20,20 @@ public class ConsUsuario extends javax.swing.JFrame {
     /**
      * Creates new form ConsUsuario
      */
+    private boolean cadastro;
+    
     public ConsUsuario() {
         initComponents();
     }
 
+    public void setCadastro(boolean cadastro) {
+        this.cadastro = cadastro;
+    }
+    
+    public boolean getCadastro() {
+        return this.cadastro;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -98,6 +109,11 @@ public class ConsUsuario extends javax.swing.JFrame {
             }
         });
         jTable3.setName("jtUsuario"); // NOI18N
+        jTable3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable3MouseClicked(evt);
+            }
+        });
         jTable3.addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
                 jTable3ComponentShown(evt);
@@ -143,6 +159,12 @@ public class ConsUsuario extends javax.swing.JFrame {
         }
         jTable3.setModel(modelo);
     }//GEN-LAST:event_formWindowOpened
+
+    private void jTable3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable3MouseClicked
+        int row = jTable3.getSelectedRow();
+        TableModel modelo = jTable3.getModel();
+        this.cadastro = false;
+    }//GEN-LAST:event_jTable3MouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
