@@ -5,6 +5,8 @@
  */
 package visao;
 
+import javax.swing.JButton;
+
 /**
  *
  * @author bruno
@@ -17,6 +19,7 @@ public class Principal extends javax.swing.JFrame {
     private ConsUsuario conUs;
     private ConsOrdemServico conOS;
     private CadOrdemServico cadOS;
+    protected Object obj;
     
     /**
      * Creates new form Principal
@@ -232,4 +235,8 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     // End of variables declaration//GEN-END:variables
+
+    public JButton getjButton4() {
+        return this.jButton4;
+    }
 }

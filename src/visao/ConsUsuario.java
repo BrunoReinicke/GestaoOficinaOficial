@@ -7,6 +7,7 @@ package visao;
 
 import controle.UsuaFactory;
 import java.util.List;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import modelo.bean.Usuario;
@@ -21,6 +22,9 @@ public class ConsUsuario extends javax.swing.JFrame {
      * Creates new form ConsUsuario
      */
     private boolean cadastro;
+    private JTextField jtfUsuario;
+    private JTextField jtfSenha;
+    private JTextField jtfTipo;
     
     public ConsUsuario() {
         initComponents();
@@ -34,6 +38,18 @@ public class ConsUsuario extends javax.swing.JFrame {
         return this.cadastro;
     }
     
+    public void setJtfUsuario(JTextField jtfUsuario) {
+        this.jtfUsuario = jtfUsuario;
+    }
+    
+    public void setJtfSenha(JTextField jtfSenha) {
+        this.jtfSenha = jtfSenha;
+    }
+    
+    public void setJtfTipo(JTextField jtfTipo) {
+        this.jtfTipo = jtfTipo;
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -161,9 +177,9 @@ public class ConsUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowOpened
 
     private void jTable3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable3MouseClicked
-        int row = jTable3.getSelectedRow();
-        TableModel modelo = jTable3.getModel();
-        this.cadastro = false;
+        DefaultTableModel modelo = (DefaultTableModel) jTable3.getModel();
+    //    Usuario usuar = (Usuario) modelo.getDataVector().get(jTable3.getSelectedRow());
+        this.jtfUsuario.setText("Teste");
     }//GEN-LAST:event_jTable3MouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
