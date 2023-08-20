@@ -12,6 +12,7 @@ package visao;
 import modelo.bean.Usuario;
 import controle.UsuaFactory;
 import java.util.List;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 public class CadtUsuario extends javax.swing.JFrame {
@@ -26,12 +27,7 @@ public class CadtUsuario extends javax.swing.JFrame {
     public CadtUsuario() {
         initComponents();
         this.idUsuario = 0;
-        this.usua = new Object();
-    
-        List<Usuario> list = (List<Usuario>) new UsuaFactory().consultar("");
-        for (int i = 0; i < list.size(); i++) {
-        //    jComboBox1.addItem(list.get(i).getUsuario());
-        }
+        jTfIDUsuario.setVisible(false);
     }
     
     public Object getUsua() {
@@ -62,6 +58,7 @@ public class CadtUsuario extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jtfUsuario = new javax.swing.JTextField();
+        jTfIDUsuario = new javax.swing.JTextField();
 
         popupMenu1.setLabel("popupMenu1");
 
@@ -121,7 +118,7 @@ public class CadtUsuario extends javax.swing.JFrame {
             }
         });
 
-        jButton4.setText("Localizar");
+        jButton4.setText("Selecionar");
         jButton4.setName("btnSalvar"); // NOI18N
         jButton4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -140,6 +137,8 @@ public class CadtUsuario extends javax.swing.JFrame {
             }
         });
 
+        jTfIDUsuario.setText("ID");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -150,30 +149,36 @@ public class CadtUsuario extends javax.swing.JFrame {
                         .addGap(14, 14, 14)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(134, 134, 134))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGap(134, 134, 134))))
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton2)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton3))
-                            .addGroup(layout.createSequentialGroup()
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel1)
+                                .addGap(2, 2, 2))
+                            .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jButton2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jtfUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jButton3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jtfUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton4)
-                    .addComponent(jButton1))
-                .addGap(136, 136, 136))
+                                .addComponent(jButton1))
+                            .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jTfIDUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton4)
+                .addGap(146, 146, 146))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -185,18 +190,20 @@ public class CadtUsuario extends javax.swing.JFrame {
                     .addComponent(jtfUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(15, 15, 15)
+                .addGap(14, 14, 14)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
                     .addComponent(jButton2)
-                    .addComponent(jButton3))
-                .addGap(0, 156, Short.MAX_VALUE))
+                    .addComponent(jButton3)
+                    .addComponent(jButton1))
+                .addGap(18, 18, 18)
+                .addComponent(jTfIDUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 111, Short.MAX_VALUE))
         );
 
         jButton2.getAccessibleContext().setAccessibleName("");
@@ -210,7 +217,7 @@ public class CadtUsuario extends javax.swing.JFrame {
             senha += jPasswordField1.getPassword()[i];
         }
         Usuario u = new Usuario();
-    //    u.setUsuario(jComboBox1.getSelectedItem().toString());
+        u.setUsuario(jtfUsuario.getText());
         u.setSenha(senha);
         u.setTipo(jTextField1.getText().charAt(0));
         new UsuaFactory().salvar(u);
@@ -221,13 +228,7 @@ public class CadtUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_jPasswordField1ActionPerformed
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
-      /*  new UsuaFactory().excluir(((List<Usuario>) new UsuaFactory().consultar(
-                " where usuario = '"+jComboBox1.getSelectedItem().toString()+"'")).get(0).getId());
-        jComboBox1.removeAllItems();
-        List<Usuario> list = (List<Usuario>) new UsuaFactory().consultar("");
-        for (int i = 0; i < list.size(); i++) {
-            jComboBox1.addItem(list.get(i).getUsuario());
-        }*/
+        new UsuaFactory().excluir(Integer.valueOf(jTfIDUsuario.getText()));
     }//GEN-LAST:event_jButton2MouseClicked
 
     private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
@@ -236,8 +237,8 @@ public class CadtUsuario extends javax.swing.JFrame {
             senha += jPasswordField1.getPassword()[i];
         }   
         Usuario u = new Usuario();
-        u.setId(this.idUsuario);
-     //   u.setUsuario(jComboBox1.getSelectedItem().toString());
+        u.setId(Integer.valueOf(jTfIDUsuario.getText()));
+        u.setUsuario(jtfUsuario.getText());
         u.setSenha(senha);
         u.setTipo(jTextField1.getText().charAt(0));
         new UsuaFactory().alterar(u);
@@ -253,7 +254,10 @@ public class CadtUsuario extends javax.swing.JFrame {
                 ConsUsuario cous = new ConsUsuario();
                 cous.setVisible(true);
                 cous.setCadastro(true);
+                cous.setJtfIdfUsuario(getJtfIDUsuario());
                 cous.setJtfUsuario(getJtfUsuario());
+                cous.setJtfSenha(getJpfSenha());
+                cous.setJtfTipo(getJtfTipo());
             }
         });
     }//GEN-LAST:event_jButton4MouseClicked
@@ -315,11 +319,24 @@ public class CadtUsuario extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTfIDUsuario;
     private javax.swing.JTextField jtfUsuario;
     private java.awt.PopupMenu popupMenu1;
     // End of variables declaration//GEN-END:variables
 
     public JTextField getJtfUsuario() {
         return this.jtfUsuario;
+    }
+    
+    public JPasswordField getJpfSenha() {
+        return this.jPasswordField1;
+    }
+    
+    public JTextField getJtfTipo() {
+        return this.jTextField1;
+    }
+    
+    public JTextField getJtfIDUsuario() {
+        return this.jTfIDUsuario;
     }
 }
