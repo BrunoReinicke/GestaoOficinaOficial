@@ -18,7 +18,7 @@ import modelo.bean.Usuario;
  *
  * @author bruno
  */
-public class ConsUsuario extends javax.swing.JFrame {
+public class ConsUsuario extends ConsPadrao {
 
     /**
      * Creates new form ConsUsuario
@@ -28,11 +28,10 @@ public class ConsUsuario extends javax.swing.JFrame {
     private JPasswordField jtfSenha;
     private JTextField jtfTipo;
     private JTextField jtfIdUsuario;
-    private int row;
     
     public ConsUsuario() {
         initComponents();
-        this.row = -1;
+        this.cadastro = false;
     }
 
     public void setCadastro(boolean cadastro) {
@@ -59,13 +58,14 @@ public class ConsUsuario extends javax.swing.JFrame {
         this.jtfTipo = jtfTipo;
     }
     
-    public void preencherTela(String usuario) {
+    @Override
+    public void listar(String info) {
         List<Usuario> list;
         
-        if (usuario.equals(""))
+        if (info.equals(""))
            list = (List<Usuario>) new UsuaFactory().consultar("");
         else
-           list = (List<Usuario>) new UsuaFactory().consultar(" where usuario like '"+usuario+"%'");
+           list = (List<Usuario>) new UsuaFactory().consultar(" where usuario like '"+info+"%'");
             
         String colunas[]   = {"ID", "Usuário", "Senha", "Tipo"};
         DefaultTableModel modelo = new DefaultTableModel(colunas, 0);
@@ -80,6 +80,13 @@ public class ConsUsuario extends javax.swing.JFrame {
         jTable3.setModel(modelo);
     }
 
+    @Override
+    public void excluir() {
+        DefaultTableModel modelo = (DefaultTableModel) jTable3.getModel();
+        Vector usuar = (Vector) modelo.getDataVector().get(super.row);
+        new UsuaFactory().excluir(Integer.valueOf(usuar.get(0).toString()));
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -95,9 +102,6 @@ public class ConsUsuario extends javax.swing.JFrame {
         jTable2 = new javax.swing.JTable();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable3 = new javax.swing.JTable();
-        btnAtualizar = new java.awt.Button();
-        lbPesquisar = new javax.swing.JLabel();
-        jtfPesquisar = new javax.swing.JTextField();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -174,51 +178,20 @@ public class ConsUsuario extends javax.swing.JFrame {
         });
         jScrollPane3.setViewportView(jTable3);
 
-        btnAtualizar.setLabel("Atualizar");
-        btnAtualizar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAtualizarActionPerformed(evt);
-            }
-        });
-
-        lbPesquisar.setText("Pesquisar:");
-
-        jtfPesquisar.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jtfPesquisarKeyPressed(evt);
-            }
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jtfPesquisarKeyReleased(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 378, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lbPesquisar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jtfPesquisar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnAtualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 550, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(lbPesquisar)
-                        .addComponent(jtfPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btnAtualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addGap(12, 12, 12)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 311, Short.MAX_VALUE))
+                .addGap(0, 48, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -229,35 +202,15 @@ public class ConsUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_jTable3ComponentShown
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        this.preencherTela("");
+     //   this.preencherTela("");
     }//GEN-LAST:event_formWindowOpened
 
     private void jTable3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable3MouseClicked
-       /* if (this.row == jTable3.getSelectedRow()) {
-            DefaultTableModel modelo = (DefaultTableModel) jTable3.getModel();
-            Vector usuar = (Vector) modelo.getDataVector().get(jTable3.getSelectedRow());
-            this.jtfIdUsuario.setText(usuar.get(0).toString());
-            this.jtfUsuario.setText(usuar.get(1).toString());
-            this.jtfSenha.setText(usuar.get(2).toString());
-            this.jtfTipo.setText(usuar.get(3).toString());
-        }
-        this.row = jTable3.getSelectedRow();*/
+        super.row = jTable3.getSelectedRow();
     }//GEN-LAST:event_jTable3MouseClicked
 
-    private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
-        this.preencherTela("");
-    }//GEN-LAST:event_btnAtualizarActionPerformed
-
-    private void jtfPesquisarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfPesquisarKeyPressed
-      //  this.preencherTela(jtfPesquisar.getText() + evt.getKeyChar());
-    }//GEN-LAST:event_jtfPesquisarKeyPressed
-
-    private void jtfPesquisarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfPesquisarKeyReleased
-        this.preencherTela(jtfPesquisar.getText());
-    }//GEN-LAST:event_jtfPesquisarKeyReleased
-
     private void jTable3MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable3MouseReleased
-        if (this.row == jTable3.getSelectedRow()) {
+        if (super.row == jTable3.getSelectedRow()) {
             DefaultTableModel modelo = (DefaultTableModel) jTable3.getModel();
             Vector usuar = (Vector) modelo.getDataVector().get(jTable3.getSelectedRow());
             this.jtfIdUsuario.setText(usuar.get(0).toString());
@@ -265,18 +218,14 @@ public class ConsUsuario extends javax.swing.JFrame {
             this.jtfSenha.setText(usuar.get(2).toString());
             this.jtfTipo.setText(usuar.get(3).toString());
         }
-        this.row = jTable3.getSelectedRow();
     }//GEN-LAST:event_jTable3MouseReleased
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private java.awt.Button btnAtualizar;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable3;
-    private javax.swing.JTextField jtfPesquisar;
-    private javax.swing.JLabel lbPesquisar;
     // End of variables declaration//GEN-END:variables
 }
