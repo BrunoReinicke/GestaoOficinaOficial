@@ -6,12 +6,13 @@
 package visao;
 
 import controle.UsuaFactory;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.List;
 import java.util.Vector;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 import modelo.bean.Usuario;
 
 /**

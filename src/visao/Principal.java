@@ -5,6 +5,7 @@
  */
 package visao;
 
+import java.awt.event.KeyListener;
 import javax.swing.JButton;
 
 /**
@@ -155,6 +156,7 @@ public class Principal extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         this.conUs = new ConsUsuario();
         this.conUs.setVisible(true);
+        this.conUs.addKeyListener((KeyListener) this);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked

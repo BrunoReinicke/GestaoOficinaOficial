@@ -11,7 +11,6 @@ package visao;
  */
 import modelo.bean.Usuario;
 import controle.UsuaFactory;
-import java.util.List;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
@@ -105,7 +104,7 @@ public class CadtUsuario extends CadPadrao {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(41, 41, 41)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 195, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
@@ -243,7 +242,7 @@ public class CadtUsuario extends CadPadrao {
     public JTextField getJtfTipo() {
         return this.jTextField1;
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
