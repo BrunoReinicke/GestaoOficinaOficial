@@ -18,6 +18,7 @@ public abstract class CadPadrao extends javax.swing.JFrame {
     public CadPadrao() {
         initComponents();
         this.jTfID.setVisible(false);
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 
     /**

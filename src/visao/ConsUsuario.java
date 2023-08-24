@@ -218,6 +218,7 @@ public class ConsUsuario extends ConsPadrao {
             this.jtfUsuario.setText(usuar.get(1).toString());
             this.jtfSenha.setText(usuar.get(2).toString());
             this.jtfTipo.setText(usuar.get(3).toString());
+            super.sair();
         }
     }//GEN-LAST:event_jTable3MouseReleased
 

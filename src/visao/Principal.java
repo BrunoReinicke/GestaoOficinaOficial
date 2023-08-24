@@ -174,15 +174,15 @@ public class Principal extends javax.swing.JFrame {
         this.jButton3.setVisible(false);
         this.jButton6.setVisible(false);
         
+        this.conUs.dispose();
         this.caUs.dispose();
         this.conOS.dispose();
-        this.conUs.dispose();
         this.cadOS.dispose();
         
-        this.caUs.setVisible(false);
+        /*this.caUs.setVisible(false);
         this.conOS.setVisible(false);
         this.conUs.setVisible(false);
-        this.cadOS.setVisible(false);
+        this.cadOS.setVisible(false);*/
     }//GEN-LAST:event_jButton5MouseClicked
 
     private void jButton2ComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jButton2ComponentShown

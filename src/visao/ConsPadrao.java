@@ -18,6 +18,7 @@ public abstract class ConsPadrao extends javax.swing.JFrame {
     public ConsPadrao() {
         initComponents();
         this.row = -1;
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
     
     public abstract void listar(String info);
@@ -114,6 +115,10 @@ public abstract class ConsPadrao extends javax.swing.JFrame {
         this.excluir();
         this.listar("");
     }//GEN-LAST:event_btnExcluir1ActionPerformed
+    
+    public void sair() {
+        this.dispose();
+    }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private java.awt.Button btnAtualizar;
