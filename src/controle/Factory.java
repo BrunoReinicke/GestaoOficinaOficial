@@ -9,7 +9,6 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import javax.persistence.TransactionRequiredException;
 import org.hibernate.Session;
 import util.HibernateUtil;
 
@@ -19,7 +18,7 @@ import util.HibernateUtil;
  */
 public class Factory {
     
-    protected void salvar(Object obj, String pers) {
+    public void salvar(Object obj, String pers) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory(pers);
         EntityManager em = emf.createEntityManager();
         
@@ -39,7 +38,7 @@ public class Factory {
         return list; 
     }
     
-    protected void excluir(String pers, Integer id, Object o) {
+    public void excluir(String pers, Integer id, Object o) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory(pers);
         EntityManager em = emf.createEntityManager();  
         Object obj = em.find(o.getClass(), id);
@@ -49,7 +48,7 @@ public class Factory {
         em.getTransaction().commit();
     }
     
-    protected void alterar(Object obj) {
+    public void alterar(Object obj) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
         session.update(obj);

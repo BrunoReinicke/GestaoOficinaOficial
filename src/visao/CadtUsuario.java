@@ -13,6 +13,7 @@ import modelo.bean.Usuario;
 import controle.UsuaFactory;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.JOptionPane;
 
 public class CadtUsuario extends CadPadrao {
     
@@ -152,12 +153,12 @@ public class CadtUsuario extends CadPadrao {
         u.setSenha(senha);
         u.setTipo(jTextField1.getText().charAt(0));
         
-        if (getJtfID().getText().equals("")) 
-            new UsuaFactory().salvar(u);
-        else {
-            u.setId(Integer.valueOf(getJtfID().getText()));    
-            new UsuaFactory().alterar(u);
-        }
+        if (!new UsuaFactory().usuJaCad(jtfUsuario.getText())) {
+            if (!getJtfID().getText().equals("")) 
+                u.setId(Integer.valueOf(getJtfID().getText()));
+            super.confirmar(new UsuaFactory(), u, "UsuarioPU");
+        } else
+            JOptionPane.showMessageDialog(null, "Usuário já cadastrado.");
     }
     
     @Override
@@ -179,7 +180,15 @@ public class CadtUsuario extends CadPadrao {
     public void excluir() {
         new UsuaFactory().excluir(Integer.valueOf(getJtfID().getText()));
     }
-            
+
+    @Override
+    public void limpar() {
+        getJtfID().setText("");
+        this.jtfUsuario.setText("");
+        this.jPasswordField1.setText("");
+        this.jTextField1.setText("");
+    }
+    
     private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jPasswordField1ActionPerformed

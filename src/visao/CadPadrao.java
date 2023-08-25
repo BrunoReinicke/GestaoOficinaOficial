@@ -4,6 +4,8 @@
  */
 package visao;
 
+import controle.Factory;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 /**
@@ -35,6 +37,7 @@ public abstract class CadPadrao extends javax.swing.JFrame {
         btExcluir = new javax.swing.JButton();
         jTfID = new javax.swing.JTextField();
         btSelecionar = new javax.swing.JButton();
+        btLimpar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -71,16 +74,31 @@ public abstract class CadPadrao extends javax.swing.JFrame {
             }
         });
 
+        btLimpar.setText("Limpar");
+        btLimpar.setName("btnSalvar"); // NOI18N
+        btLimpar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btLimparMouseClicked(evt);
+            }
+        });
+        btLimpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btLimparActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(60, Short.MAX_VALUE)
+                .addContainerGap(71, Short.MAX_VALUE)
                 .addComponent(jTfID, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(123, 123, 123)
+                .addGap(39, 39, 39)
                 .addComponent(btSelecionar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btLimpar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btConfirmar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -95,7 +113,8 @@ public abstract class CadPadrao extends javax.swing.JFrame {
                     .addComponent(btConfirmar)
                     .addComponent(btExcluir)
                     .addComponent(btSelecionar)
-                    .addComponent(jTfID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTfID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btLimpar))
                 .addGap(5, 5, 5)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(264, Short.MAX_VALUE))
@@ -109,7 +128,13 @@ public abstract class CadPadrao extends javax.swing.JFrame {
     }//GEN-LAST:event_btConfirmarActionPerformed
 
     private void btExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btExcluirActionPerformed
-        this.excluir();
+        if (!getJtfID().getText().equals("")) {
+            if (JOptionPane.showConfirmDialog(null, "Deseja confirmar a exclusão?") == 0) {
+                this.excluir();
+                this.limpar();
+            }
+        } else
+            JOptionPane.showMessageDialog(null, "Não há nada selecionado para exclusão.");
     }//GEN-LAST:event_btExcluirActionPerformed
 
     private void btSelecionarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btSelecionarMouseClicked
@@ -120,15 +145,32 @@ public abstract class CadPadrao extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btSelecionarActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
- 
+    private void btLimparMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btLimparMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btLimparMouseClicked
+
+    private void btLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLimparActionPerformed
+        this.limpar();
+    }//GEN-LAST:event_btLimparActionPerformed
+
     public abstract void salvar();
-    
     public abstract void excluir();
-    
     public abstract void selecionar();
+    public abstract void limpar();
+
+    public void confirmar(Factory fact, Object obj, String pers) {  
+        if (getJtfID().getText().equals("")) {
+            if (JOptionPane.showConfirmDialog(null, "Deseja confirmar o cadastro?") == 0) {
+                fact.salvar(obj, pers);
+                this.dispose();
+            }
+        } else {
+            if (JOptionPane.showConfirmDialog(null, "Deseja confirmar a alteração?") == 0) {   
+                fact.alterar(obj);
+                this.dispose();
+            }
+        }
+    }
     
     protected JTextField getJtfID() {
         return this.jTfID;
@@ -137,6 +179,7 @@ public abstract class CadPadrao extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btConfirmar;
     private javax.swing.JButton btExcluir;
+    private javax.swing.JButton btLimpar;
     private javax.swing.JButton btSelecionar;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextField jTfID;
