@@ -20,6 +20,7 @@ public class Login extends JFrame {
     private JButton btnConsUsu;
     private JButton btnConsOS;
     private JButton btnCadOS;
+    private JButton btnLogin;
     private int idUsuario;
     
     /**
@@ -131,12 +132,13 @@ public class Login extends JFrame {
         if (!new UsuaFactory().isLogged(u).isEmpty()) {
             this.idUsuario = ((Usuario) new UsuaFactory().isLogged(u).get(0)).getId();
             
-            if (((Usuario) new UsuaFactory().isLogged(u).get(0)).getTipo() == 'A') {
+            if (((Usuario) new UsuaFactory().isLogged(u).get(0)).getTipo().equalsIgnoreCase("Administrador")) {
                 this.btnCadUsu.setVisible(true);
                 this.btnConsUsu.setVisible(true);
                 this.btnCadOS.setVisible(true);
             }
             this.btnConsOS.setVisible(true);
+            this.btnLogin.setVisible(false);
         }
     }//GEN-LAST:event_jButton1MouseClicked
 
@@ -169,6 +171,14 @@ public class Login extends JFrame {
 
     public void setBtnCadOS(JButton btnCadOS) {
         this.btnCadOS = btnCadOS;
+    }
+    
+    public JButton getBtnLogin() {
+        return btnLogin;
+    }
+
+    public void setBtnLogin(JButton btnLogin) {
+        this.btnLogin = btnLogin;
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

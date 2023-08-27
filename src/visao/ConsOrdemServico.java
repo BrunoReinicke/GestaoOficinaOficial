@@ -9,6 +9,11 @@ import controle.ClienteFactory;
 import controle.OrdemServFactory;
 import controle.UsuaFactory;
 import java.util.List;
+import java.util.Vector;
+import javax.swing.JButton;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import modelo.bean.Cliente;
 import modelo.bean.OrdemServico;
@@ -18,16 +23,23 @@ import modelo.bean.Usuario;
  *
  * @author bruno
  */
-public class ConsOrdemServico extends javax.swing.JFrame {
+public class ConsOrdemServico extends ConsPadrao {
 
     /**
      * Creates new form ConsOrdemServico
      */
-    private int idUsuario;
     private List<Object> lstOS;
+    private int idUsuario;
     
     public ConsOrdemServico() {
         initComponents();
+        getjButton1().setVisible(false);
+        getjButton2().setVisible(false);
+        getjScrollPane1().setVisible(false);
+        getjScrollPane2().setVisible(false);
+        getjTable1().setVisible(false);
+        getjTable2().setVisible(false);
+        getjTextField1().setVisible(false);
     }
 
     /**
@@ -149,7 +161,7 @@ public class ConsOrdemServico extends javax.swing.JFrame {
     }//GEN-LAST:event_jTable2ComponentShown
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        if (((List<Usuario>) new UsuaFactory().consultar(this.idUsuario)).get(0).getTipo() == 'C') {
+        /*if (((List<Usuario>) new UsuaFactory().consultar(this.idUsuario)).get(0).getTipo().equals("C")) {
             int idCliente = 
                 ((Cliente)
                     ((List<Object>) 
@@ -158,7 +170,7 @@ public class ConsOrdemServico extends javax.swing.JFrame {
         } else {
             lstOS = (List<Object>) new OrdemServFactory().consultar("from OrdemServico");
         } 
-        this.carregarTabela("");
+        this.carregarTabela("");*/
     }//GEN-LAST:event_formWindowOpened
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
@@ -168,10 +180,6 @@ public class ConsOrdemServico extends javax.swing.JFrame {
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         this.carregarTabela("");
     }//GEN-LAST:event_jButton1MouseClicked
-
-    public void setIdUsuario(int idUsuario) {
-        this.idUsuario = idUsuario;
-    }
     
     private void listarOrdensServ(DefaultTableModel modelo, String numero) {
         for (int i = 0; i < lstOS.size(); i++) {
@@ -208,18 +216,71 @@ public class ConsOrdemServico extends javax.swing.JFrame {
                     status});
             }
         }
-        jTable2.setModel(modelo);
+        super.getTable().setModel(modelo);
     }
     
     private void carregarTabela(String numero) {
+        
+    }
+
+    public JButton getjButton1() {
+        return jButton1;
+    }
+
+    public JButton getjButton2() {
+        return jButton2;
+    }
+
+    public JScrollPane getjScrollPane1() {
+        return jScrollPane1;
+    }
+
+    public JScrollPane getjScrollPane2() {
+        return jScrollPane2;
+    }
+
+    public JTable getjTable1() {
+        return jTable1;
+    }
+
+    public JTable getjTable2() {
+        return jTable2;
+    }
+
+    public JTextField getjTextField1() {
+        return jTextField1;
+    }
+    
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
+    }
+   
+    @Override
+    public void listar(String info) {
         String colunas[] = {"Número", "Cliente", "Carro", "Peça", "Data abertura", 
             "Data encerramento", "Prazo de entrega", "Peça trocada", "Status"};
         DefaultTableModel modelo = new DefaultTableModel(colunas, 0);
         
-        jTable2.setModel(modelo);
-        this.listarOrdensServ(modelo, numero);
+        if (((List<Usuario>) new UsuaFactory().consultar(this.idUsuario)).get(0).getTipo().equals("Comum")) {
+            List<Object> cli = (List<Object>) new ClienteFactory().consultar("from Cliente where idUsuario = " + this.idUsuario);
+            int idCliente = ((Cliente) cli.get(0)).getId();         
+            lstOS = (List<Object>) new OrdemServFactory().consultar("from OrdemServico where idCliente = "+idCliente+" and status = 0");
+        } else {
+            lstOS = (List<Object>) new OrdemServFactory().consultar("from OrdemServico");
+        } 
+        this.listarOrdensServ(modelo, "");
     }
-   
+
+    @Override
+    public void excluir() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void preencherCad(Vector vect) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;

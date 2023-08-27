@@ -22,18 +22,18 @@ public class TestePeca {
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
         
         // Cadastro
-       /* Peca pe = new Peca();
+        Peca pe = new Peca();
         pe.setNome("Radiador");
         pe.setAno(2021);
         pe.setPreco(1000);
         pe.setMarca("random");
-        pe.setForn(new Fornecedor(3, "Random", 42, 'M', "***.***.***-**", "*.***.***",
+        pe.setForn(new Fornecedor(1, "Random", 42, 'M', "***.***.***-**", "*.***.***",
             formato.parse("14/01/1980"), "Pomerode", "SC", "Brasil"));
         pe.setCategoria("Média");
         new PecaFactory().salvar(pe);
         
         // Consulta
-        List<Peca> lstPeca = (List<Peca>) new PecaFactory().consultar();
+        /*List<Peca> lstPeca = (List<Peca>) new PecaFactory().consultar();
         System.out.println("Consulta sem filtro:");
         lstPeca.forEach((peca) -> {
             System.out.println(peca.toString());
@@ -49,7 +49,7 @@ public class TestePeca {
         pe2.setForn(new Fornecedor(3, "Random", 42, 'M', "***.***.***-**", "*.***.***",
             formato.parse("14/01/1980"), "Pomerode", "SC", "Brasil"));
         pe2.setCategoria("Média");
-        new PecaFactory().alterar(pe2);*/
+        new PecaFactory().alterar(pe2);
         
         // Exclusão
         new PecaFactory().excluir(7);
@@ -59,6 +59,6 @@ public class TestePeca {
         System.out.println("Consulta com filtro:");
         lstPeca3.forEach((peca) -> {
             System.out.println(peca.toString());
-        });
+        });*/
     }
 }

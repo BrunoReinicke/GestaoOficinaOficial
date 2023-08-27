@@ -41,6 +41,7 @@ public class UsuaFactory extends Factory {
         return super.consultar("from Usuario where id = " + id);
     }
     
+    @Override
     public void excluir(Integer id) {
         super.excluir("UsuarioPU", id, new Usuario());
     }

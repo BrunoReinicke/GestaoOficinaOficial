@@ -23,12 +23,12 @@ public class TesteCarro {
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
         
         // Cadastro
-       /* Carro car = new Carro();
+        Carro car = new Carro();
         car.setNome("Palio");
         car.setAno(1998);
-        car.setDono(new Cliente(2, "Bruno", 25, 'M', "***.***.***-**", "*.***.***", 
+        car.setDono(new Cliente(1, "Cadavér1khx", 27, 'M', "***.***.***-**", "*.***.***", 
             formato.parse("14/02/1996"), "Pomerode", "SC", "Brasil", 
-            new Usuario(3, "bruno", "12345", 'C')));
+            new Usuario(5, "bruno", "123", "Comum")));
         car.setPlaca("SUL-XLLY");
         car.setCidade("Blumenau");
         car.setUf("SC");
@@ -37,7 +37,7 @@ public class TesteCarro {
         new CarroFactory().salvar(car);
        
         // Consulta
-        List<Carro> lstCarro = (List<Carro>) new CarroFactory().consultar();
+        /*List<Carro> lstCarro = (List<Carro>) new CarroFactory().consultar();
         System.out.println("Consulta sem filtro:");
         lstCarro.forEach((carro) -> {
             System.out.println(carro.toString());

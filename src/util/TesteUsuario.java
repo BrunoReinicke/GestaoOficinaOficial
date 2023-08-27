@@ -16,21 +16,7 @@ import org.hibernate.StaleStateException;
 public class TesteUsuario {
     
     public static void main(String[] args) {        
-        // Cadastro
-        /*Usuario usua1 = new Usuario();
-        usua1.setUsuario("eme400046");
-        usua1.setSenha("Khadavehr1kh%");
-        usua1.setTipo('A');
-        new UsuaFactory().salvar(usua1);
-     
-        // Consulta
-        List<Usuario> lstUsu = (List<Usuario>) new UsuaFactory().consultar();
-        System.out.println("Consulta sem filtro:");
-        lstUsu.forEach((us) -> {
-            System.out.println(us.toString());
-        });
-        
-        // Alteração  
+        /*// Alteração  
         Usuario usua3 = new Usuario();
             usua3.setId(7);
             usua3.setUsuario("di000054");
@@ -53,15 +39,21 @@ public class TesteUsuario {
         System.out.println("Consulta com filtro:");
         lstUsu3.forEach((us) -> {
             System.out.println(us.toString());
-        });*/
+        });
         
         // Está logado
         /*Usuario usua4 = new Usuario();
         usua4.setUsuario("user");
         usua4.setSenha("pass");
-        System.out.println("Logado? " + ((new UsuaFactory().isLogged(usua4)).size() > 0));*/
+        System.out.println("Logado? " + ((new UsuaFactory().isLogged(usua4)).size() > 0));
         
         // Exclusão
-        new UsuaFactory().excluir(3);  
+        new UsuaFactory().excluir(3);  */
+        
+        Usuario usua1 = new Usuario();
+        usua1.setUsuario("root");
+        usua1.setSenha("root");
+        usua1.setTipo("Administrador");
+        new UsuaFactory().salvar(usua1, "UsuarioPU");
     }
 }

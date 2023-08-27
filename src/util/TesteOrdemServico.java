@@ -30,7 +30,7 @@ public class TesteOrdemServico {
         os.setCarro(new Carro(2, "C4", 2008, 
             new Cliente(3, "Bruno", 25, 'M', "***.***.***-**", "*.***.***", 
                 formato.parse("14/02/1996"), "Pomerode", "SC", "Brasil", 
-                new Usuario(3, "user", "pass", 'C')),
+                new Usuario(3, "user", "pass", "C")),
             "$UL-X11Y", "Joinville", "SC", "Brasil", "Citroen"));
         os.setPeca(new Peca(6, "Radiador", 2021, 1000, "random", 
             new Fornecedor(3, "Random", 42, 'M', "***.***.***-**", "*.***.***",
@@ -41,7 +41,7 @@ public class TesteOrdemServico {
         os.setPrazoEntrega(formato.parse("28/01/2022"));
         os.setPecaTrocada(false);
         os.setCliente(new Cliente(2, "Bruno", 25, 'M', "***.***.***-**", "*.***.***", 
-            formato.parse("14/02/1996"), "Pomerode", "SC", "Brasil", new Usuario(3, "bruno", "12345", 'C')));
+            formato.parse("14/02/1996"), "Pomerode", "SC", "Brasil", new Usuario(3, "bruno", "12345", "C")));
         new OrdemServFactory().salvar(os);
           
         // Consulta

@@ -22,7 +22,7 @@ public class TesteAdministrador {
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
         
         // Cadastro
-       /* Administrador adm = new Administrador();
+        Administrador adm = new Administrador();
         adm.setNome("Teste");
         adm.setIdade(53);
         adm.setSexo('M');
@@ -32,11 +32,11 @@ public class TesteAdministrador {
         adm.setCidade("Pomerode");
         adm.setUf("SC");
         adm.setPais("Brasil");
-        adm.setUsu(new Usuario(2, "root", "1234", 'A'));
+        adm.setUsu(new Usuario(3, "teste", "teste", "Administrador"));
         new AdminFactory().salvar(adm);
         
         // Alteração
-        Administrador adm2 = new Administrador();
+       /* Administrador adm2 = new Administrador();
         adm2.setId(2);
         adm2.setNome("Bruno");
         adm2.setIdade(25);
@@ -61,6 +61,6 @@ public class TesteAdministrador {
        // System.out.println("Consulta com filtro:\n" + new AdminFactory().consultar(3).toString());
         
         // Exclusão
-        new AdminFactory().excluir(2);
+       // new AdminFactory().excluir(2);
     }
 }

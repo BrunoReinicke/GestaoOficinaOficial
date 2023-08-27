@@ -22,7 +22,7 @@ public class TesteCliente {
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
         
         // Cadastro
-       /* Cliente cli = new Cliente();
+        Cliente cli = new Cliente();
         cli.setNome("Cadavér1khx");
         cli.setIdade(27);
         cli.setSexo('M');
@@ -32,11 +32,11 @@ public class TesteCliente {
         cli.setCidade("Pomerode");
         cli.setUf("SC");
         cli.setPais("Brasil");
-        cli.setUsu(new Usuario(4, "Bruno Luiz Reinicke", "Cadavérikhx", 'C'));
+        cli.setUsu(new Usuario(5, "bruno", "123", "Comum"));
         new ClienteFactory().salvar(cli);
         
         // Consulta
-        List<Cliente> lstClie2 = (List<Cliente>) new ClienteFactory().consultar();
+       /* List<Cliente> lstClie2 = (List<Cliente>) new ClienteFactory().consultar();
         System.out.println("Consulta sem filtro:");
         lstClie2.forEach((clie2) -> {
             System.out.println(clie2.toString());

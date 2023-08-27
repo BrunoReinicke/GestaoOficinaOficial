@@ -23,13 +23,13 @@ public class Usuario implements Serializable {
     private Integer id;
     private String usuario;
     private String senha;
-    private char tipo;
+    private String tipo;
     
     public Usuario() {
     
     }
     
-    public Usuario(Integer id, String usuario, String senha, char tipo) {
+    public Usuario(Integer id, String usuario, String senha, String tipo) {
         this.id = id;
         this.usuario = usuario;
         this.senha = senha;
@@ -60,11 +60,11 @@ public class Usuario implements Serializable {
         this.senha = senha;
     }
 
-    public char getTipo() {
+    public String getTipo() {
         return tipo;
     }
 
-    public void setTipo(char tipo) {
+    public void setTipo(String tipo) {
         this.tipo = tipo;
     }
 

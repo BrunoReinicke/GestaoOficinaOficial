@@ -10,6 +10,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.List;
 import java.util.Vector;
+import javax.swing.JComboBox;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
@@ -24,25 +25,15 @@ public class ConsUsuario extends ConsPadrao {
     /**
      * Creates new form ConsUsuario
      */
-    private boolean cadastro;
     private JTextField jtfUsuario;
     private JPasswordField jtfSenha;
-    private JTextField jtfTipo;
+    private JComboBox jcbTipo;
     private JTextField jtfIdUsuario;
     
     public ConsUsuario() {
         initComponents();
-        this.cadastro = false;
     }
 
-    public void setCadastro(boolean cadastro) {
-        this.cadastro = cadastro;
-    }
-    
-    public boolean getCadastro() {
-        return this.cadastro;
-    }
-    
     public void setJtfUsuario(JTextField jtfUsuario) {
         this.jtfUsuario = jtfUsuario;
     }
@@ -55,8 +46,8 @@ public class ConsUsuario extends ConsPadrao {
         this.jtfSenha = jtfSenha;
     }
     
-    public void setJtfTipo(JTextField jtfTipo) {
-        this.jtfTipo = jtfTipo;
+    public void setJcbTipo(JComboBox jcbTipo) {
+        this.jcbTipo = jcbTipo;
     }
     
     @Override
@@ -76,16 +67,25 @@ public class ConsUsuario extends ConsPadrao {
                 list.get(i).getId().toString(), 
                 list.get(i).getUsuario(), 
                 list.get(i).getSenha(),
-                String.valueOf(list.get(i).getTipo())});
+                list.get(i).getTipo()});
         }
-        jTable3.setModel(modelo);
+        super.getTable().setModel(modelo);
     }
 
     @Override
     public void excluir() {
-        DefaultTableModel modelo = (DefaultTableModel) jTable3.getModel();
-        Vector usuar = (Vector) modelo.getDataVector().get(super.row);
-        new UsuaFactory().excluir(Integer.valueOf(usuar.get(0).toString()));
+        super.excluirPadrao(new UsuaFactory());
+    }
+    
+    @Override
+    public void preencherCad(Vector vect) {
+        this.jtfIdUsuario.setText(vect.get(0).toString());
+        this.jtfUsuario.setText(vect.get(1).toString());
+        this.jtfSenha.setText(vect.get(2).toString());
+        if (vect.get(3).toString().equalsIgnoreCase("Administrador")) 
+            this.jcbTipo.setSelectedIndex(0);
+        else
+            this.jcbTipo.setSelectedIndex(1);
     }
     
     /**
@@ -101,8 +101,6 @@ public class ConsUsuario extends ConsPadrao {
         jTable1 = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -139,95 +137,28 @@ public class ConsUsuario extends ConsPadrao {
             }
         });
 
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "ID", "Usuário", "Senha", "Tipo"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jTable3.setFocusable(false);
-        jTable3.setName("jtUsuario"); // NOI18N
-        jTable3.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTable3MouseClicked(evt);
-            }
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                jTable3MouseReleased(evt);
-            }
-        });
-        jTable3.addComponentListener(new java.awt.event.ComponentAdapter() {
-            public void componentShown(java.awt.event.ComponentEvent evt) {
-                jTable3ComponentShown(evt);
-            }
-        });
-        jScrollPane3.setViewportView(jTable3);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 550, Short.MAX_VALUE)
-                .addContainerGap())
+            .addGap(0, 562, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 48, Short.MAX_VALUE)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGap(0, 355, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTable3ComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jTable3ComponentShown
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTable3ComponentShown
-
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
      //   this.preencherTela("");
     }//GEN-LAST:event_formWindowOpened
 
-    private void jTable3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable3MouseClicked
-        super.row = jTable3.getSelectedRow();
-    }//GEN-LAST:event_jTable3MouseClicked
-
-    private void jTable3MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable3MouseReleased
-        if (super.row == jTable3.getSelectedRow()) {
-            DefaultTableModel modelo = (DefaultTableModel) jTable3.getModel();
-            Vector usuar = (Vector) modelo.getDataVector().get(jTable3.getSelectedRow());
-            this.jtfIdUsuario.setText(usuar.get(0).toString());
-            this.jtfUsuario.setText(usuar.get(1).toString());
-            this.jtfSenha.setText(usuar.get(2).toString());
-            this.jtfTipo.setText(usuar.get(3).toString());
-            super.sair();
-        }
-    }//GEN-LAST:event_jTable3MouseReleased
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
-    private javax.swing.JTable jTable3;
     // End of variables declaration//GEN-END:variables
 }

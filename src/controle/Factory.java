@@ -16,7 +16,7 @@ import util.HibernateUtil;
  *
  * @author bruno
  */
-public class Factory {
+public abstract class Factory {
     
     public void salvar(Object obj, String pers) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory(pers);
@@ -54,4 +54,6 @@ public class Factory {
         session.update(obj);
         session.getTransaction().commit();
     }
+    
+    public abstract void excluir(Integer id);
 }

@@ -150,11 +150,13 @@ public class Principal extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         this.conOS = new ConsOrdemServico();
         this.conOS.setIdUsuario(this.log.getIdUsuario());
+        this.conOS.listar("");
         this.conOS.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         this.conUs = new ConsUsuario();
+        this.conUs.listar("");
         this.conUs.setVisible(true);
         this.conUs.addKeyListener((KeyListener) this);
     }//GEN-LAST:event_jButton3ActionPerformed
@@ -165,6 +167,7 @@ public class Principal extends javax.swing.JFrame {
         this.log.setBtnConsUsu(this.jButton3);
         this.log.setBtnConsOS(this.jButton2);
         this.log.setBtnCadOS(this.jButton6);
+        this.log.setBtnLogin(this.jButton4);
         this.log.setVisible(true);
     }//GEN-LAST:event_jButton4MouseClicked
 
@@ -173,17 +176,18 @@ public class Principal extends javax.swing.JFrame {
         this.jButton2.setVisible(false);
         this.jButton3.setVisible(false);
         this.jButton6.setVisible(false);
+        this.jButton4.setVisible(true);
         
-        if (this.conUs.isVisible())
+        if (this.conUs != null)
             this.conUs.dispose();
         
-        if (this.caUs.isVisible())
+        if (this.caUs != null)
             this.caUs.dispose();
         
-        if (this.conOS.isVisible())
+        if (this.conOS != null)
             this.conOS.dispose();
         
-        if (this.cadOS.isVisible())
+        if (this.cadOS != null)
             this.cadOS.dispose();
     }//GEN-LAST:event_jButton5MouseClicked
 

@@ -5,8 +5,10 @@
 package visao;
 
 import controle.Factory;
+import javax.persistence.RollbackException;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import org.hibernate.exception.ConstraintViolationException;
 
 /**
  *
@@ -130,8 +132,13 @@ public abstract class CadPadrao extends javax.swing.JFrame {
     private void btExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btExcluirActionPerformed
         if (!getJtfID().getText().equals("")) {
             if (JOptionPane.showConfirmDialog(null, "Deseja confirmar a exclusão?") == 0) {
-                this.excluir();
-                this.limpar();
+                try {
+                    this.excluir();
+                    this.dispose();
+                } catch (RollbackException ex) {
+                    JOptionPane.showMessageDialog(null,
+                                                  "Não é possível excluir, há algum outro cadastro que depende do cadastro desta tela.");
+                }
             }
         } else
             JOptionPane.showMessageDialog(null, "Não há nada selecionado para exclusão.");

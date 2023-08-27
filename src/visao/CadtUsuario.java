@@ -11,6 +11,7 @@ package visao;
  */
 import modelo.bean.Usuario;
 import controle.UsuaFactory;
+import javax.swing.JComboBox;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.JOptionPane;
@@ -52,8 +53,8 @@ public class CadtUsuario extends CadPadrao {
         jPasswordField1 = new javax.swing.JPasswordField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
         jtfUsuario = new javax.swing.JTextField();
+        jcbTipo = new javax.swing.JComboBox<>();
 
         popupMenu1.setLabel("popupMenu1");
 
@@ -85,17 +86,13 @@ public class CadtUsuario extends CadPadrao {
         jLabel3.setText("Tipo:");
         jLabel3.setName(""); // NOI18N
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
-            }
-        });
-
         jtfUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jtfUsuarioActionPerformed(evt);
             }
         });
+
+        jcbTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrador", "Comum", " " }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -118,7 +115,7 @@ public class CadtUsuario extends CadPadrao {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(jcbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGap(171, 171, 171))
         );
         layout.setVerticalGroup(
@@ -134,8 +131,8 @@ public class CadtUsuario extends CadPadrao {
                     .addComponent(jLabel2))
                 .addGap(5, 5, 5)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jcbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(149, Short.MAX_VALUE))
         );
 
@@ -151,9 +148,10 @@ public class CadtUsuario extends CadPadrao {
         Usuario u = new Usuario();
         u.setUsuario(jtfUsuario.getText());
         u.setSenha(senha);
-        u.setTipo(jTextField1.getText().charAt(0));
+        u.setTipo(jcbTipo.getSelectedItem().toString());
         
-        if (!new UsuaFactory().usuJaCad(jtfUsuario.getText())) {
+        if (!new UsuaFactory().usuJaCad(jtfUsuario.getText()) ||
+                !getJtfID().getText().equals("")) {
             if (!getJtfID().getText().equals("")) 
                 u.setId(Integer.valueOf(getJtfID().getText()));
             super.confirmar(new UsuaFactory(), u, "UsuarioPU");
@@ -171,7 +169,7 @@ public class CadtUsuario extends CadPadrao {
                 cous.setJtfIdfUsuario(getJtfID());
                 cous.setJtfUsuario(getJtfUsuario());
                 cous.setJtfSenha(getJpfSenha());
-                cous.setJtfTipo(getJtfTipo());
+                cous.setJcbTipo(getJcbTipo());
             }
         });
     }
@@ -186,16 +184,12 @@ public class CadtUsuario extends CadPadrao {
         getJtfID().setText("");
         this.jtfUsuario.setText("");
         this.jPasswordField1.setText("");
-        this.jTextField1.setText("");
+        this.jcbTipo.setSelectedIndex(0);
     }
     
     private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jPasswordField1ActionPerformed
-
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jtfUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfUsuarioActionPerformed
         // TODO add your handling code here:
@@ -248,8 +242,8 @@ public class CadtUsuario extends CadPadrao {
         return this.jPasswordField1;
     }
     
-    public JTextField getJtfTipo() {
-        return this.jTextField1;
+    public JComboBox getJcbTipo() {
+        return this.jcbTipo;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -257,7 +251,7 @@ public class CadtUsuario extends CadPadrao {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JComboBox<String> jcbTipo;
     private javax.swing.JTextField jtfUsuario;
     private java.awt.PopupMenu popupMenu1;
     // End of variables declaration//GEN-END:variables

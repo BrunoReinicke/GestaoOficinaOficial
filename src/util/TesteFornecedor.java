@@ -27,7 +27,7 @@ public class TesteFornecedor {
         }); 
         
         // Exclusão
-        new FornecFactory().excluir(4);
+        new FornecFactory().excluir(4);*/
         
         // Cadastro
         Fornecedor forn3 = new Fornecedor();
@@ -40,13 +40,6 @@ public class TesteFornecedor {
         forn3.setCidade("Pomerode");
         forn3.setUf("SC");
         forn3.setPais("Brasil");
-        new FornecFactory().salvar(forn3);*/
-        
-        // Consulta
-        List<Fornecedor> lstForn3 = (List<Fornecedor>) new FornecFactory().consultar(3);
-        System.out.println("Consulta com filtro:");
-        lstForn3.forEach((fornec) -> {
-            System.out.println(fornec.toString());
-        });
+        new FornecFactory().salvar(forn3);
     }
 }

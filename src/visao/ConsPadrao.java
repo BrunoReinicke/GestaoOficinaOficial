@@ -4,6 +4,11 @@
  */
 package visao;
 
+import controle.Factory;
+import java.util.Vector;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Bruno Reinicke
@@ -11,6 +16,7 @@ package visao;
 public abstract class ConsPadrao extends javax.swing.JFrame {
 
     protected int row;
+    private boolean cadastro;
     
     /**
      * Creates new form ConsPadrao
@@ -19,10 +25,13 @@ public abstract class ConsPadrao extends javax.swing.JFrame {
         initComponents();
         this.row = -1;
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+      //  this.listar("");
+        this.cadastro = false;
     }
     
     public abstract void listar(String info);
     public abstract void excluir();
+    public abstract void preencherCad(Vector vect);
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -37,6 +46,8 @@ public abstract class ConsPadrao extends javax.swing.JFrame {
         jtfPesquisar = new javax.swing.JTextField();
         btnAtualizar = new java.awt.Button();
         btnExcluir1 = new java.awt.Button();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTbPadrao = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -67,6 +78,27 @@ public abstract class ConsPadrao extends javax.swing.JFrame {
             }
         });
 
+        jTbPadrao.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jTbPadrao.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTbPadraoMouseClicked(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jTbPadraoMouseReleased(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jTbPadrao);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -81,6 +113,7 @@ public abstract class ConsPadrao extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnExcluir1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
+            .addComponent(jScrollPane1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -92,7 +125,9 @@ public abstract class ConsPadrao extends javax.swing.JFrame {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(lbPesquisar)
                         .addComponent(jtfPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(268, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -114,14 +149,44 @@ public abstract class ConsPadrao extends javax.swing.JFrame {
         this.excluir();
         this.listar("");
     }//GEN-LAST:event_btnExcluir1ActionPerformed
+
+    private void jTbPadraoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTbPadraoMouseClicked
+        this.row = this.jTbPadrao.getSelectedRow();
+    }//GEN-LAST:event_jTbPadraoMouseClicked
+
+    private void jTbPadraoMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTbPadraoMouseReleased
+        if ((this.row == this.jTbPadrao.getSelectedRow()) && this.cadastro) {
+            DefaultTableModel modelo = (DefaultTableModel) this.jTbPadrao.getModel();
+            Vector vect = (Vector) modelo.getDataVector().get(this.jTbPadrao.getSelectedRow());
+            this.preencherCad(vect);
+            this.dispose();
+        }
+    }//GEN-LAST:event_jTbPadraoMouseReleased
     
-    public void sair() {
-        this.dispose();
+    public void setTable(JTable jTbPadrao) {
+        this.jTbPadrao = jTbPadrao;
+    }
+    
+    public JTable getTable() {
+        return this.jTbPadrao;
+    }
+    
+    public void setCadastro(boolean cadastro) {
+        this.cadastro = cadastro;
+    }
+    
+    protected void excluirPadrao(Factory fact) {
+        DefaultTableModel modelo = (DefaultTableModel) this.jTbPadrao.getModel();
+        Vector vect = (Vector) modelo.getDataVector().get(this.row);
+        fact.excluir(Integer.valueOf(vect.get(0).toString()));
+        this.row = -1;
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private java.awt.Button btnAtualizar;
     private java.awt.Button btnExcluir1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTbPadrao;
     private javax.swing.JTextField jtfPesquisar;
     private javax.swing.JLabel lbPesquisar;
     // End of variables declaration//GEN-END:variables
