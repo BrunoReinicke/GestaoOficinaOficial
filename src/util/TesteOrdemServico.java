@@ -42,7 +42,7 @@ public class TesteOrdemServico {
         os.setPecaTrocada(false);
         os.setCliente(new Cliente(2, "Bruno", 25, 'M', "***.***.***-**", "*.***.***", 
             formato.parse("14/02/1996"), "Pomerode", "SC", "Brasil", new Usuario(3, "bruno", "12345", "C")));
-        new OrdemServFactory().salvar(os);
+        new OrdemServFactory().salvar(os, "OrdemServicoPU");
           
         // Consulta
     /*    List<OrdemServico> lstOS = (List<OrdemServico>) new OrdemServFactory().consultar(1);

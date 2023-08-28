@@ -7,6 +7,7 @@ package controle;
 
 import modelo.bean.OrdemServico;
 import java.util.List;
+import org.hibernate.Criteria;
 import org.hibernate.criterion.Order;
 import util.HibernateUtil;
 /**
@@ -15,26 +16,24 @@ import util.HibernateUtil;
  */
 public class OrdemServFactory extends Factory {
 
-    public void salvar(Object obj) {
+    @Override
+    public void salvar(Object obj, String pers ) {
         List<Object> lstOS = 
             (List<Object>) super.consultar(
                 "from OrdemServico where idCarro = " + ((OrdemServico) obj).getCarro().getId() + " and status = 0");
         
-        if (lstOS.size() > 0) {
+        if (!lstOS.isEmpty()) {
             ((OrdemServico) obj).setNumero(((OrdemServico) lstOS.get(0)).getNumero());
         } else {
             try {
-                ((OrdemServico) obj).setNumero(
-                    ((OrdemServico) HibernateUtil.getSessionFactory().openSession().createCriteria(OrdemServico.class)
-                    .addOrder(Order.desc("numero"))
-                    .setMaxResults(1)
-                    .uniqueResult()).getNumero() + 1
-                );   
+                Criteria sessao = HibernateUtil.getSessionFactory().openSession().createCriteria(OrdemServico.class);
+                Criteria ordem  = sessao.addOrder(Order.desc("numero"));
+                ((OrdemServico) obj).setNumero(((OrdemServico) ordem.setMaxResults(1).uniqueResult()).getNumero() + 1);   
             } catch (NullPointerException ex) {
                 ((OrdemServico) obj).setNumero(1);
             }
         }
-        super.salvar(obj, "OrdemServicoPU");
+        super.salvar(obj, pers);
     }
     
     public Object consultar() {
@@ -50,10 +49,15 @@ public class OrdemServFactory extends Factory {
         return super.consultar("from OrdemServico where numero = " + numero);
     }
     
+    @Override
+    public void excluir(Integer id) {
+        super.excluir("OrdemServicoPU", id, new OrdemServico());
+    }
+    /*@Override
     public void excluir(Integer numero) {
         List<OrdemServico> lstOS = (List<OrdemServico>) this.consultar(numero);
         lstOS.forEach((os) -> {
             super.excluir("OrdemServicoPU", os.getId(), new OrdemServico());
         });
-    }
+    }*/
 }

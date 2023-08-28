@@ -5,7 +5,10 @@
 package visao;
 
 import controle.Factory;
+import java.awt.Button;
 import java.util.Vector;
+import javax.persistence.RollbackException;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -25,8 +28,9 @@ public abstract class ConsPadrao extends javax.swing.JFrame {
         initComponents();
         this.row = -1;
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-      //  this.listar("");
         this.cadastro = false;
+        this.setResizable(true);
+      //  this.listar("");
     }
     
     public abstract void listar(String info);
@@ -50,6 +54,7 @@ public abstract class ConsPadrao extends javax.swing.JFrame {
         jTbPadrao = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setSize(new java.awt.Dimension(1051, 523));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
@@ -89,6 +94,7 @@ public abstract class ConsPadrao extends javax.swing.JFrame {
 
             }
         ));
+        jTbPadrao.setPreferredSize(new java.awt.Dimension(1020, 500));
         jTbPadrao.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTbPadraoMouseClicked(evt);
@@ -103,30 +109,32 @@ public abstract class ConsPadrao extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lbPesquisar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jtfPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jtfPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 425, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnAtualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnExcluir1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(487, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jScrollPane1)
                 .addContainerGap())
-            .addComponent(jScrollPane1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnExcluir1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAtualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(13, 13, 13)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(lbPesquisar)
-                        .addComponent(jtfPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jtfPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnAtualizar, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
+                    .addComponent(btnExcluir1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -134,7 +142,7 @@ public abstract class ConsPadrao extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        this.listar("");
+     //   this.listar("");
     }//GEN-LAST:event_formWindowOpened
 
     private void jtfPesquisarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfPesquisarKeyReleased
@@ -143,6 +151,7 @@ public abstract class ConsPadrao extends javax.swing.JFrame {
 
     private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
         this.listar("");
+        this.jtfPesquisar.setText("");
     }//GEN-LAST:event_btnAtualizarActionPerformed
 
     private void btnExcluir1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluir1ActionPerformed
@@ -176,10 +185,29 @@ public abstract class ConsPadrao extends javax.swing.JFrame {
     }
     
     protected void excluirPadrao(Factory fact) {
-        DefaultTableModel modelo = (DefaultTableModel) this.jTbPadrao.getModel();
-        Vector vect = (Vector) modelo.getDataVector().get(this.row);
-        fact.excluir(Integer.valueOf(vect.get(0).toString()));
-        this.row = -1;
+        if (this.row > -1) {
+            try {
+                if (JOptionPane.showConfirmDialog(null, "Deseja confirmar a exclusão?") == 0) {
+                    DefaultTableModel modelo = (DefaultTableModel) this.jTbPadrao.getModel();
+                    Vector vect = (Vector) modelo.getDataVector().get(this.row);
+                    fact.excluir(Integer.valueOf(vect.get(0).toString()));
+                    this.row = -1;
+                }
+            } catch (RollbackException ex) {
+                JOptionPane.showMessageDialog(null,
+                             "Não é possível excluir, há algum item cadastrado que depende do item selecionado nesta tela.");
+            }
+        } else
+            JOptionPane.showMessageDialog(null, "Não há nenhum item selecionado para exclusão.");
+    }
+    
+    protected void setSize() {
+        this.setSize(1151, 500);
+        this.setResizable(false);
+    }
+    
+    protected Button getBtnExcluir1() {
+        return this.btnExcluir1;
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

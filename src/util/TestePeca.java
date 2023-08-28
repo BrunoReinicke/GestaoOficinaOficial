@@ -23,7 +23,7 @@ public class TestePeca {
         
         // Cadastro
         Peca pe = new Peca();
-        pe.setNome("Radiador");
+        pe.setNome("Carburador");
         pe.setAno(2021);
         pe.setPreco(1000);
         pe.setMarca("random");
@@ -52,13 +52,6 @@ public class TestePeca {
         new PecaFactory().alterar(pe2);
         
         // Exclusão
-        new PecaFactory().excluir(7);
-        
-        // Consulta
-        List<Peca> lstPeca3 = (List<Peca>) new PecaFactory().consultar(8);
-        System.out.println("Consulta com filtro:");
-        lstPeca3.forEach((peca) -> {
-            System.out.println(peca.toString());
-        });*/
+        new PecaFactory().excluir(7);*/
     }
 }

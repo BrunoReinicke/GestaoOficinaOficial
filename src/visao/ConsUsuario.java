@@ -32,6 +32,7 @@ public class ConsUsuario extends ConsPadrao {
     
     public ConsUsuario() {
         initComponents();
+        super.setSize();
     }
 
     public void setJtfUsuario(JTextField jtfUsuario) {
@@ -141,11 +142,11 @@ public class ConsUsuario extends ConsPadrao {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 562, Short.MAX_VALUE)
+            .addGap(0, 589, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 355, Short.MAX_VALUE)
+            .addGap(0, 314, Short.MAX_VALUE)
         );
 
         pack();

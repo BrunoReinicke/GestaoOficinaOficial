@@ -9,8 +9,10 @@ import controle.ClienteFactory;
 import controle.OrdemServFactory;
 import controle.UsuaFactory;
 import java.util.List;
+import java.util.Objects;
 import java.util.Vector;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -33,13 +35,7 @@ public class ConsOrdemServico extends ConsPadrao {
     
     public ConsOrdemServico() {
         initComponents();
-        getjButton1().setVisible(false);
-        getjButton2().setVisible(false);
-        getjScrollPane1().setVisible(false);
-        getjScrollPane2().setVisible(false);
-        getjTable1().setVisible(false);
-        getjTable2().setVisible(false);
-        getjTextField1().setVisible(false);
+        super.setSize();
     }
 
     /**
@@ -53,11 +49,6 @@ public class ConsOrdemServico extends ConsPadrao {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -74,53 +65,10 @@ public class ConsOrdemServico extends ConsPadrao {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Consulta de ordens de serviço");
+        setPreferredSize(new java.awt.Dimension(500, 471));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
-            }
-        });
-
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Número", "Cliente", "Carro", "Peça", "Data abertura", "Data encerramento", "Prazo de entrega", "Peça trocada", "Status"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Boolean.class, java.lang.String.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jTable2.addComponentListener(new java.awt.event.ComponentAdapter() {
-            public void componentShown(java.awt.event.ComponentEvent evt) {
-                jTable2ComponentShown(evt);
-            }
-        });
-        jScrollPane2.setViewportView(jTable2);
-
-        jButton1.setText("Remover filtro");
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton1MouseClicked(evt);
-            }
-        });
-
-        jButton2.setText("Filtrar");
-        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton2MouseClicked(evt);
             }
         });
 
@@ -128,127 +76,65 @@ public class ConsOrdemServico extends ConsPadrao {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 997, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGap(0, 571, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+            .addGap(0, 300, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTable2ComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jTable2ComponentShown
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTable2ComponentShown
-
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        /*if (((List<Usuario>) new UsuaFactory().consultar(this.idUsuario)).get(0).getTipo().equals("C")) {
-            int idCliente = 
-                ((Cliente)
-                    ((List<Object>) 
-                        (new ClienteFactory().consultar("from Cliente where idUsuario = " + this.idUsuario))).get(0)).getId();          
-            lstOS = (List<Object>) new OrdemServFactory().consultar("from OrdemServico where idCliente = "+idCliente+" and status = 0");
-        } else {
-            lstOS = (List<Object>) new OrdemServFactory().consultar("from OrdemServico");
-        } 
-        this.carregarTabela("");*/
     }//GEN-LAST:event_formWindowOpened
-
-    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
-        this.carregarTabela(jTextField1.getText());
-    }//GEN-LAST:event_jButton2MouseClicked
-
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-        this.carregarTabela("");
-    }//GEN-LAST:event_jButton1MouseClicked
     
-    private void listarOrdensServ(DefaultTableModel modelo, String numero) {
+    private void listarOrdensServ(DefaultTableModel modelo) {
         for (int i = 0; i < lstOS.size(); i++) {
             String status;
             String dtEncerramento = "";
             String pecTrocada = "Não";
             String dtPrevisao = "";
-            
-            if (numero.equals("") || 
-               (Integer.valueOf(numero) == ((OrdemServico) lstOS.get(i)).getNumero())) {
-                if (((OrdemServico) lstOS.get(i)).getStatus() == 0) 
-                   status = "Em execução";
-                else
-                   status = "Encerrada"; 
 
-                if (((OrdemServico) lstOS.get(i)).getDtEncerramento() != null) 
-                   dtEncerramento = ((OrdemServico) lstOS.get(i)).getDtEncerramento().toString();
+            if (((OrdemServico) lstOS.get(i)).getStatus() == 0) 
+                status = "Em execução";
+            else
+                status = "Encerrada"; 
 
-                if (((OrdemServico) lstOS.get(i)).isPecaTrocada())
-                   pecTrocada = "Sim";
+            if (((OrdemServico) lstOS.get(i)).getDtEncerramento() != null) 
+                dtEncerramento = ((OrdemServico) lstOS.get(i)).getDtEncerramento().toString();
 
-                if (((OrdemServico) lstOS.get(i)).getPrazoEntrega() != null) 
-                   dtPrevisao = ((OrdemServico) lstOS.get(i)).getPrazoEntrega().toString();
-                
+            if (((OrdemServico) lstOS.get(i)).isPecaTrocada())
+                pecTrocada = "Sim";
+
+            if (((OrdemServico) lstOS.get(i)).getPrazoEntrega() != null) 
+                dtPrevisao = ((OrdemServico) lstOS.get(i)).getPrazoEntrega().toString();
+
+            if (((List<Usuario>) new UsuaFactory().consultar(this.idUsuario)).get(0).getTipo().equals("Comum"))   
                 modelo.addRow(new String[]{
-                    ((OrdemServico) lstOS.get(i)).getNumero().toString(), 
-                    ((OrdemServico) lstOS.get(i)).getCliente().getNome(), 
-                    ((OrdemServico) lstOS.get(i)).getCarro().getNome(),
-                    ((OrdemServico) lstOS.get(i)).getPeca().getNome(),
-                    ((OrdemServico) lstOS.get(i)).getDtAbertura().toString(),
-                    dtEncerramento,
-                    dtPrevisao,
-                    pecTrocada,
-                    status});
-            }
+                     ((OrdemServico) lstOS.get(i)).getNumero().toString(), 
+                     ((OrdemServico) lstOS.get(i)).getCliente().getNome(), 
+                     ((OrdemServico) lstOS.get(i)).getCarro().getNome(),
+                     ((OrdemServico) lstOS.get(i)).getPeca().getNome(),
+                     ((OrdemServico) lstOS.get(i)).getDtAbertura().toString(),
+                     dtEncerramento,
+                     dtPrevisao,
+                     pecTrocada,
+                     status});
+            else
+                modelo.addRow(new String[]{
+                     ((OrdemServico) lstOS.get(i)).getId().toString(), 
+                     ((OrdemServico) lstOS.get(i)).getNumero().toString(), 
+                     ((OrdemServico) lstOS.get(i)).getCliente().getNome(), 
+                     ((OrdemServico) lstOS.get(i)).getCarro().getNome(),
+                     ((OrdemServico) lstOS.get(i)).getPeca().getNome(),
+                     ((OrdemServico) lstOS.get(i)).getDtAbertura().toString(),
+                     dtEncerramento,
+                     dtPrevisao,
+                     pecTrocada,
+                     status}); 
         }
         super.getTable().setModel(modelo);
-    }
-    
-    private void carregarTabela(String numero) {
-        
-    }
-
-    public JButton getjButton1() {
-        return jButton1;
-    }
-
-    public JButton getjButton2() {
-        return jButton2;
-    }
-
-    public JScrollPane getjScrollPane1() {
-        return jScrollPane1;
-    }
-
-    public JScrollPane getjScrollPane2() {
-        return jScrollPane2;
-    }
-
-    public JTable getjTable1() {
-        return jTable1;
-    }
-
-    public JTable getjTable2() {
-        return jTable2;
-    }
-
-    public JTextField getjTextField1() {
-        return jTextField1;
     }
     
     public void setIdUsuario(int idUsuario) {
@@ -257,23 +143,39 @@ public class ConsOrdemServico extends ConsPadrao {
    
     @Override
     public void listar(String info) {
-        String colunas[] = {"Número", "Cliente", "Carro", "Peça", "Data abertura", 
-            "Data encerramento", "Prazo de entrega", "Peça trocada", "Status"};
-        DefaultTableModel modelo = new DefaultTableModel(colunas, 0);
-        
+        String numero = "";
+        if (!info.equals(""))
+            numero = " and numero = " + info;
+            
         if (((List<Usuario>) new UsuaFactory().consultar(this.idUsuario)).get(0).getTipo().equals("Comum")) {
-            List<Object> cli = (List<Object>) new ClienteFactory().consultar("from Cliente where idUsuario = " + this.idUsuario);
-            int idCliente = ((Cliente) cli.get(0)).getId();         
-            lstOS = (List<Object>) new OrdemServFactory().consultar("from OrdemServico where idCliente = "+idCliente+" and status = 0");
+            String colunas[] = {"Número", "Cliente", "Carro", "Peça", "Dt. abertura", 
+                                "Dt. encerramento", "Prazo de entrega", "Peça trocada", "Status"};
+            DefaultTableModel modelo = new DefaultTableModel(colunas, 0);
+            super.getBtnExcluir1().setVisible(false);
+            List<Object> cli = (List<Object>) new ClienteFactory().consultar("from Cliente where idUsuario="+this.idUsuario+numero);
+            
+            if (!cli.isEmpty()) {
+                int idCliente = ((Cliente) cli.get(0)).getId();         
+                lstOS = (List<Object>) new OrdemServFactory().consultar(
+                            "from OrdemServico where idCliente="+idCliente+" and status=0"+numero);
+                this.listarOrdensServ(modelo);
+                this.setVisible(true);
+            } else 
+                JOptionPane.showMessageDialog(null, "Você não possui nenhuma OS em execução no momento.");
         } else {
-            lstOS = (List<Object>) new OrdemServFactory().consultar("from OrdemServico");
+            String colunas[] = {"ID", "Número", "Cliente", "Carro", "Peça", "Dt. abertura", 
+                                "Dt. encerramento", "Prazo de entrega", "Peça trocada", "Status"};
+            DefaultTableModel modelo = new DefaultTableModel(colunas, 0);
+            
+            lstOS = (List<Object>) new OrdemServFactory().consultar("from OrdemServico where 1=1 "+numero);
+            this.listarOrdensServ(modelo);
+            this.setVisible(true);
         } 
-        this.listarOrdensServ(modelo, "");
     }
 
     @Override
     public void excluir() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        super.excluirPadrao(new OrdemServFactory());
     }
 
     @Override
@@ -282,12 +184,7 @@ public class ConsOrdemServico extends ConsPadrao {
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }

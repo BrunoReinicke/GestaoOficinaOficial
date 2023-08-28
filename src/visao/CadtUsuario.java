@@ -170,6 +170,7 @@ public class CadtUsuario extends CadPadrao {
                 cous.setJtfUsuario(getJtfUsuario());
                 cous.setJtfSenha(getJpfSenha());
                 cous.setJcbTipo(getJcbTipo());
+                cous.listar("");
             }
         });
     }

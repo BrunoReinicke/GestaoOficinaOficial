@@ -151,7 +151,7 @@ public class Principal extends javax.swing.JFrame {
         this.conOS = new ConsOrdemServico();
         this.conOS.setIdUsuario(this.log.getIdUsuario());
         this.conOS.listar("");
-        this.conOS.setVisible(true);
+       // this.conOS.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
