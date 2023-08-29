@@ -95,20 +95,30 @@ public class ConsOrdemServico extends ConsPadrao {
             String dtEncerramento = "";
             String pecTrocada = "Não";
             String dtPrevisao = "";
+            String dtAbertura = "";
 
             if (((OrdemServico) lstOS.get(i)).getStatus() == 0) 
                 status = "Em execução";
             else
                 status = "Encerrada"; 
 
-            if (((OrdemServico) lstOS.get(i)).getDtEncerramento() != null) 
+            if (((OrdemServico) lstOS.get(i)).getDtEncerramento() != null) {
                 dtEncerramento = ((OrdemServico) lstOS.get(i)).getDtEncerramento().toString();
+                dtEncerramento = super.formatarData(dtEncerramento);
+            }
 
             if (((OrdemServico) lstOS.get(i)).isPecaTrocada())
                 pecTrocada = "Sim";
 
-            if (((OrdemServico) lstOS.get(i)).getPrazoEntrega() != null) 
+            if (((OrdemServico) lstOS.get(i)).getPrazoEntrega() != null) { 
                 dtPrevisao = ((OrdemServico) lstOS.get(i)).getPrazoEntrega().toString();
+                dtPrevisao = super.formatarData(dtPrevisao);
+            }
+            
+            if (((OrdemServico) lstOS.get(i)).getDtAbertura() != null) { 
+                dtAbertura = ((OrdemServico) lstOS.get(i)).getDtAbertura().toString();
+                dtAbertura = super.formatarData(dtAbertura);
+            }
 
             if (((List<Usuario>) new UsuaFactory().consultar(this.idUsuario)).get(0).getTipo().equals("Comum"))   
                 modelo.addRow(new String[]{
@@ -116,7 +126,7 @@ public class ConsOrdemServico extends ConsPadrao {
                      ((OrdemServico) lstOS.get(i)).getCliente().getNome(), 
                      ((OrdemServico) lstOS.get(i)).getCarro().getNome(),
                      ((OrdemServico) lstOS.get(i)).getPeca().getNome(),
-                     ((OrdemServico) lstOS.get(i)).getDtAbertura().toString(),
+                     dtAbertura,
                      dtEncerramento,
                      dtPrevisao,
                      pecTrocada,
@@ -128,7 +138,7 @@ public class ConsOrdemServico extends ConsPadrao {
                      ((OrdemServico) lstOS.get(i)).getCliente().getNome(), 
                      ((OrdemServico) lstOS.get(i)).getCarro().getNome(),
                      ((OrdemServico) lstOS.get(i)).getPeca().getNome(),
-                     ((OrdemServico) lstOS.get(i)).getDtAbertura().toString(),
+                     dtAbertura,
                      dtEncerramento,
                      dtPrevisao,
                      pecTrocada,
@@ -152,15 +162,18 @@ public class ConsOrdemServico extends ConsPadrao {
                                 "Dt. encerramento", "Prazo de entrega", "Peça trocada", "Status"};
             DefaultTableModel modelo = new DefaultTableModel(colunas, 0);
             super.getBtnExcluir1().setVisible(false);
-            List<Object> cli = (List<Object>) new ClienteFactory().consultar("from Cliente where idUsuario="+this.idUsuario+numero);
+            List<Object> cli = (List<Object>) new ClienteFactory().consultar("from Cliente where idUsuario="+this.idUsuario);
             
-            if (!cli.isEmpty()) {
-                int idCliente = ((Cliente) cli.get(0)).getId();         
-                lstOS = (List<Object>) new OrdemServFactory().consultar(
-                            "from OrdemServico where idCliente="+idCliente+" and status=0"+numero);
+            int idCliente = 0;
+            if (!cli.isEmpty())
+                idCliente = ((Cliente) cli.get(0)).getId();
+          
+            lstOS = (List<Object>) new OrdemServFactory().consultar(
+                                "from OrdemServico where idCliente="+idCliente+" and status=0"+numero);
+            if (!lstOS.isEmpty()) {
                 this.listarOrdensServ(modelo);
                 this.setVisible(true);
-            } else 
+            } else
                 JOptionPane.showMessageDialog(null, "Você não possui nenhuma OS em execução no momento.");
         } else {
             String colunas[] = {"ID", "Número", "Cliente", "Carro", "Peça", "Dt. abertura", 

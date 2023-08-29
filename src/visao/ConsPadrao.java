@@ -30,7 +30,6 @@ public abstract class ConsPadrao extends javax.swing.JFrame {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.cadastro = false;
         this.setResizable(true);
-      //  this.listar("");
     }
     
     public abstract void listar(String info);
@@ -208,6 +207,12 @@ public abstract class ConsPadrao extends javax.swing.JFrame {
     
     protected Button getBtnExcluir1() {
         return this.btnExcluir1;
+    }
+    
+    protected String formatarData(String data) {
+        return data.substring(8, 10) + '/' +
+               data.substring(5, 7) + '/' +
+               data.substring(0, 4);
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

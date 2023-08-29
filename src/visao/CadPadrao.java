@@ -5,9 +5,12 @@
 package visao;
 
 import controle.Factory;
+import java.text.ParseException;
 import javax.persistence.RollbackException;
+import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.text.MaskFormatter;
 import org.hibernate.exception.ConstraintViolationException;
 
 /**
@@ -94,10 +97,10 @@ public abstract class CadPadrao extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(71, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(28, 28, 28)
                 .addComponent(jTfID, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
                 .addComponent(btSelecionar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btLimpar)
@@ -181,6 +184,17 @@ public abstract class CadPadrao extends javax.swing.JFrame {
     
     protected JTextField getJtfID() {
         return this.jTfID;
+    }
+    
+    protected MaskFormatter getMascData() {
+        MaskFormatter mascaraData = null;
+        try {
+            mascaraData = new MaskFormatter("##/##/####");
+            mascaraData.setPlaceholderCharacter(' ');
+        } catch(ParseException excp) {
+            System.err.println("Erro na formatação: " + excp.getMessage());
+        }
+        return mascaraData;
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
