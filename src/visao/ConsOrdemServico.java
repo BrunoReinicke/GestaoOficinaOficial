@@ -159,7 +159,7 @@ public class ConsOrdemServico extends ConsPadrao {
             
         if (((List<Usuario>) new UsuaFactory().consultar(this.idUsuario)).get(0).getTipo().equals("Comum")) {
             String colunas[] = {"Número", "Cliente", "Carro", "Peça", "Dt. abertura", 
-                                "Dt. encerramento", "Prazo de entrega", "Peça trocada", "Status"};
+                                "Dt. encerramento", "Dt. previsão", "Peça trocada", "Status"};
             DefaultTableModel modelo = new DefaultTableModel(colunas, 0);
             super.getBtnExcluir1().setVisible(false);
             List<Object> cli = (List<Object>) new ClienteFactory().consultar("from Cliente where idUsuario="+this.idUsuario);
@@ -177,7 +177,7 @@ public class ConsOrdemServico extends ConsPadrao {
                 JOptionPane.showMessageDialog(null, "Você não possui nenhuma OS em execução no momento.");
         } else {
             String colunas[] = {"ID", "Número", "Cliente", "Carro", "Peça", "Dt. abertura", 
-                                "Dt. encerramento", "Prazo de entrega", "Peça trocada", "Status"};
+                                "Dt. encerramento", "Dt. previsão", "Peça trocada", "Status"};
             DefaultTableModel modelo = new DefaultTableModel(colunas, 0);
             
             lstOS = (List<Object>) new OrdemServFactory().consultar("from OrdemServico where 1=1 "+numero);
@@ -193,7 +193,7 @@ public class ConsOrdemServico extends ConsPadrao {
 
     @Override
     public void preencherCad(Vector vect) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

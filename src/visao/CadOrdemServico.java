@@ -13,8 +13,10 @@ import controle.UsuaFactory;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.List;
 import javax.swing.JFormattedTextField;
+import javax.swing.JOptionPane;
 import javax.swing.text.MaskFormatter;
 import modelo.bean.Carro;
 import modelo.bean.Cliente;
@@ -32,6 +34,8 @@ public class CadOrdemServico extends CadPadrao {
      */
     public CadOrdemServico() {
         initComponents();
+        this.jFTFDtAbertura.setValue(super.formatarData(LocalDate.now().toString()));
+        this.jFTFDtAbertura.setEnabled(false);
     }
 
     /**
@@ -54,12 +58,11 @@ public class CadOrdemServico extends CadPadrao {
         jTextField1 = new javax.swing.JTextField();
         jTextField9 = new javax.swing.JTextField();
         jTextField10 = new javax.swing.JTextField();
-        jTextField12 = new javax.swing.JTextField();
-        jTextField13 = new javax.swing.JTextField();
         jTextField14 = new javax.swing.JTextField();
         jTextField15 = new javax.swing.JTextField();
         jFTFDtAbertura = new javax.swing.JFormattedTextField(super.getMascData());
-	jFTFDtAbertura.setFocusLostBehavior(JFormattedTextField.COMMIT);
+        jFTFDtPrevisao = new javax.swing.JFormattedTextField(super.getMascData());
+        jFTFDtEncerramento1 = new javax.swing.JFormattedTextField(super.getMascData());
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de ordens de serviço");
@@ -79,6 +82,14 @@ public class CadOrdemServico extends CadPadrao {
         jLabel7.setText("Peça trocada:");
 
         jLabel8.setText("Status:");
+
+        jFTFDtAbertura.setEditable(false);
+
+        jFTFDtEncerramento1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jFTFDtEncerramento1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -110,11 +121,11 @@ public class CadOrdemServico extends CadPadrao {
                         .addComponent(jTextField10, javax.swing.GroupLayout.DEFAULT_SIZE, 267, Short.MAX_VALUE)
                         .addComponent(jTextField1)
                         .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jTextField12, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jTextField13, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jTextField15, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jTextField14, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jFTFDtAbertura, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jFTFDtAbertura, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jFTFDtEncerramento1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jFTFDtPrevisao, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(74, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -138,12 +149,12 @@ public class CadOrdemServico extends CadPadrao {
                     .addComponent(jFTFDtAbertura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jLabel5)
+                    .addComponent(jFTFDtEncerramento1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(6, 6, 6)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
+                    .addComponent(jLabel6)
+                    .addComponent(jFTFDtPrevisao))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -157,6 +168,10 @@ public class CadOrdemServico extends CadPadrao {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jFTFDtEncerramento1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFTFDtEncerramento1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jFTFDtEncerramento1ActionPerformed
     
     /**
      * @param args the command line arguments
@@ -196,6 +211,8 @@ public class CadOrdemServico extends CadPadrao {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JFormattedTextField jFTFDtAbertura;
+    private javax.swing.JFormattedTextField jFTFDtEncerramento1;
+    private javax.swing.JFormattedTextField jFTFDtPrevisao;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -206,8 +223,6 @@ public class CadOrdemServico extends CadPadrao {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField10;
-    private javax.swing.JTextField jTextField12;
-    private javax.swing.JTextField jTextField13;
     private javax.swing.JTextField jTextField14;
     private javax.swing.JTextField jTextField15;
     private javax.swing.JTextField jTextField9;
@@ -215,7 +230,6 @@ public class CadOrdemServico extends CadPadrao {
 
     @Override
     public void salvar() {
-        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
         OrdemServico os = new OrdemServico();
        
         os.setCliente(
@@ -227,28 +241,39 @@ public class CadOrdemServico extends CadPadrao {
         os.setPeca(
             ((Peca) ((List<Peca>) new PecaFactory()
                 .consultar("from Peca where nome like '" + jTextField10.getText() + "'")).get(0)));
-        
-        try {
-            os.setDtAbertura(formato.parse(jFTFDtAbertura.getText()));
-            os.setPrazoEntrega(formato.parse(jTextField13.getText()));
-            os.setDtEncerramento(formato.parse(jTextField12.getText()));
-        } catch (ParseException pe) {
-            //
-        }
-        
-        if (jTextField14.getText().equals("Sim"))
-            os.setPecaTrocada(true);
-        else
-            os.setPecaTrocada(false);
-        
-        if (jTextField15.getText().equals("Em execução"))
-            os.setStatus(0);
-        else
-            os.setStatus(1);
-        
-        if (!getJtfID().getText().equals("")) 
-            os.setId(Integer.valueOf(getJtfID().getText()));
-        super.confirmar(new OrdemServFactory(), os, "OrdemServicoPU");
+   
+        List<OrdemServico> lstOs = 
+            (List<OrdemServico>) new OrdemServFactory().consultar(
+                                                        "from OrdemServico "+
+                                                        "where idCliente = "+os.getCliente().getId()+
+                                                        " and idCarro = "+os.getCarro().getId()+
+                                                        " and idPeca = "+os.getPeca().getId()+
+                                                        " and status = 0");
+        if (lstOs.isEmpty()) {
+            os.setDtAbertura(super.validarData("abertura", jFTFDtAbertura.getText()));
+            os.setPrazoEntrega(super.validarData("previsão", jFTFDtPrevisao.getText()));
+            os.setDtEncerramento(super.validarData("encerramento", jFTFDtEncerramento1.getText()));
+            
+            if (jTextField14.getText().equals("Sim"))
+                os.setPecaTrocada(true);
+            else
+                os.setPecaTrocada(false);
+
+            if (jTextField15.getText().equals("Em execução"))
+                os.setStatus(0);
+            else
+                os.setStatus(1);
+
+            if (!getJtfID().getText().equals("")) 
+                os.setId(Integer.valueOf(getJtfID().getText()));
+            
+            if (!bErro)
+                super.confirmar(new OrdemServFactory(), os, "OrdemServicoPU");
+        } else
+            JOptionPane.showMessageDialog(null, 
+                "A peça "+os.getPeca().getNome()+ " do carro placa "+os.getCarro().getPlaca()+
+                " já está sendo tratada na OS "+lstOs.get(0).getNumero()+".");
+        this.bErro = false;
     }
 
     @Override
@@ -258,16 +283,23 @@ public class CadOrdemServico extends CadPadrao {
 
     @Override
     public void selecionar() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                ConsOrdemServico conos = new ConsOrdemServico();
+                conos.setVisible(true);
+                conos.setCadastro(true);
+                conos.setIdUsuario(getIdUsuario());
+                conos.listar("");
+            }
+        });
     }
 
     @Override
     public void limpar() {
         this.jTextField1.setText("");
         this.jTextField10.setText("");
-        this.jFTFDtAbertura.setValue(null);
-        this.jTextField12.setText("");
-        this.jTextField13.setText("");
+        this.jFTFDtEncerramento1.setValue(null);
+        this.jFTFDtPrevisao.setValue(null);
         this.jTextField14.setText("");
         this.jTextField15.setText("");
         this.jTextField9.setText("");

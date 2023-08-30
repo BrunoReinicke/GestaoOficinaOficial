@@ -5,7 +5,16 @@
 package visao;
 
 import controle.Factory;
+import java.text.DateFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
+import java.time.temporal.TemporalAccessor;
+import java.util.Date;
 import javax.persistence.RollbackException;
 import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
@@ -22,10 +31,14 @@ public abstract class CadPadrao extends javax.swing.JFrame {
     /**
      * Creates new form CadPadrao
      */
+    private int idUsuario;
+    protected boolean bErro;
+    
     public CadPadrao() {
         initComponents();
         this.jTfID.setVisible(false);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.bErro = false;
     }
 
     /**
@@ -195,6 +208,44 @@ public abstract class CadPadrao extends javax.swing.JFrame {
             System.err.println("Erro na formatação: " + excp.getMessage());
         }
         return mascaraData;
+    }
+
+    public int getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
+    }
+    
+    protected String formatarData(String data) {
+        return data.substring(8, 10) + '/' +
+               data.substring(5, 7) + '/' +
+               data.substring(0, 4);
+    }
+    
+    public Date validarData(String nmData, String data) {
+        Date dtFormat = null;
+        if (!data.equals("  /  /    ")) {
+            DateTimeFormatter dateTimeFormatter = DateTimeFormatter
+                                .ofPattern("dd/MM/uuuu")
+                                .withResolverStyle(ResolverStyle.STRICT);
+            DateFormat formatter = new SimpleDateFormat("dd/mm/yyyy");
+            try {
+                LocalDate.parse(data, dateTimeFormatter);
+                try {
+                    dtFormat = formatter.parse(data);
+                } catch(ParseException ex) {
+                
+                }    
+            } catch (DateTimeParseException e) {
+                if (!this.bErro) {
+                    JOptionPane.showMessageDialog(null, "Data de "+nmData+" inválida, verifique.");
+                    this.bErro = true;
+                }
+            } 
+        }
+        return dtFormat;
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

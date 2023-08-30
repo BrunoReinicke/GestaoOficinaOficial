@@ -198,6 +198,7 @@ public class Principal extends javax.swing.JFrame {
     private void jButton6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton6MouseClicked
         this.cadOS = new CadOrdemServico();
         this.cadOS.setVisible(true);
+        this.cadOS.setIdUsuario(this.log.getIdUsuario());
     }//GEN-LAST:event_jButton6MouseClicked
     
     /**

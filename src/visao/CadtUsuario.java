@@ -246,7 +246,7 @@ public class CadtUsuario extends CadPadrao {
     public JComboBox getJcbTipo() {
         return this.jcbTipo;
     }
-
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
