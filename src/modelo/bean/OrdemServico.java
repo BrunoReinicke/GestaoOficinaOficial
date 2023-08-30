@@ -31,13 +31,13 @@ public class OrdemServico implements Serializable {
     private Carro carro;
     private Peca peca;
     private Integer numero;
-    private Integer status;
+    private String status;
     private Date dtAbertura;
     private Date dtEncerramento;
     private Date prazoEntrega;
-    private boolean pecaTrocada;
+    private String trocPeca;
     private Cliente cliente;
-
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer getId() {
@@ -95,12 +95,12 @@ public class OrdemServico implements Serializable {
         this.prazoEntrega = prazoEntrega;
     }
 
-    public boolean isPecaTrocada() {
-        return pecaTrocada;
+    public String getTrocPeca() {
+        return trocPeca;
     }
 
-    public void setPecaTrocada(boolean pecaTrocada) {
-        this.pecaTrocada = pecaTrocada;
+    public void setTrocPeca(String trocPeca) {
+        this.trocPeca = trocPeca;
     }
 
     @ManyToOne
@@ -121,16 +121,16 @@ public class OrdemServico implements Serializable {
         this.numero = numero;
     }
 
-    public Integer getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(Integer status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
     @Override
     public String toString() {
-        return "OrdemServico{" + "id=" + id + ", carro=" + carro + ", peca=" + peca + ", numero=" + numero + ", status=" + status + ", dtAbertura=" + dtAbertura + ", dtEncerramento=" + dtEncerramento + ", prazoEntrega=" + prazoEntrega + ", pecaTrocada=" + pecaTrocada + ", cliente=" + cliente + '}';
+        return "OrdemServico{" + "id=" + id + ", carro=" + carro + ", peca=" + peca + ", numero=" + numero + ", status=" + status + ", dtAbertura=" + dtAbertura + ", dtEncerramento=" + dtEncerramento + ", prazoEntrega=" + prazoEntrega + ", trocPeca=" + trocPeca + ", cliente=" + cliente + '}';
     }    
 }

@@ -27,11 +27,12 @@ public class Peca implements Serializable {
     private String marca;
     private Fornecedor forn;
     private String categoria;
-
+    private Integer qtde;
+    
     public Peca() {
     }
 
-    public Peca(Integer id, String nome, Integer ano, double preco, String marca, Fornecedor forn, String categoria) {
+    public Peca(Integer id, String nome, Integer ano, double preco, String marca, Fornecedor forn, String categoria, Integer qtde) {
         this.id = id;
         this.nome = nome;
         this.ano = ano;
@@ -39,6 +40,7 @@ public class Peca implements Serializable {
         this.marca = marca;
         this.forn = forn;
         this.categoria = categoria;
+        this.qtde = qtde;
     }
 
     @Id
@@ -101,9 +103,18 @@ public class Peca implements Serializable {
         this.categoria = categoria;
     }
 
+    public Integer getQtde() {
+        return qtde;
+    }
+
+    public void setQtde(Integer qtde) {
+        this.qtde = qtde;
+    }
+
     @Override
     public String toString() {
         return "Peca{" + "id=" + id + ", nome=" + nome + ", ano=" + ano + ", preco=" + preco + 
-               ", marca=" + marca + ", forn=" + forn.toString() + ", categoria=" + categoria + '}';
+               ", marca=" + marca + ", forn=" + forn.toString() + ", categoria=" + categoria + 
+               ", qtde=" + qtde + '}';
     }
 }

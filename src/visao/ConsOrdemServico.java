@@ -91,30 +91,17 @@ public class ConsOrdemServico extends ConsPadrao {
     
     private void listarOrdensServ(DefaultTableModel modelo) {
         for (int i = 0; i < lstOS.size(); i++) {
-            String status;
             String dtEncerramento = "";
-            String pecTrocada = "Não";
-            String dtPrevisao = "";
-            String dtAbertura = "";
-
-            if (((OrdemServico) lstOS.get(i)).getStatus() == 0) 
-                status = "Em execução";
-            else
-                status = "Encerrada"; 
-
             if (((OrdemServico) lstOS.get(i)).getDtEncerramento() != null) {
                 dtEncerramento = ((OrdemServico) lstOS.get(i)).getDtEncerramento().toString();
                 dtEncerramento = super.formatarData(dtEncerramento);
             }
-
-            if (((OrdemServico) lstOS.get(i)).isPecaTrocada())
-                pecTrocada = "Sim";
-
+            String dtPrevisao = "";
             if (((OrdemServico) lstOS.get(i)).getPrazoEntrega() != null) { 
                 dtPrevisao = ((OrdemServico) lstOS.get(i)).getPrazoEntrega().toString();
                 dtPrevisao = super.formatarData(dtPrevisao);
             }
-            
+            String dtAbertura = "";
             if (((OrdemServico) lstOS.get(i)).getDtAbertura() != null) { 
                 dtAbertura = ((OrdemServico) lstOS.get(i)).getDtAbertura().toString();
                 dtAbertura = super.formatarData(dtAbertura);
@@ -129,8 +116,8 @@ public class ConsOrdemServico extends ConsPadrao {
                      dtAbertura,
                      dtEncerramento,
                      dtPrevisao,
-                     pecTrocada,
-                     status});
+                     ((OrdemServico) lstOS.get(i)).getTrocPeca(),
+                     ((OrdemServico) lstOS.get(i)).getStatus()});
             else
                 modelo.addRow(new String[]{
                      ((OrdemServico) lstOS.get(i)).getId().toString(), 
@@ -141,8 +128,8 @@ public class ConsOrdemServico extends ConsPadrao {
                      dtAbertura,
                      dtEncerramento,
                      dtPrevisao,
-                     pecTrocada,
-                     status}); 
+                     ((OrdemServico) lstOS.get(i)).getTrocPeca(),
+                     ((OrdemServico) lstOS.get(i)).getStatus()}); 
         }
         super.getTable().setModel(modelo);
     }
@@ -159,7 +146,7 @@ public class ConsOrdemServico extends ConsPadrao {
             
         if (((List<Usuario>) new UsuaFactory().consultar(this.idUsuario)).get(0).getTipo().equals("Comum")) {
             String colunas[] = {"Número", "Cliente", "Carro", "Peça", "Dt. abertura", 
-                                "Dt. encerramento", "Dt. previsão", "Peça trocada", "Status"};
+                                "Dt. encerramento", "Dt. previsão", "Troca de peça", "Status"};
             DefaultTableModel modelo = new DefaultTableModel(colunas, 0);
             super.getBtnExcluir1().setVisible(false);
             List<Object> cli = (List<Object>) new ClienteFactory().consultar("from Cliente where idUsuario="+this.idUsuario);
@@ -177,7 +164,7 @@ public class ConsOrdemServico extends ConsPadrao {
                 JOptionPane.showMessageDialog(null, "Você não possui nenhuma OS em execução no momento.");
         } else {
             String colunas[] = {"ID", "Número", "Cliente", "Carro", "Peça", "Dt. abertura", 
-                                "Dt. encerramento", "Dt. previsão", "Peça trocada", "Status"};
+                                "Dt. encerramento", "Dt. previsão", "Troca de peça", "Status"};
             DefaultTableModel modelo = new DefaultTableModel(colunas, 0);
             
             lstOS = (List<Object>) new OrdemServFactory().consultar("from OrdemServico where 1=1 "+numero);

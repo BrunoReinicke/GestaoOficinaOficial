@@ -174,9 +174,13 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JFormattedTextField" name="jFTFDtPrevisao">
+      <Events>
+        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jFTFDtPrevisaoFocusLost"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JFormattedTextField" name="jFTFDtEncerramento1">
       <Events>
+        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jFTFDtEncerramento1FocusLost"/>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jFTFDtEncerramento1ActionPerformed"/>
       </Events>
     </Component>

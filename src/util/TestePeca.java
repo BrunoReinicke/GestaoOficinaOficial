@@ -30,6 +30,7 @@ public class TestePeca {
         pe.setForn(new Fornecedor(1, "Random", 42, 'M', "***.***.***-**", "*.***.***",
             formato.parse("14/01/1980"), "Pomerode", "SC", "Brasil"));
         pe.setCategoria("Média");
+        pe.setQtde(5);
         new PecaFactory().salvar(pe);
         
         // Consulta
@@ -49,9 +50,6 @@ public class TestePeca {
         pe2.setForn(new Fornecedor(3, "Random", 42, 'M', "***.***.***-**", "*.***.***",
             formato.parse("14/01/1980"), "Pomerode", "SC", "Brasil"));
         pe2.setCategoria("Média");
-        new PecaFactory().alterar(pe2);
-        
-        // Exclusão
-        new PecaFactory().excluir(7);*/
+        new PecaFactory().alterar(pe2);*/
     }
 }

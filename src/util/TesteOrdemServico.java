@@ -28,20 +28,20 @@ public class TesteOrdemServico {
         // Cadastro
         OrdemServico os = new OrdemServico();
         os.setCarro(new Carro(2, "C4", 2008, 
-            new Cliente(3, "Bruno", 25, 'M', "***.***.***-**", "*.***.***", 
+            new Cliente(1, "Cadavér1khx", 27, 'M', "***.***.***-**", "*.***.***", 
                 formato.parse("14/02/1996"), "Pomerode", "SC", "Brasil", 
-                new Usuario(3, "user", "pass", "C")),
+                new Usuario(5, "bruno", "123", "Comum")),
             "$UL-X11Y", "Joinville", "SC", "Brasil", "Citroen"));
-        os.setPeca(new Peca(6, "Radiador", 2021, 1000, "random", 
-            new Fornecedor(3, "Random", 42, 'M', "***.***.***-**", "*.***.***",
+        os.setPeca(new Peca(1, "Carburador", 2021, 1000, "random", 
+            new Fornecedor(1, "Random", 42, 'M', "***.***.***-**", "*.***.***",
                 formato.parse("14/01/1980"), "Pomerode", "SC", "Brasil"),
-            "Média"));
-        os.setStatus(0);
+            "Média", 5));
+        os.setStatus("Em aberto");
         os.setDtAbertura(formato.parse("24/01/2022"));
         os.setPrazoEntrega(formato.parse("28/01/2022"));
-        os.setPecaTrocada(false);
-        os.setCliente(new Cliente(2, "Bruno", 25, 'M', "***.***.***-**", "*.***.***", 
-            formato.parse("14/02/1996"), "Pomerode", "SC", "Brasil", new Usuario(3, "bruno", "12345", "C")));
+        os.setTrocPeca("Sim");
+        os.setCliente(new Cliente(1, "Cadavér1khx", 27, 'M', "***.***.***-**", "*.***.***", 
+            formato.parse("14/02/1996"), "Pomerode", "SC", "Brasil", new Usuario(5, "bruno", "123", "Comum")));
         new OrdemServFactory().salvar(os, "OrdemServicoPU");
           
         // Consulta
@@ -50,8 +50,6 @@ public class TesteOrdemServico {
         lstOS.forEach((ordServ) -> {
             System.out.println(ordServ.toString());
         });
-        
-        // Exclusão
-      //  new OrdemServFactory().excluir(4);*/
+        */
     }
 }

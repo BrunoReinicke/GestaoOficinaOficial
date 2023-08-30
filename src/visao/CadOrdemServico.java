@@ -85,6 +85,17 @@ public class CadOrdemServico extends CadPadrao {
 
         jFTFDtAbertura.setEditable(false);
 
+        jFTFDtPrevisao.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jFTFDtPrevisaoFocusLost(evt);
+            }
+        });
+
+        jFTFDtEncerramento1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jFTFDtEncerramento1FocusLost(evt);
+            }
+        });
         jFTFDtEncerramento1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jFTFDtEncerramento1ActionPerformed(evt);
@@ -172,6 +183,16 @@ public class CadOrdemServico extends CadPadrao {
     private void jFTFDtEncerramento1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFTFDtEncerramento1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jFTFDtEncerramento1ActionPerformed
+
+    private void jFTFDtEncerramento1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jFTFDtEncerramento1FocusLost
+        if (this.jFTFDtEncerramento1.getText().equals("  /  /    "))
+            this.jFTFDtEncerramento1.setValue(null);
+    }//GEN-LAST:event_jFTFDtEncerramento1FocusLost
+
+    private void jFTFDtPrevisaoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jFTFDtPrevisaoFocusLost
+        if (this.jFTFDtPrevisao.getText().equals("  /  /    "))
+            this.jFTFDtPrevisao.setValue(null);
+    }//GEN-LAST:event_jFTFDtPrevisaoFocusLost
     
     /**
      * @param args the command line arguments
@@ -254,7 +275,7 @@ public class CadOrdemServico extends CadPadrao {
             os.setPrazoEntrega(super.validarData("previsão", jFTFDtPrevisao.getText()));
             os.setDtEncerramento(super.validarData("encerramento", jFTFDtEncerramento1.getText()));
             
-            if (jTextField14.getText().equals("Sim"))
+        /*    if (jTextField14.getText().equals("Sim"))
                 os.setPecaTrocada(true);
             else
                 os.setPecaTrocada(false);
@@ -262,7 +283,7 @@ public class CadOrdemServico extends CadPadrao {
             if (jTextField15.getText().equals("Em execução"))
                 os.setStatus(0);
             else
-                os.setStatus(1);
+                os.setStatus(1);*/
 
             if (!getJtfID().getText().equals("")) 
                 os.setId(Integer.valueOf(getJtfID().getText()));
