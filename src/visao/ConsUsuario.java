@@ -54,12 +54,10 @@ public class ConsUsuario extends ConsPadrao {
     @Override
     public void listar(String info) {
         List<Usuario> list;
-        
         if (info.equals(""))
            list = (List<Usuario>) new UsuaFactory().consultar("");
         else
-           list = (List<Usuario>) new UsuaFactory().consultar(" where usuario like '"+info+"%'");
-            
+           list = (List<Usuario>) new UsuaFactory().consultar(" where usuario like '"+info+"%'");      
         String colunas[]   = {"ID", "Usuário", "Senha", "Tipo"};
         DefaultTableModel modelo = new DefaultTableModel(colunas, 0);
         

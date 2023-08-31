@@ -17,6 +17,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
 
 @Entity
 public class Administrador implements Serializable {
@@ -24,7 +25,7 @@ public class Administrador implements Serializable {
     private Integer id;
     private String nome;
     private int idade;
-    private char sexo;
+    private String sexo;
     private String cpf;
     private String rg;
     private Date dataNasc;
@@ -59,11 +60,11 @@ public class Administrador implements Serializable {
         this.idade = idade;
     }
 
-    public char getSexo() {
+    public String getSexo() {
         return sexo;
     }
 
-    public void setSexo(char sexo) {
+    public void setSexo(String sexo) {
         this.sexo = sexo;
     }
 
@@ -83,6 +84,7 @@ public class Administrador implements Serializable {
         this.rg = rg;
     }
 
+    @Temporal(javax.persistence.TemporalType.DATE)
     public Date getDataNasc() {
         return dataNasc;
     }

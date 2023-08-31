@@ -58,11 +58,11 @@ public class CadOrdemServico extends CadPadrao {
         jTextField1 = new javax.swing.JTextField();
         jTextField9 = new javax.swing.JTextField();
         jTextField10 = new javax.swing.JTextField();
-        jTextField14 = new javax.swing.JTextField();
-        jTextField15 = new javax.swing.JTextField();
         jFTFDtAbertura = new javax.swing.JFormattedTextField(super.getMascData());
         jFTFDtPrevisao = new javax.swing.JFormattedTextField(super.getMascData());
         jFTFDtEncerramento1 = new javax.swing.JFormattedTextField(super.getMascData());
+        jCbTrPeca = new javax.swing.JComboBox<>();
+        jCbStatus = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de ordens de serviço");
@@ -79,7 +79,7 @@ public class CadOrdemServico extends CadPadrao {
 
         jLabel6.setText("Data de previsão:");
 
-        jLabel7.setText("Peça trocada:");
+        jLabel7.setText("Troca peça:");
 
         jLabel8.setText("Status:");
 
@@ -102,41 +102,44 @@ public class CadOrdemServico extends CadPadrao {
             }
         });
 
+        jCbTrPeca.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Não", "Sim" }));
+
+        jCbStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Em aberto", "Em execução", "Encerrada" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(91, 91, 91)
-                            .addComponent(jLabel8))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(36, 36, 36)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jLabel5)
                                 .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING))
-                            .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING))))
+                            .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel8)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jTextField10, javax.swing.GroupLayout.DEFAULT_SIZE, 267, Short.MAX_VALUE)
                         .addComponent(jTextField1)
-                        .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jTextField15, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jTextField14, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jFTFDtAbertura, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jFTFDtEncerramento1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jFTFDtPrevisao, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jFTFDtPrevisao, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCbTrPeca, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCbStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(74, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -168,12 +171,12 @@ public class CadOrdemServico extends CadPadrao {
                     .addComponent(jFTFDtPrevisao))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7))
+                    .addComponent(jLabel7)
+                    .addComponent(jCbTrPeca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8))
+                    .addComponent(jLabel8)
+                    .addComponent(jCbStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(107, 107, 107))
         );
 
@@ -231,6 +234,8 @@ public class CadOrdemServico extends CadPadrao {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> jCbStatus;
+    private javax.swing.JComboBox<String> jCbTrPeca;
     private javax.swing.JFormattedTextField jFTFDtAbertura;
     private javax.swing.JFormattedTextField jFTFDtEncerramento1;
     private javax.swing.JFormattedTextField jFTFDtPrevisao;
@@ -244,8 +249,6 @@ public class CadOrdemServico extends CadPadrao {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField10;
-    private javax.swing.JTextField jTextField14;
-    private javax.swing.JTextField jTextField15;
     private javax.swing.JTextField jTextField9;
     // End of variables declaration//GEN-END:variables
 
@@ -269,25 +272,16 @@ public class CadOrdemServico extends CadPadrao {
                                                         "where idCliente = "+os.getCliente().getId()+
                                                         " and idCarro = "+os.getCarro().getId()+
                                                         " and idPeca = "+os.getPeca().getId()+
-                                                        " and status = 0");
+                                                        " and status <> 'Encerrada'");
         if (lstOs.isEmpty()) {
-            os.setDtAbertura(super.validarData("abertura", jFTFDtAbertura.getText()));
-            os.setPrazoEntrega(super.validarData("previsão", jFTFDtPrevisao.getText()));
-            os.setDtEncerramento(super.validarData("encerramento", jFTFDtEncerramento1.getText()));
-            
-        /*    if (jTextField14.getText().equals("Sim"))
-                os.setPecaTrocada(true);
-            else
-                os.setPecaTrocada(false);
-
-            if (jTextField15.getText().equals("Em execução"))
-                os.setStatus(0);
-            else
-                os.setStatus(1);*/
-
+            os.setDtAbertura(super.validarData("abertura", jFTFDtAbertura.getText(), ""));
+            os.setDtEncerramento(super.validarData("encerramento", jFTFDtEncerramento1.getText(), "igual"));
+            os.setPrazoEntrega(super.validarData("previsão", jFTFDtPrevisao.getText(), "maior"));
+            os.setTrocPeca(this.jCbTrPeca.getSelectedItem().toString());
+            os.setStatus(this.jCbStatus.getSelectedItem().toString());
+  
             if (!getJtfID().getText().equals("")) 
-                os.setId(Integer.valueOf(getJtfID().getText()));
-            
+                os.setId(Integer.valueOf(getJtfID().getText()));          
             if (!bErro)
                 super.confirmar(new OrdemServFactory(), os, "OrdemServicoPU");
         } else
@@ -304,14 +298,12 @@ public class CadOrdemServico extends CadPadrao {
 
     @Override
     public void selecionar() {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                ConsOrdemServico conos = new ConsOrdemServico();
-                conos.setVisible(true);
-                conos.setCadastro(true);
-                conos.setIdUsuario(getIdUsuario());
-                conos.listar("");
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            ConsOrdemServico conos = new ConsOrdemServico();
+            conos.setVisible(true);
+            conos.setCadastro(true);
+            conos.setIdUsuario(getIdUsuario());
+            conos.listar("");
         });
     }
 
@@ -321,8 +313,8 @@ public class CadOrdemServico extends CadPadrao {
         this.jTextField10.setText("");
         this.jFTFDtEncerramento1.setValue(null);
         this.jFTFDtPrevisao.setValue(null);
-        this.jTextField14.setText("");
-        this.jTextField15.setText("");
+        this.jCbStatus.setSelectedIndex(0);
+        this.jCbTrPeca.setSelectedIndex(0);
         this.jTextField9.setText("");
     }
 }

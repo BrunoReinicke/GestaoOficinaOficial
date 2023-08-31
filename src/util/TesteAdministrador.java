@@ -23,9 +23,9 @@ public class TesteAdministrador {
         
         // Cadastro
         Administrador adm = new Administrador();
-        adm.setNome("Teste");
+        adm.setNome("Gerson Luiz Reinicke");
         adm.setIdade(53);
-        adm.setSexo('M');
+        adm.setSexo("Masculino");
         adm.setCpf("***.***.***-**");
         adm.setRg("*.***.***");
         adm.setDataNasc(formato.parse("25/09/1968"));
@@ -56,11 +56,5 @@ public class TesteAdministrador {
         lstAdmin3.forEach((admin) -> {
             System.out.println(admin.toString());
         }); */
-        
-        // Consulta
-       // System.out.println("Consulta com filtro:\n" + new AdminFactory().consultar(3).toString());
-        
-        // Exclusão
-       // new AdminFactory().excluir(2);
     }
 }

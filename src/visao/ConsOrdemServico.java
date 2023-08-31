@@ -142,7 +142,7 @@ public class ConsOrdemServico extends ConsPadrao {
     public void listar(String info) {
         String numero = "";
         if (!info.equals(""))
-            numero = " and numero = " + info;
+            numero = " and numero like '" + info + "%'";
             
         if (((List<Usuario>) new UsuaFactory().consultar(this.idUsuario)).get(0).getTipo().equals("Comum")) {
             String colunas[] = {"Número", "Cliente", "Carro", "Peça", "Dt. abertura", 
@@ -156,7 +156,7 @@ public class ConsOrdemServico extends ConsPadrao {
                 idCliente = ((Cliente) cli.get(0)).getId();
           
             lstOS = (List<Object>) new OrdemServFactory().consultar(
-                                "from OrdemServico where idCliente="+idCliente+" and status=0"+numero);
+                                "from OrdemServico where idCliente="+idCliente+" and status <> 'Encerrada' "+numero);
             if (!lstOS.isEmpty()) {
                 this.listarOrdensServ(modelo);
                 this.setVisible(true);

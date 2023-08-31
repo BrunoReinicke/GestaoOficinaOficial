@@ -27,7 +27,7 @@ public abstract class ConsPadrao extends javax.swing.JFrame {
     public ConsPadrao() {
         initComponents();
         this.row = -1;
-        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         this.cadastro = false;
         this.setResizable(true);
     }

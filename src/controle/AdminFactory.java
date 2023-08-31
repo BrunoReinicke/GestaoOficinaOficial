@@ -17,8 +17,9 @@ public class AdminFactory extends Factory {
         super.salvar(obj, "AdministradorPU");
     }
     
-    public Object consultar() {
-        return super.consultar("from Administrador");
+    @Override
+    public Object consultar(String sql) {
+        return super.consultar("from Administrador " + sql);
     }
     
     @Override

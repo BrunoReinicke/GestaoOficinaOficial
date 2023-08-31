@@ -20,6 +20,7 @@ public class Principal extends javax.swing.JFrame {
     private ConsUsuario conUs;
     private ConsOrdemServico conOS;
     private CadOrdemServico cadOS;
+    private ConsAdministrador conAdm;
     protected Object obj;
     
     /**
@@ -32,6 +33,7 @@ public class Principal extends javax.swing.JFrame {
         this.jButton2.setVisible(false);
         this.jButton3.setVisible(false);
         this.jButton6.setVisible(false);
+        this.jBtnConsAdm.setVisible(false);
     }
 
     /**
@@ -49,6 +51,7 @@ public class Principal extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
+        jBtnConsAdm = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("OSTPA");
@@ -96,6 +99,11 @@ public class Principal extends javax.swing.JFrame {
                 jButton5MouseClicked(evt);
             }
         });
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         jButton6.setText("Cadastrar OS");
         jButton6.setActionCommand("");
@@ -103,6 +111,24 @@ public class Principal extends javax.swing.JFrame {
         jButton6.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton6MouseClicked(evt);
+            }
+        });
+
+        jBtnConsAdm.setText("Consultar adm.");
+        jBtnConsAdm.setName("btnConsultar"); // NOI18N
+        jBtnConsAdm.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jBtnConsAdmMouseClicked(evt);
+            }
+        });
+        jBtnConsAdm.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                jBtnConsAdmComponentShown(evt);
+            }
+        });
+        jBtnConsAdm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnConsAdmActionPerformed(evt);
             }
         });
 
@@ -122,7 +148,9 @@ public class Principal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jBtnConsAdm)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -134,8 +162,9 @@ public class Principal extends javax.swing.JFrame {
                     .addComponent(jButton2)
                     .addComponent(jButton3)
                     .addComponent(jButton4)
-                    .addComponent(jButton5)
-                    .addComponent(jButton6))
+                    .addComponent(jButton6)
+                    .addComponent(jBtnConsAdm)
+                    .addComponent(jButton5))
                 .addContainerGap(263, Short.MAX_VALUE))
         );
 
@@ -151,7 +180,6 @@ public class Principal extends javax.swing.JFrame {
         this.conOS = new ConsOrdemServico();
         this.conOS.setIdUsuario(this.log.getIdUsuario());
         this.conOS.listar("");
-       // this.conOS.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -168,6 +196,7 @@ public class Principal extends javax.swing.JFrame {
         this.log.setBtnConsOS(this.jButton2);
         this.log.setBtnCadOS(this.jButton6);
         this.log.setBtnLogin(this.jButton4);
+        this.log.setBtnConsAdm(this.jBtnConsAdm);
         this.log.setVisible(true);
     }//GEN-LAST:event_jButton4MouseClicked
 
@@ -176,6 +205,7 @@ public class Principal extends javax.swing.JFrame {
         this.jButton2.setVisible(false);
         this.jButton3.setVisible(false);
         this.jButton6.setVisible(false);
+        this.jBtnConsAdm.setVisible(false);
         this.jButton4.setVisible(true);
         
         if (this.conUs != null)
@@ -189,6 +219,9 @@ public class Principal extends javax.swing.JFrame {
         
         if (this.cadOS != null)
             this.cadOS.dispose();
+        
+        if (this.conAdm != null)
+            this.conAdm.dispose();
     }//GEN-LAST:event_jButton5MouseClicked
 
     private void jButton2ComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jButton2ComponentShown
@@ -200,6 +233,24 @@ public class Principal extends javax.swing.JFrame {
         this.cadOS.setVisible(true);
         this.cadOS.setIdUsuario(this.log.getIdUsuario());
     }//GEN-LAST:event_jButton6MouseClicked
+
+    private void jBtnConsAdmComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jBtnConsAdmComponentShown
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBtnConsAdmComponentShown
+
+    private void jBtnConsAdmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConsAdmActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBtnConsAdmActionPerformed
+
+    private void jBtnConsAdmMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnConsAdmMouseClicked
+        this.conAdm = new ConsAdministrador();
+        this.conAdm.listar("");
+        this.conAdm.setVisible(true);
+    }//GEN-LAST:event_jBtnConsAdmMouseClicked
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton5ActionPerformed
     
     /**
      * @param args the command line arguments
@@ -237,6 +288,7 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBtnConsAdm;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;

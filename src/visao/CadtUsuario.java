@@ -11,6 +11,7 @@ package visao;
  */
 import modelo.bean.Usuario;
 import controle.UsuaFactory;
+import java.util.Arrays;
 import javax.swing.JComboBox;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -141,17 +142,13 @@ public class CadtUsuario extends CadPadrao {
 
     @Override
     public void salvar() {
-        String senha = "";
-        for (int i = 0; i < jPasswordField1.getPassword().length; i++) {
-            senha += jPasswordField1.getPassword()[i];
-        }
         Usuario u = new Usuario();
         u.setUsuario(jtfUsuario.getText());
-        u.setSenha(senha);
+        u.setSenha(new String(jPasswordField1.getPassword()));
         u.setTipo(jcbTipo.getSelectedItem().toString());
         
         if (!new UsuaFactory().usuJaCad(jtfUsuario.getText()) ||
-                !getJtfID().getText().equals("")) {
+            !getJtfID().getText().equals("")) {
             if (!getJtfID().getText().equals("")) 
                 u.setId(Integer.valueOf(getJtfID().getText()));
             super.confirmar(new UsuaFactory(), u, "UsuarioPU");

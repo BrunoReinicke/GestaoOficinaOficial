@@ -37,7 +37,7 @@ public abstract class CadPadrao extends javax.swing.JFrame {
     public CadPadrao() {
         initComponents();
         this.jTfID.setVisible(false);
-        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         this.bErro = false;
     }
 
@@ -224,25 +224,38 @@ public abstract class CadPadrao extends javax.swing.JFrame {
                data.substring(0, 4);
     }
     
-    public Date validarData(String nmData, String data) {
+    private void erroData(String msg) {
+        if (!this.bErro) {
+            JOptionPane.showMessageDialog(null, msg);
+            this.bErro = true;
+        }
+    }
+
+    public Date validarData(String nmData, String data, String condicao) {
         Date dtFormat = null;
         if (!data.equals("  /  /    ")) {
             DateTimeFormatter dateTimeFormatter = DateTimeFormatter
                                 .ofPattern("dd/MM/uuuu")
                                 .withResolverStyle(ResolverStyle.STRICT);
-            DateFormat formatter = new SimpleDateFormat("dd/mm/yyyy");
+            DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+            
             try {
-                LocalDate.parse(data, dateTimeFormatter);
+                LocalDate.parse(data, dateTimeFormatter);                
                 try {
                     dtFormat = formatter.parse(data);
+                    String formDtHoje = this.formatarData(LocalDate.now().toString()); 
+                    
+                    if (condicao.equalsIgnoreCase("maior")) 
+                        if (dtFormat.getTime() < formatter.parse(formDtHoje).getTime()) 
+                            this.erroData("Data de "+nmData+" precisa ser maior ou igual à data de hoje.");
+                    if (condicao.equalsIgnoreCase("igual")) 
+                        if (dtFormat.getTime() != formatter.parse(formDtHoje).getTime()) 
+                            this.erroData("Data de "+nmData+" precisa ser igual à data de hoje.");
                 } catch(ParseException ex) {
                 
                 }    
             } catch (DateTimeParseException e) {
-                if (!this.bErro) {
-                    JOptionPane.showMessageDialog(null, "Data de "+nmData+" inválida, verifique.");
-                    this.bErro = true;
-                }
+                this.erroData("Data de "+nmData+" inválida, verifique.");
             } 
         }
         return dtFormat;

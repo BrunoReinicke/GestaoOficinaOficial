@@ -21,6 +21,7 @@ public class Login extends JFrame {
     private JButton btnConsOS;
     private JButton btnCadOS;
     private JButton btnLogin;
+    private JButton btnConsAdm;
     private int idUsuario;
     
     /**
@@ -120,22 +121,17 @@ public class Login extends JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-        String senha = "";   
-        for (int i = 0; i < jPasswordField2.getPassword().length; i++) {
-            senha += jPasswordField2.getPassword()[i];
-        } 
-        
         Usuario u = new Usuario();
         u.setUsuario(jTextField1.getText());
-        u.setSenha(senha);
+        u.setSenha(new String(jPasswordField2.getPassword()));
        
         if (!new UsuaFactory().isLogged(u).isEmpty()) {
-            this.idUsuario = ((Usuario) new UsuaFactory().isLogged(u).get(0)).getId();
-            
+            this.idUsuario = ((Usuario) new UsuaFactory().isLogged(u).get(0)).getId();           
             if (((Usuario) new UsuaFactory().isLogged(u).get(0)).getTipo().equalsIgnoreCase("Administrador")) {
                 this.btnCadUsu.setVisible(true);
                 this.btnConsUsu.setVisible(true);
                 this.btnCadOS.setVisible(true);
+                this.btnConsAdm.setVisible(true);
             }
             this.btnConsOS.setVisible(true);
             this.btnLogin.setVisible(false);
@@ -179,6 +175,14 @@ public class Login extends JFrame {
 
     public void setBtnLogin(JButton btnLogin) {
         this.btnLogin = btnLogin;
+    }
+
+    public JButton getBtnConsAdm() {
+        return btnConsAdm;
+    }
+
+    public void setBtnConsAdm(JButton btnConsAdm) {
+        this.btnConsAdm = btnConsAdm;
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
