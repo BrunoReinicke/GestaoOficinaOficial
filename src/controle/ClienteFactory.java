@@ -17,8 +17,9 @@ public class ClienteFactory extends Factory {
         super.salvar(obj, "ClientePU");
     }
     
-    public Object consultar() {
-        return super.consultar("from Cliente");
+    @Override
+    public Object consultar(String sql) {
+        return super.consultar("from Cliente " + sql);
     }
     
     @Override

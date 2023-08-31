@@ -25,7 +25,7 @@ public class Cliente implements Serializable {
     private Integer id;
     private String nome;
     private int idade;
-    private char sexo;
+    private String sexo;
     private String cpf;
     private String rg;
     private Date dataNasc;
@@ -36,7 +36,7 @@ public class Cliente implements Serializable {
     
     public Cliente() {}
 
-    public Cliente(Integer id, String nome, int idade, char sexo, String cpf, String rg, Date dataNasc, String cidade, String uf, String pais, Usuario usu) {
+    public Cliente(Integer id, String nome, int idade, String sexo, String cpf, String rg, Date dataNasc, String cidade, String uf, String pais, Usuario usu) {
         this.id = id;
         this.nome = nome;
         this.idade = idade;
@@ -76,11 +76,11 @@ public class Cliente implements Serializable {
         this.idade = idade;
     }
 
-    public char getSexo() {
+    public String getSexo() {
         return sexo;
     }
 
-    public void setSexo(char sexo) {
+    public void setSexo(String sexo) {
         this.sexo = sexo;
     }
 

@@ -19,21 +19,11 @@ public class TesteFornecedor {
     public static void main(String[] args) throws ParseException {
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
         
-        // Consulta
-        /*List<Fornecedor> lstForn2 = (List<Fornecedor>) new FornecFactory().consultar();
-        System.out.println("Consulta sem filtro:");
-        lstForn2.forEach((fornec) -> {
-            System.out.println(fornec.toString());
-        }); 
-        
-        // Exclusão
-        new FornecFactory().excluir(4);*/
-        
         // Cadastro
         Fornecedor forn3 = new Fornecedor();
         forn3.setNome("Random");
         forn3.setIdade(42);
-        forn3.setSexo('M');
+        forn3.setSexo("Masculino");
         forn3.setCpf("***.***.***-**");
         forn3.setRg("*.***.***");
         forn3.setDataNasc(formato.parse("14/01/1980"));

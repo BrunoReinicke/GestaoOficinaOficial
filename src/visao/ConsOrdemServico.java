@@ -35,7 +35,8 @@ public class ConsOrdemServico extends ConsPadrao {
     
     public ConsOrdemServico() {
         initComponents();
-        super.setSize();
+        super.setSize();    
+        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
 
     /**

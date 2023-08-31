@@ -30,6 +30,7 @@ public class CadtUsuario extends CadPadrao {
         initComponents();
         this.idUsuario = 0;
         this.id = 0;
+        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
     
     public Object getUsua() {

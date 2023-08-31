@@ -33,6 +33,7 @@ public class ConsUsuario extends ConsPadrao {
     public ConsUsuario() {
         initComponents();
         super.setSize();
+        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
 
     public void setJtfUsuario(JTextField jtfUsuario) {

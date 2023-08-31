@@ -28,28 +28,20 @@ public class TesteOrdemServico {
         // Cadastro
         OrdemServico os = new OrdemServico();
         os.setCarro(new Carro(2, "C4", 2008, 
-            new Cliente(1, "Cadavér1khx", 27, 'M', "***.***.***-**", "*.***.***", 
+            new Cliente(1, "Bruno Luiz Reinicke", 27, "Masculino", "***.***.***-**", "*.***.***", 
                 formato.parse("14/02/1996"), "Pomerode", "SC", "Brasil", 
                 new Usuario(5, "bruno", "123", "Comum")),
             "$UL-X11Y", "Joinville", "SC", "Brasil", "Citroen"));
         os.setPeca(new Peca(1, "Carburador", 2021, 1000, "random", 
-            new Fornecedor(1, "Random", 42, 'M', "***.***.***-**", "*.***.***",
+            new Fornecedor(1, "Random", 42, "Masculino", "***.***.***-**", "*.***.***",
                 formato.parse("14/01/1980"), "Pomerode", "SC", "Brasil"),
             "Média", 5));
         os.setStatus("Em aberto");
         os.setDtAbertura(formato.parse("24/01/2022"));
         os.setPrazoEntrega(formato.parse("28/01/2022"));
         os.setTrocPeca("Sim");
-        os.setCliente(new Cliente(1, "Cadavér1khx", 27, 'M', "***.***.***-**", "*.***.***", 
+        os.setCliente(new Cliente(1, "Bruno Luiz Reinicke", 27, "Masculino", "***.***.***-**", "*.***.***", 
             formato.parse("14/02/1996"), "Pomerode", "SC", "Brasil", new Usuario(5, "bruno", "123", "Comum")));
         new OrdemServFactory().salvar(os, "OrdemServicoPU");
-          
-        // Consulta
-    /*    List<OrdemServico> lstOS = (List<OrdemServico>) new OrdemServFactory().consultar(1);
-        System.out.println("Consulta com filtro:");
-        lstOS.forEach((ordServ) -> {
-            System.out.println(ordServ.toString());
-        });
-        */
     }
 }

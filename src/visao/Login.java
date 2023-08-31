@@ -22,6 +22,9 @@ public class Login extends JFrame {
     private JButton btnCadOS;
     private JButton btnLogin;
     private JButton btnConsAdm;
+    private JButton btnConsCar;
+    private JButton btnConsClie;
+    private JButton btnConsForn;
     private int idUsuario;
     
     /**
@@ -132,6 +135,9 @@ public class Login extends JFrame {
                 this.btnConsUsu.setVisible(true);
                 this.btnCadOS.setVisible(true);
                 this.btnConsAdm.setVisible(true);
+                this.btnConsCar.setVisible(true);
+                this.btnConsClie.setVisible(true);
+                this.btnConsForn.setVisible(true);
             }
             this.btnConsOS.setVisible(true);
             this.btnLogin.setVisible(false);
@@ -183,6 +189,30 @@ public class Login extends JFrame {
 
     public void setBtnConsAdm(JButton btnConsAdm) {
         this.btnConsAdm = btnConsAdm;
+    }
+    
+    public JButton getBtnConsCar() {
+        return btnConsCar;
+    }
+
+    public void setBtnConsCar(JButton btnConsCar) {
+        this.btnConsCar = btnConsCar;
+    }
+    
+    public JButton getBtnConsClie() {
+        return btnConsClie;
+    }
+
+    public void setBtnConsClie(JButton btnConsClie) {
+        this.btnConsClie = btnConsClie;
+    }
+
+    public JButton getBtnConsForn() {
+        return btnConsForn;
+    }
+
+    public void setBtnConsForn(JButton btnConsForn) {
+        this.btnConsForn = btnConsForn;
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -36,6 +36,7 @@ public class CadOrdemServico extends CadPadrao {
         initComponents();
         this.jFTFDtAbertura.setValue(super.formatarData(LocalDate.now().toString()));
         this.jFTFDtAbertura.setEnabled(false);
+        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
 
     /**
@@ -282,8 +283,25 @@ public class CadOrdemServico extends CadPadrao {
   
             if (!getJtfID().getText().equals("")) 
                 os.setId(Integer.valueOf(getJtfID().getText()));          
-            if (!bErro)
-                super.confirmar(new OrdemServFactory(), os, "OrdemServicoPU");
+            
+            if (!bErro) {
+                boolean peDisp = true;
+                
+                if (os.getTrocPeca().equalsIgnoreCase("Sim")) {
+                    int idPeca = os.getPeca().getId();
+                    List<Peca> lstPeca = (List<Peca>) (new PecaFactory().consultar(idPeca));
+                    if (lstPeca.get(0).getQtde() > 0) {
+                        Peca peca = ((List<Peca>) (new PecaFactory().consultar(idPeca))).get(0);
+                        peca.setQtde(peca.getQtde() - 1);
+                        new PecaFactory().alterar(peca);
+                    } else {
+                        peDisp = false;
+                        JOptionPane.showMessageDialog(null, "Peça indisponível no estoque, para dar continuidade à OS realize a compra.");
+                    }
+                }
+                if (peDisp)
+                    super.confirmar(new OrdemServFactory(), os, "OrdemServicoPU");
+            }
         } else
             JOptionPane.showMessageDialog(null, 
                 "A peça "+os.getPeca().getNome()+ " do carro placa "+os.getCarro().getPlaca()+

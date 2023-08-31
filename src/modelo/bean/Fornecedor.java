@@ -15,6 +15,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
 
 @Entity
 public class Fornecedor implements Serializable {
@@ -22,7 +23,7 @@ public class Fornecedor implements Serializable {
     private Integer id;
     private String nome;
     private int idade;
-    private char sexo;
+    private String sexo;
     private String cpf;
     private String rg;
     private Date dataNasc;
@@ -33,7 +34,7 @@ public class Fornecedor implements Serializable {
     public Fornecedor () {
     }
 
-    public Fornecedor(Integer id, String nome, int idade, char sexo, String cpf, String rg, Date dataNasc, String cidade, String uf, String pais) {
+    public Fornecedor(Integer id, String nome, int idade, String sexo, String cpf, String rg, Date dataNasc, String cidade, String uf, String pais) {
         this.id = id;
         this.nome = nome;
         this.idade = idade;
@@ -72,11 +73,11 @@ public class Fornecedor implements Serializable {
         this.idade = idade;
     }
 
-    public char getSexo() {
+    public String getSexo() {
         return sexo;
     }
 
-    public void setSexo(char sexo) {
+    public void setSexo(String sexo) {
         this.sexo = sexo;
     }
 
@@ -96,6 +97,7 @@ public class Fornecedor implements Serializable {
         this.rg = rg;
     }
 
+    @Temporal(javax.persistence.TemporalType.DATE)
     public Date getDataNasc() {
         return dataNasc;
     }

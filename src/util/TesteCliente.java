@@ -23,9 +23,9 @@ public class TesteCliente {
         
         // Cadastro
         Cliente cli = new Cliente();
-        cli.setNome("Cadavér1khx");
+        cli.setNome("Bruno Luiz Reinicke");
         cli.setIdade(27);
-        cli.setSexo('M');
+        cli.setSexo("Masculino");
         cli.setCpf("***.***.***-**");
         cli.setRg("*.***.***");
         cli.setDataNasc(formato.parse("14/02/1996"));
@@ -41,30 +41,6 @@ public class TesteCliente {
         lstClie2.forEach((clie2) -> {
             System.out.println(clie2.toString());
         });
-        
-        // Alteração
-        Cliente cli2 = new Cliente();
-        cli2.setId(2);
-        cli2.setNome("aaa");
-        cli2.setIdade(29);
-        cli2.setSexo('M');
-        cli2.setCpf("***.***.***-**");
-        cli2.setRg("*.***.***");
-        cli2.setDataNasc(formato.parse("13/01/1993"));
-        cli2.setCidade("AAA");
-        cli2.setUf("bbb");
-        cli2.setPais("Brasil");
-        cli2.setUsu(new Usuario(2, "root", "1234", 'A'));
-        new ClienteFactory().alterar(cli2);
-        
-        // Consulta
-        List<Cliente> lstClie = (List<Cliente>) new ClienteFactory().consultar(2);
-        System.out.println("Consulta com filtro:");
-        lstClie.forEach((clie) -> {
-            System.out.println(clie.toString());
-        });  
-     */   
-        // Exclusão
-        new ClienteFactory().excluir(4);
+        */   
     }
 }

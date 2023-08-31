@@ -17,8 +17,9 @@ public class FornecFactory extends Factory {
         super.salvar(obj, "FornecedorPU");
     }
     
-    public Object consultar() {
-        return super.consultar("from Fornecedor");
+    @Override
+    public Object consultar(String sql) {
+        return super.consultar("from Fornecedor " + sql);
     }
     
     @Override

@@ -39,7 +39,7 @@ public class TesteCarro {
         Carro car = new Carro();
         car.setNome("C4");
         car.setAno(2008);
-        car.setDono(new Cliente(1, "Cadavér1khx", 27, 'M', "***.***.***-**", "*.***.***", 
+        car.setDono(new Cliente(1, "Bruno Luiz Reinicke", 27, "Masculino", "***.***.***-**", "*.***.***", 
             formato.parse("14/02/1996"), "Pomerode", "SC", "Brasil", 
             new Usuario(5, "bruno", "123", "Comum")));
         car.setPlaca("AAA-0001");
@@ -61,21 +61,6 @@ public class TesteCarro {
         System.out.println("Consulta sem filtro:");
         lstCarro3.forEach((carro) -> {
             System.out.println(carro.toString());
-        });
-       
-        // Alteração
-        Carro car2 = new Carro();
-        car2.setId(5);
-        car2.setNome("Sportage");
-        car2.setAno(2010);
-        car2.setDono(new Cliente(2, "Bruno", 25, 'M', "***.***.***-**", "*.***.***", 
-            formato.parse("14/02/1996"), "Pomerode", "SC", "Brasil", 
-            new Usuario(3, "bruno", "12345", 'C')));
-        car2.setPlaca("Teste-123");
-        car2.setCidade("Joinville");
-        car2.setUf("SC");
-        car2.setPais("Brasil");
-        car2.setMarca("Citroen");
-        new CarroFactory().alterar(car2);*/
+        });*/
     }
 }

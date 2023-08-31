@@ -27,7 +27,7 @@ public class TestePeca {
         pe.setAno(2021);
         pe.setPreco(1000);
         pe.setMarca("random");
-        pe.setForn(new Fornecedor(1, "Random", 42, 'M', "***.***.***-**", "*.***.***",
+        pe.setForn(new Fornecedor(1, "Random", 42, "Masculino", "***.***.***-**", "*.***.***",
             formato.parse("14/01/1980"), "Pomerode", "SC", "Brasil"));
         pe.setCategoria("Média");
         pe.setQtde(5);
@@ -37,19 +37,6 @@ public class TestePeca {
         /*List<Peca> lstPeca = (List<Peca>) new PecaFactory().consultar();
         System.out.println("Consulta sem filtro:");
         lstPeca.forEach((peca) -> {
-            System.out.println(peca.toString());
-        });
-        
-        // Alteração 
-        Peca pe2 = new Peca();
-        pe2.setId(6);
-        pe2.setNome("Radiador");
-        pe2.setAno(2022);
-        pe2.setPreco(1500);
-        pe2.setMarca("BBBAAA");
-        pe2.setForn(new Fornecedor(3, "Random", 42, 'M', "***.***.***-**", "*.***.***",
-            formato.parse("14/01/1980"), "Pomerode", "SC", "Brasil"));
-        pe2.setCategoria("Média");
-        new PecaFactory().alterar(pe2);*/
+            System.out.println(peca.toString());*/
     }
 }

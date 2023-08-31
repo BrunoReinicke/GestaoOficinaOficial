@@ -21,6 +21,9 @@ public class Principal extends javax.swing.JFrame {
     private ConsOrdemServico conOS;
     private CadOrdemServico cadOS;
     private ConsAdministrador conAdm;
+    private ConsCarro conCar;
+    private ConsCliente conClie;
+    private ConsFornecedor conForn;
     protected Object obj;
     
     /**
@@ -34,6 +37,9 @@ public class Principal extends javax.swing.JFrame {
         this.jButton3.setVisible(false);
         this.jButton6.setVisible(false);
         this.jBtnConsAdm.setVisible(false);
+        this.jBtnConsCarros.setVisible(false);
+        this.jBtnConsCli.setVisible(false);
+        this.jBtnConsForn.setVisible(false);
     }
 
     /**
@@ -52,6 +58,9 @@ public class Principal extends javax.swing.JFrame {
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jBtnConsAdm = new javax.swing.JButton();
+        jBtnConsCarros = new javax.swing.JButton();
+        jBtnConsCli = new javax.swing.JButton();
+        jBtnConsForn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("OSTPA");
@@ -132,40 +141,107 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
+        jBtnConsCarros.setText("Consultar carros");
+        jBtnConsCarros.setName("btnConsultar"); // NOI18N
+        jBtnConsCarros.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jBtnConsCarrosMouseClicked(evt);
+            }
+        });
+        jBtnConsCarros.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                jBtnConsCarrosComponentShown(evt);
+            }
+        });
+        jBtnConsCarros.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnConsCarrosActionPerformed(evt);
+            }
+        });
+
+        jBtnConsCli.setText("Consultar clientes");
+        jBtnConsCli.setName("btnConsultar"); // NOI18N
+        jBtnConsCli.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jBtnConsCliMouseClicked(evt);
+            }
+        });
+        jBtnConsCli.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                jBtnConsCliComponentShown(evt);
+            }
+        });
+        jBtnConsCli.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnConsCliActionPerformed(evt);
+            }
+        });
+
+        jBtnConsForn.setText("Cons. fornecedores");
+        jBtnConsForn.setName("btnConsultar"); // NOI18N
+        jBtnConsForn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jBtnConsFornMouseClicked(evt);
+            }
+        });
+        jBtnConsForn.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                jBtnConsFornComponentShown(evt);
+            }
+        });
+        jBtnConsForn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnConsFornActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jBtnConsAdm)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jBtnConsAdm)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jBtnConsCarros)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jBtnConsCli)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jBtnConsForn)))
+                .addContainerGap(57, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3)
                     .addComponent(jButton4)
-                    .addComponent(jButton6)
-                    .addComponent(jBtnConsAdm)
                     .addComponent(jButton5))
-                .addContainerGap(263, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton3)
+                    .addComponent(jButton6)
+                    .addComponent(jButton2)
+                    .addComponent(jBtnConsAdm)
+                    .addComponent(jBtnConsCarros)
+                    .addComponent(jBtnConsCli)
+                    .addComponent(jBtnConsForn))
+                .addContainerGap(235, Short.MAX_VALUE))
         );
 
         pack();
@@ -197,31 +273,46 @@ public class Principal extends javax.swing.JFrame {
         this.log.setBtnCadOS(this.jButton6);
         this.log.setBtnLogin(this.jButton4);
         this.log.setBtnConsAdm(this.jBtnConsAdm);
+        this.log.setBtnConsCar(this.jBtnConsCarros);
+        this.log.setBtnConsClie(this.jBtnConsCli);
+        this.log.setBtnConsForn(this.jBtnConsForn);
         this.log.setVisible(true);
     }//GEN-LAST:event_jButton4MouseClicked
 
+    private void fecharTelaCons(ConsPadrao cons) {
+        if (cons != null)
+            cons.dispose();
+    }
+    
+    private void fecharTelaCad(CadPadrao cad) {
+        if (cad != null)
+            cad.dispose();
+    }
+    
     private void jButton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseClicked
         this.jButton1.setVisible(false);
         this.jButton2.setVisible(false);
         this.jButton3.setVisible(false);
         this.jButton6.setVisible(false);
         this.jBtnConsAdm.setVisible(false);
+        this.jBtnConsCarros.setVisible(false);
+        this.jBtnConsCli.setVisible(false);
+        this.jBtnConsForn.setVisible(false);
         this.jButton4.setVisible(true);
         
-        if (this.conUs != null)
-            this.conUs.dispose();
+        this.fecharTelaCons(this.conUs);
+        this.fecharTelaCad(this.caUs);
         
-        if (this.caUs != null)
-            this.caUs.dispose();
+        this.fecharTelaCons(this.conOS);
+        this.fecharTelaCad(this.cadOS);
+     
+        this.fecharTelaCons(this.conAdm);
         
-        if (this.conOS != null)
-            this.conOS.dispose();
+        this.fecharTelaCons(this.conCar);
         
-        if (this.cadOS != null)
-            this.cadOS.dispose();
-        
-        if (this.conAdm != null)
-            this.conAdm.dispose();
+        this.fecharTelaCons(this.conClie);
+
+        this.fecharTelaCons(this.conForn);
     }//GEN-LAST:event_jButton5MouseClicked
 
     private void jButton2ComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jButton2ComponentShown
@@ -234,6 +325,12 @@ public class Principal extends javax.swing.JFrame {
         this.cadOS.setIdUsuario(this.log.getIdUsuario());
     }//GEN-LAST:event_jButton6MouseClicked
 
+    private void abrirConsulta(Object obj, ConsPadrao cons) {
+        this.obj = cons;
+        ((ConsPadrao) this.obj).listar("");
+        ((ConsPadrao) this.obj).setVisible(true);
+    }
+    
     private void jBtnConsAdmComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jBtnConsAdmComponentShown
         // TODO add your handling code here:
     }//GEN-LAST:event_jBtnConsAdmComponentShown
@@ -243,14 +340,48 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jBtnConsAdmActionPerformed
 
     private void jBtnConsAdmMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnConsAdmMouseClicked
-        this.conAdm = new ConsAdministrador();
-        this.conAdm.listar("");
-        this.conAdm.setVisible(true);
+        this.abrirConsulta(this.conAdm, new ConsAdministrador());
     }//GEN-LAST:event_jBtnConsAdmMouseClicked
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jBtnConsCarrosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnConsCarrosMouseClicked
+        this.abrirConsulta(this.conCar, new ConsCarro());
+    }//GEN-LAST:event_jBtnConsCarrosMouseClicked
+
+    private void jBtnConsCarrosComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jBtnConsCarrosComponentShown
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBtnConsCarrosComponentShown
+
+    private void jBtnConsCarrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConsCarrosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBtnConsCarrosActionPerformed
+
+    private void jBtnConsCliMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnConsCliMouseClicked
+        this.abrirConsulta(this.conClie, new ConsCliente());
+    }//GEN-LAST:event_jBtnConsCliMouseClicked
+
+    private void jBtnConsCliComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jBtnConsCliComponentShown
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBtnConsCliComponentShown
+
+    private void jBtnConsCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConsCliActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBtnConsCliActionPerformed
+
+    private void jBtnConsFornMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnConsFornMouseClicked
+        this.abrirConsulta(this.conForn, new ConsFornecedor());
+    }//GEN-LAST:event_jBtnConsFornMouseClicked
+
+    private void jBtnConsFornComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jBtnConsFornComponentShown
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBtnConsFornComponentShown
+
+    private void jBtnConsFornActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConsFornActionPerformed
+       
+    }//GEN-LAST:event_jBtnConsFornActionPerformed
     
     /**
      * @param args the command line arguments
@@ -289,6 +420,9 @@ public class Principal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtnConsAdm;
+    private javax.swing.JButton jBtnConsCarros;
+    private javax.swing.JButton jBtnConsCli;
+    private javax.swing.JButton jBtnConsForn;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
