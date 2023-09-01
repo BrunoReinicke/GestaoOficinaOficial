@@ -25,6 +25,7 @@ public class Login extends JFrame {
     private JButton btnConsCar;
     private JButton btnConsClie;
     private JButton btnConsForn;
+    private JButton btnConsPeca;
     private int idUsuario;
     
     /**
@@ -138,6 +139,7 @@ public class Login extends JFrame {
                 this.btnConsCar.setVisible(true);
                 this.btnConsClie.setVisible(true);
                 this.btnConsForn.setVisible(true);
+                this.btnConsPeca.setVisible(true);
             }
             this.btnConsOS.setVisible(true);
             this.btnLogin.setVisible(false);
@@ -214,7 +216,15 @@ public class Login extends JFrame {
     public void setBtnConsForn(JButton btnConsForn) {
         this.btnConsForn = btnConsForn;
     }
-    
+
+    public JButton getBtnConsPeca() {
+        return btnConsPeca;
+    }
+
+    public void setBtnConsPeca(JButton btnConsPeca) {
+        this.btnConsPeca = btnConsPeca;
+    }
+      
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;

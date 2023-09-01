@@ -23,14 +23,14 @@ public class TestePeca {
         
         // Cadastro
         Peca pe = new Peca();
-        pe.setNome("Carburador");
+        pe.setNome("Radiador");
         pe.setAno(2021);
         pe.setPreco(1000);
         pe.setMarca("random");
-        pe.setForn(new Fornecedor(1, "Random", 42, "Masculino", "***.***.***-**", "*.***.***",
+        pe.setForn(new Fornecedor(2, "Random", 42, "Masculino", "***.***.***-**", "*.***.***",
             formato.parse("14/01/1980"), "Pomerode", "SC", "Brasil"));
         pe.setCategoria("Média");
-        pe.setQtde(5);
+        pe.setQtde(1);
         new PecaFactory().salvar(pe);
         
         // Consulta

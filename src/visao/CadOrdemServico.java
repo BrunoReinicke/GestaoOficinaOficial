@@ -259,13 +259,13 @@ public class CadOrdemServico extends CadPadrao {
        
         os.setCliente(
             ((Cliente) ((List<Cliente>) new ClienteFactory()
-                .consultar("from Cliente where nome like '" + jTextField1.getText() + "'")).get(0)));
+                .consultar("where nome like '" + jTextField1.getText() + "'")).get(0)));
         os.setCarro(
             ((Carro) ((List<Carro>) new CarroFactory()
-                .consultar("from Carro where nome like '" + jTextField9.getText() + "'")).get(0)));
+                .consultar("where nome like '" + jTextField9.getText() + "'")).get(0)));
         os.setPeca(
             ((Peca) ((List<Peca>) new PecaFactory()
-                .consultar("from Peca where nome like '" + jTextField10.getText() + "'")).get(0)));
+                .consultar("where nome like '" + jTextField10.getText() + "'")).get(0)));
    
         List<OrdemServico> lstOs = 
             (List<OrdemServico>) new OrdemServFactory().consultar(

@@ -39,10 +39,10 @@ public class TesteCarro {
         Carro car = new Carro();
         car.setNome("C4");
         car.setAno(2008);
-        car.setDono(new Cliente(1, "Bruno Luiz Reinicke", 27, "Masculino", "***.***.***-**", "*.***.***", 
+        car.setDono(new Cliente(2, "Bruno Luiz Reinicke", 27, "Masculino", "***.***.***-**", "*.***.***", 
             formato.parse("14/02/1996"), "Pomerode", "SC", "Brasil", 
             new Usuario(5, "bruno", "123", "Comum")));
-        car.setPlaca("AAA-0001");
+        car.setPlaca("BBB-0001");
         car.setCidade("Blumenau");
         car.setUf("SC");
         car.setPais("Brasil");

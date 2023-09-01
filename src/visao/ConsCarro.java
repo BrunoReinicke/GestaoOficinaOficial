@@ -35,6 +35,7 @@ public class ConsCarro extends ConsPadrao {
     private void initComponents() {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Consulta de carros");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -91,7 +92,7 @@ public class ConsCarro extends ConsPadrao {
         if (info.equals(""))
            list = (List<Carro>) new CarroFactory().consultar("");
         else
-           list = (List<Carro>) new CarroFactory().consultar(" where nome like '"+info+"%'");      
+           list = (List<Carro>) new CarroFactory().consultar(" where placa like '"+info+"%'");      
         String colunas[]   = {"ID", "Ano", "Cidade", "Marca", "Nome", "País", "Placa", "UF", "Cliente"};
         DefaultTableModel modelo = new DefaultTableModel(colunas, 0);
         

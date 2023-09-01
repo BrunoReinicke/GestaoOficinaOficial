@@ -17,8 +17,9 @@ public class PecaFactory extends Factory {
         super.salvar(obj, "PecaPU");
     }
     
-    public Object consultar() {
-        return super.consultar("from Peca");
+    @Override
+    public Object consultar(String sql) {
+        return super.consultar("from Peca " + sql);
     }
     
     @Override

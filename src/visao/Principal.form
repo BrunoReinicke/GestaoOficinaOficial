@@ -46,11 +46,13 @@
                       <Component id="jBtnConsCarros" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jBtnConsCli" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="jBtnConsForn" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jBtnConsPeca" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="57" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -72,6 +74,7 @@
                   <Component id="jBtnConsCarros" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jBtnConsCli" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jBtnConsForn" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jBtnConsPeca" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="235" max="32767" attributes="0"/>
           </Group>
@@ -177,6 +180,17 @@
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jBtnConsFornMouseClicked"/>
         <EventHandler event="componentShown" listener="java.awt.event.ComponentListener" parameters="java.awt.event.ComponentEvent" handler="jBtnConsFornComponentShown"/>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBtnConsFornActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="jBtnConsPeca">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Consultar pe&#xe7;as"/>
+        <Property name="name" type="java.lang.String" value="btnConsultar" noResource="true"/>
+      </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jBtnConsPecaMouseClicked"/>
+        <EventHandler event="componentShown" listener="java.awt.event.ComponentListener" parameters="java.awt.event.ComponentEvent" handler="jBtnConsPecaComponentShown"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBtnConsPecaActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

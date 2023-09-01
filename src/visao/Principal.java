@@ -24,6 +24,7 @@ public class Principal extends javax.swing.JFrame {
     private ConsCarro conCar;
     private ConsCliente conClie;
     private ConsFornecedor conForn;
+    private ConsPeca conPeca;
     protected Object obj;
     
     /**
@@ -40,6 +41,7 @@ public class Principal extends javax.swing.JFrame {
         this.jBtnConsCarros.setVisible(false);
         this.jBtnConsCli.setVisible(false);
         this.jBtnConsForn.setVisible(false);
+        this.jBtnConsPeca.setVisible(false);
     }
 
     /**
@@ -61,6 +63,7 @@ public class Principal extends javax.swing.JFrame {
         jBtnConsCarros = new javax.swing.JButton();
         jBtnConsCli = new javax.swing.JButton();
         jBtnConsForn = new javax.swing.JButton();
+        jBtnConsPeca = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("OSTPA");
@@ -195,6 +198,24 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
+        jBtnConsPeca.setText("Consultar peças");
+        jBtnConsPeca.setName("btnConsultar"); // NOI18N
+        jBtnConsPeca.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jBtnConsPecaMouseClicked(evt);
+            }
+        });
+        jBtnConsPeca.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                jBtnConsPecaComponentShown(evt);
+            }
+        });
+        jBtnConsPeca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnConsPecaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -220,9 +241,11 @@ public class Principal extends javax.swing.JFrame {
                         .addComponent(jBtnConsCarros)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jBtnConsCli)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jBtnConsForn)))
-                .addContainerGap(57, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jBtnConsForn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jBtnConsPeca)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -240,7 +263,8 @@ public class Principal extends javax.swing.JFrame {
                     .addComponent(jBtnConsAdm)
                     .addComponent(jBtnConsCarros)
                     .addComponent(jBtnConsCli)
-                    .addComponent(jBtnConsForn))
+                    .addComponent(jBtnConsForn)
+                    .addComponent(jBtnConsPeca))
                 .addContainerGap(235, Short.MAX_VALUE))
         );
 
@@ -276,6 +300,7 @@ public class Principal extends javax.swing.JFrame {
         this.log.setBtnConsCar(this.jBtnConsCarros);
         this.log.setBtnConsClie(this.jBtnConsCli);
         this.log.setBtnConsForn(this.jBtnConsForn);
+        this.log.setBtnConsPeca(this.jBtnConsPeca);
         this.log.setVisible(true);
     }//GEN-LAST:event_jButton4MouseClicked
 
@@ -298,6 +323,7 @@ public class Principal extends javax.swing.JFrame {
         this.jBtnConsCarros.setVisible(false);
         this.jBtnConsCli.setVisible(false);
         this.jBtnConsForn.setVisible(false);
+        this.jBtnConsPeca.setVisible(false);
         this.jButton4.setVisible(true);
         
         this.fecharTelaCons(this.conUs);
@@ -313,6 +339,8 @@ public class Principal extends javax.swing.JFrame {
         this.fecharTelaCons(this.conClie);
 
         this.fecharTelaCons(this.conForn);
+        
+        this.fecharTelaCons(this.conPeca);
     }//GEN-LAST:event_jButton5MouseClicked
 
     private void jButton2ComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jButton2ComponentShown
@@ -324,12 +352,6 @@ public class Principal extends javax.swing.JFrame {
         this.cadOS.setVisible(true);
         this.cadOS.setIdUsuario(this.log.getIdUsuario());
     }//GEN-LAST:event_jButton6MouseClicked
-
-    private void abrirConsulta(Object obj, ConsPadrao cons) {
-        this.obj = cons;
-        ((ConsPadrao) this.obj).listar("");
-        ((ConsPadrao) this.obj).setVisible(true);
-    }
     
     private void jBtnConsAdmComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jBtnConsAdmComponentShown
         // TODO add your handling code here:
@@ -340,7 +362,9 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jBtnConsAdmActionPerformed
 
     private void jBtnConsAdmMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnConsAdmMouseClicked
-        this.abrirConsulta(this.conAdm, new ConsAdministrador());
+        this.conAdm = new ConsAdministrador();
+        this.conAdm.listar("");
+        this.conAdm.setVisible(true);
     }//GEN-LAST:event_jBtnConsAdmMouseClicked
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
@@ -348,7 +372,9 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jBtnConsCarrosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnConsCarrosMouseClicked
-        this.abrirConsulta(this.conCar, new ConsCarro());
+        this.conCar = new ConsCarro();
+        this.conCar.listar("");
+        this.conCar.setVisible(true);
     }//GEN-LAST:event_jBtnConsCarrosMouseClicked
 
     private void jBtnConsCarrosComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jBtnConsCarrosComponentShown
@@ -360,7 +386,9 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jBtnConsCarrosActionPerformed
 
     private void jBtnConsCliMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnConsCliMouseClicked
-        this.abrirConsulta(this.conClie, new ConsCliente());
+        this.conClie = new ConsCliente();
+        this.conClie.listar("");
+        this.conClie.setVisible(true);
     }//GEN-LAST:event_jBtnConsCliMouseClicked
 
     private void jBtnConsCliComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jBtnConsCliComponentShown
@@ -372,7 +400,9 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jBtnConsCliActionPerformed
 
     private void jBtnConsFornMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnConsFornMouseClicked
-        this.abrirConsulta(this.conForn, new ConsFornecedor());
+        this.conForn = new ConsFornecedor();
+        this.conForn.listar("");
+        this.conForn.setVisible(true);
     }//GEN-LAST:event_jBtnConsFornMouseClicked
 
     private void jBtnConsFornComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jBtnConsFornComponentShown
@@ -382,6 +412,20 @@ public class Principal extends javax.swing.JFrame {
     private void jBtnConsFornActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConsFornActionPerformed
        
     }//GEN-LAST:event_jBtnConsFornActionPerformed
+
+    private void jBtnConsPecaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnConsPecaMouseClicked
+        this.conPeca = new ConsPeca();
+        this.conPeca.listar("");
+        this.conPeca.setVisible(true);
+    }//GEN-LAST:event_jBtnConsPecaMouseClicked
+
+    private void jBtnConsPecaComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jBtnConsPecaComponentShown
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBtnConsPecaComponentShown
+
+    private void jBtnConsPecaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConsPecaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBtnConsPecaActionPerformed
     
     /**
      * @param args the command line arguments
@@ -423,6 +467,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton jBtnConsCarros;
     private javax.swing.JButton jBtnConsCli;
     private javax.swing.JButton jBtnConsForn;
+    private javax.swing.JButton jBtnConsPeca;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
