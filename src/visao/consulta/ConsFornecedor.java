@@ -2,25 +2,24 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package visao;
+package visao.consulta;
 
-import controle.PecaFactory;
-import java.text.DecimalFormat;
+import controle.FornecFactory;
 import java.util.List;
 import java.util.Vector;
 import javax.swing.table.DefaultTableModel;
-import modelo.bean.Peca;
+import modelo.bean.Fornecedor;
 
 /**
  *
  * @author Bruno Reinicke
  */
-public class ConsPeca extends ConsPadrao {
+public class ConsFornecedor extends ConsPadrao {
 
     /**
-     * Creates new form ConsPeca
+     * Creates new form ConsFornecedor
      */
-    public ConsPeca() {
+    public ConsFornecedor() {
         initComponents();
         super.setSize();
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -36,7 +35,7 @@ public class ConsPeca extends ConsPadrao {
     private void initComponents() {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Consulta de peças");
+        setTitle("Consulta de fornecedores");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -69,55 +68,55 @@ public class ConsPeca extends ConsPadrao {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ConsPeca.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConsFornecedor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ConsPeca.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConsFornecedor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ConsPeca.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConsFornecedor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ConsPeca.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConsFornecedor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ConsPeca().setVisible(true);
+                new ConsFornecedor().setVisible(true);
             }
         });
     }
 
     @Override
     public void listar(String info) {
-        List<Peca> list;
-        
+        List<Fornecedor> list;
         if (info.equals(""))
-           list = (List<Peca>) new PecaFactory().consultar("");
+           list = (List<Fornecedor>) new FornecFactory().consultar("");
         else
-           list = (List<Peca>) new PecaFactory().consultar(" where nome like '"+info+"%'");      
-        String colunas[]   = {"ID", "Ano", "Categoria", "Marca", "Nome", 
-                            "Preço", "Quantidade", "Fornecedor"};
+           list = (List<Fornecedor>) new FornecFactory().consultar(" where nome like '"+info+"%'");      
+        String colunas[]   = {"ID", "Cidade", "CPF", "Dt. nascimento", "Idade", 
+                              "Nome", "País", "RG", "Sexo", "UF"};
         DefaultTableModel modelo = new DefaultTableModel(colunas, 0);
         
         for (int i = 0; i < list.size(); i++) {
             modelo.addRow(new String[]{
                 list.get(i).getId().toString(), 
-                list.get(i).getAno() + "", 
-                list.get(i).getCategoria(),
-                list.get(i).getMarca(),
+                String.valueOf(list.get(i).getCidade()), 
+                list.get(i).getCpf(),
+                super.formatarData(list.get(i).getDataNasc().toString()),
+                String.valueOf(list.get(i).getIdade()),
                 list.get(i).getNome(),
-                "R$ " + new DecimalFormat("#,##0.00").format(list.get(i).getPreco()),
-                list.get(i).getQtde()+ "",
-                list.get(i).getForn().getNome(),
+                list.get(i).getPais(),
+                list.get(i).getRg(),
+                list.get(i).getSexo(),
+                list.get(i).getUf()
             });
         }
         super.getTable().setModel(modelo);
-    }    
+    }
 
     @Override
     public void excluir() {
-        super.excluirPadrao(new PecaFactory());
-                
+        super.excluirPadrao(new FornecFactory());
     }
 
     @Override

@@ -22,7 +22,7 @@ public class TesteCliente {
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
         
         // Cadastro
-        Cliente cli = new Cliente();
+      /*  Cliente cli = new Cliente();
         cli.setNome("Bruno Luiz Reinicke");
         cli.setIdade(27);
         cli.setSexo("Masculino");
@@ -33,14 +33,19 @@ public class TesteCliente {
         cli.setUf("SC");
         cli.setPais("Brasil");
         cli.setUsu(new Usuario(5, "bruno", "123", "Comum"));
-        new ClienteFactory().salvar(cli);
+        new ClienteFactory().salvar(cli);*/
         
-        // Consulta
-       /* List<Cliente> lstClie2 = (List<Cliente>) new ClienteFactory().consultar();
-        System.out.println("Consulta sem filtro:");
-        lstClie2.forEach((clie2) -> {
-            System.out.println(clie2.toString());
-        });
-        */   
+        Cliente cli2 = new Cliente();
+        cli2.setNome("Teste 123");
+        cli2.setIdade(27);
+        cli2.setSexo("Masculino");
+        cli2.setCpf("***.***.***-**");
+        cli2.setRg("*.***.***");
+        cli2.setDataNasc(formato.parse("14/02/1996"));
+        cli2.setCidade("Pomerode");
+        cli2.setUf("SC");
+        cli2.setPais("Brasil");
+        cli2.setUsu(new Usuario(6, "adm", "adm", "Comum"));
+        new ClienteFactory().salvar(cli2); 
     }
 }

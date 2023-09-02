@@ -2,24 +2,24 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package visao;
+package visao.consulta;
 
-import controle.ClienteFactory;
+import controle.CarroFactory;
 import java.util.List;
 import java.util.Vector;
 import javax.swing.table.DefaultTableModel;
-import modelo.bean.Cliente;
+import modelo.bean.Carro;
 
 /**
  *
  * @author Bruno Reinicke
  */
-public class ConsCliente extends ConsPadrao {
+public class ConsCarro extends ConsPadrao {
 
     /**
-     * Creates new form ConsCliente
+     * Creates new form ConsCarro
      */
-    public ConsCliente() {
+    public ConsCarro() {
         initComponents();
         super.setSize();
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -35,7 +35,7 @@ public class ConsCliente extends ConsPadrao {
     private void initComponents() {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Consulta de clientes");
+        setTitle("Consulta de carros");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -68,61 +68,59 @@ public class ConsCliente extends ConsPadrao {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ConsCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConsCarro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ConsCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConsCarro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ConsCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConsCarro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ConsCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConsCarro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ConsCliente().setVisible(true);
+                new ConsCarro().setVisible(true);
             }
         });
     }
 
     @Override
-    public void excluir() {
-        super.excluirPadrao(new ClienteFactory());
-    }
-
-    @Override
     public void listar(String info) {
-        List<Cliente> list;
+        List<Carro> list;
         if (info.equals(""))
-           list = (List<Cliente>) new ClienteFactory().consultar("");
+           list = (List<Carro>) new CarroFactory().consultar("");
         else
-           list = (List<Cliente>) new ClienteFactory().consultar(" where nome like '"+info+"%'");      
-        String colunas[]   = {"ID", "Cidade", "CPF", "Dt. nascimento", "Idade", 
-                              "Nome", "País", "RG", "Sexo", "UF", "Usuário"};
+           list = (List<Carro>) new CarroFactory().consultar(" where placa like '"+info+"%'");      
+        String colunas[]   = {"ID", "Ano", "Cidade", "Marca", "Nome", "País", "Placa", "UF", "Cliente"};
         DefaultTableModel modelo = new DefaultTableModel(colunas, 0);
         
         for (int i = 0; i < list.size(); i++) {
             modelo.addRow(new String[]{
                 list.get(i).getId().toString(), 
-                list.get(i).getCidade(), 
-                list.get(i).getCpf(),
-                super.formatarData(list.get(i).getDataNasc().toString()),
-                String.valueOf(list.get(i).getIdade()),
+                String.valueOf(list.get(i).getAno()), 
+                list.get(i).getCidade(),
+                list.get(i).getMarca(),
                 list.get(i).getNome(),
                 list.get(i).getPais(),
-                list.get(i).getRg(),
-                list.get(i).getSexo(),
+                list.get(i).getPlaca(),
                 list.get(i).getUf(),
-                list.get(i).getUsu().getUsuario()
+                list.get(i).getDono().getNome()
             });
         }
         super.getTable().setModel(modelo);
     }
 
     @Override
+    public void excluir() {
+        super.excluirPadrao(new CarroFactory());
+    }
+
+    @Override
     public void preencherCad(Vector vect) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if (super.ehNome)
+            super.jTFNome.setText(vect.get(4).toString());
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

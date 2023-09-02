@@ -2,24 +2,25 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package visao;
+package visao.consulta;
 
-import controle.FornecFactory;
+import controle.AdminFactory;
 import java.util.List;
 import java.util.Vector;
+import static javax.swing.JFrame.EXIT_ON_CLOSE;
 import javax.swing.table.DefaultTableModel;
-import modelo.bean.Fornecedor;
+import modelo.bean.Administrador;
 
 /**
  *
  * @author Bruno Reinicke
  */
-public class ConsFornecedor extends ConsPadrao {
+public class ConsAdministrador extends ConsPadrao {
 
     /**
-     * Creates new form ConsFornecedor
+     * Creates new form ConsAdministrador
      */
-    public ConsFornecedor() {
+    public ConsAdministrador() {
         initComponents();
         super.setSize();
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -35,7 +36,7 @@ public class ConsFornecedor extends ConsPadrao {
     private void initComponents() {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Consulta de fornecedores");
+        setTitle("Consulta de administradores");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -68,39 +69,41 @@ public class ConsFornecedor extends ConsPadrao {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ConsFornecedor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConsAdministrador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ConsFornecedor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConsAdministrador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ConsFornecedor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConsAdministrador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ConsFornecedor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConsAdministrador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ConsFornecedor().setVisible(true);
+                new ConsAdministrador().setVisible(true);
             }
         });
     }
 
     @Override
     public void listar(String info) {
-        List<Fornecedor> list;
+        List<Administrador> list;
+        
         if (info.equals(""))
-           list = (List<Fornecedor>) new FornecFactory().consultar("");
+           list = (List<Administrador>) new AdminFactory().consultar("");
         else
-           list = (List<Fornecedor>) new FornecFactory().consultar(" where nome like '"+info+"%'");      
-        String colunas[]   = {"ID", "Cidade", "CPF", "Dt. nascimento", "Idade", 
-                              "Nome", "País", "RG", "Sexo", "UF"};
+           list = (List<Administrador>) new AdminFactory().consultar(" where nome like '"+info+"%'");      
+        String colunas[]   = {"ID", "Cidade", "CPF", "Dt. nascimento", 
+                            "Idade", "Nome", "País", "RG",
+                            "Sexo", "UF", "Usuário"};
         DefaultTableModel modelo = new DefaultTableModel(colunas, 0);
         
         for (int i = 0; i < list.size(); i++) {
             modelo.addRow(new String[]{
                 list.get(i).getId().toString(), 
-                String.valueOf(list.get(i).getCidade()), 
+                list.get(i).getCidade(), 
                 list.get(i).getCpf(),
                 super.formatarData(list.get(i).getDataNasc().toString()),
                 String.valueOf(list.get(i).getIdade()),
@@ -108,7 +111,8 @@ public class ConsFornecedor extends ConsPadrao {
                 list.get(i).getPais(),
                 list.get(i).getRg(),
                 list.get(i).getSexo(),
-                list.get(i).getUf()
+                list.get(i).getUf(),
+                list.get(i).getUsu().getUsuario()
             });
         }
         super.getTable().setModel(modelo);
@@ -116,7 +120,7 @@ public class ConsFornecedor extends ConsPadrao {
 
     @Override
     public void excluir() {
-        super.excluirPadrao(new FornecFactory());
+        super.excluirPadrao(new AdminFactory());
     }
 
     @Override

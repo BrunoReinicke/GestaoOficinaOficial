@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package visao;
+package visao.consulta;
 
 import controle.ClienteFactory;
 import controle.OrdemServFactory;
@@ -12,6 +12,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Vector;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -32,6 +34,17 @@ public class ConsOrdemServico extends ConsPadrao {
      */
     private List<Object> lstOS;
     private int idUsuario;
+    private JComboBox<String> jCbStatus;
+    private JComboBox<String> jCbTrPeca;
+    private JFormattedTextField jFTFDtAbertura;
+    private JFormattedTextField jFTFDtEncerramento1;
+    private JFormattedTextField jFTFDtPrevisao;
+    private JTextField jTextField1;
+    private JTextField jTextField9;
+    private JTextField jTextField10;
+    private JTextField jTextFieldIdOS;
+    private JTextField jTFNumero;
+    private List<Integer> lstIds;
     
     public ConsOrdemServico() {
         initComponents();
@@ -66,7 +79,6 @@ public class ConsOrdemServico extends ConsPadrao {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Consulta de ordens de serviço");
-        setPreferredSize(new java.awt.Dimension(500, 471));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
@@ -138,7 +150,11 @@ public class ConsOrdemServico extends ConsPadrao {
     public void setIdUsuario(int idUsuario) {
         this.idUsuario = idUsuario;
     }
-   
+
+    public void setLstIds(List<Integer> lstIds) {
+        this.lstIds = lstIds;
+    }
+  
     @Override
     public void listar(String info) {
         String numero = "";
@@ -150,7 +166,7 @@ public class ConsOrdemServico extends ConsPadrao {
                                 "Dt. encerramento", "Dt. previsão", "Troca de peça", "Status"};
             DefaultTableModel modelo = new DefaultTableModel(colunas, 0);
             super.getBtnExcluir1().setVisible(false);
-            List<Object> cli = (List<Object>) new ClienteFactory().consultar("from Cliente where idUsuario="+this.idUsuario);
+            List<Object> cli = (List<Object>) new ClienteFactory().consultar("where idUsuario="+this.idUsuario);
             
             int idCliente = 0;
             if (!cli.isEmpty())
@@ -181,7 +197,82 @@ public class ConsOrdemServico extends ConsPadrao {
 
     @Override
     public void preencherCad(Vector vect) {
+        if (vect.get(9).toString().equals("Encerrada"))
+          this.jCbStatus.setSelectedIndex(2);
+        if (vect.get(9).toString().equals("Em execução"))
+          this.jCbStatus.setSelectedIndex(1);
+        if (vect.get(9).toString().equals("Em aberto"))
+          this.jCbStatus.setSelectedIndex(0);
+        
+        if (vect.get(8).toString().equals("Sim"))
+          this.jCbTrPeca.setSelectedIndex(1);
+        if (vect.get(8).toString().equals("Não"))
+          this.jCbTrPeca.setSelectedIndex(0);
+        
+        this.jFTFDtAbertura.setValue(vect.get(5).toString());
+        
+        if (!vect.get(6).toString().equals(""))
+            this.jFTFDtEncerramento1.setValue(vect.get(6).toString());
+        else
+            this.jFTFDtEncerramento1.setValue(null);
+        
+        if (!vect.get(7).toString().equals(""))
+            this.jFTFDtPrevisao.setValue(vect.get(7).toString());
+        else
+            this.jFTFDtPrevisao.setValue(null);
+        
+        this.jTextField1.setText(vect.get(2).toString());
+        this.jTextField9.setText(vect.get(3).toString());
+        this.jTextField10.setText(vect.get(4).toString());
+        this.jTextFieldIdOS.setText(vect.get(0).toString());
+        this.jTFNumero.setText(vect.get(1).toString());
+        
+        Object obj = new OrdemServFactory().consultar(" where id = " + vect.get(0).toString());
+        OrdemServico os = ((List<OrdemServico>) obj).get(0);
+        this.lstIds = null;
+        this.lstIds.add(os.getCliente().getId());
+        this.lstIds.add(os.getCarro().getId());
+        this.lstIds.add(os.getPeca().getId());
+    }
+
+    public void setjCbStatus(JComboBox<String> jCbStatus) {
+        this.jCbStatus = jCbStatus;
+    }
+
+    public void setjCbTrPeca(JComboBox<String> jCbTrPeca) {
+        this.jCbTrPeca = jCbTrPeca;
+    }
+
+    public void setjFTFDtAbertura(JFormattedTextField jFTFDtAbertura) {
+        this.jFTFDtAbertura = jFTFDtAbertura;
+    }
+
+    public void setjFTFDtEncerramento1(JFormattedTextField jFTFDtEncerramento1) {
+        this.jFTFDtEncerramento1 = jFTFDtEncerramento1;
+    }
+
+    public void setjFTFDtPrevisao(JFormattedTextField jFTFDtPrevisao) {
+        this.jFTFDtPrevisao = jFTFDtPrevisao;
+    }
+
+    public void setjTextField1(JTextField jTextField1) {
+        this.jTextField1 = jTextField1;
+    }
+
+    public void setjTextField9(JTextField jTextField9) {
+        this.jTextField9 = jTextField9;
+    }
+
+    public void setjTextField10(JTextField jTextField10) {
+        this.jTextField10 = jTextField10;
+    }
     
+    public void setjTextFieldIdOS(JTextField jTextFieldIdOS) {
+        this.jTextFieldIdOS = jTextFieldIdOS;
+    }
+    
+    public void setjTFNumero(JTextField jTFNumero) {
+        this.jTFNumero = jTFNumero;
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -5,6 +5,17 @@
  */
 package visao;
 
+import visao.consulta.ConsUsuario;
+import visao.consulta.ConsPeca;
+import visao.consulta.ConsPadrao;
+import visao.consulta.ConsOrdemServico;
+import visao.consulta.ConsFornecedor;
+import visao.consulta.ConsCliente;
+import visao.consulta.ConsCarro;
+import visao.consulta.ConsAdministrador;
+import visao.cadastro.CadtUsuario;
+import visao.cadastro.CadPadrao;
+import visao.cadastro.CadOrdemServico;
 import java.awt.event.KeyListener;
 import javax.swing.JButton;
 

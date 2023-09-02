@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package visao;
+package visao.consulta;
 
+import visao.consulta.ConsPadrao;
 import controle.UsuaFactory;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;

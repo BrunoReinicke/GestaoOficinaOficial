@@ -20,8 +20,7 @@ public class OrdemServFactory extends Factory {
 
     @Override
     public void salvar(Object obj, String pers ) {
-        int idCarro = ((OrdemServico) obj).getCarro().getId();
-        Object objOs = super.consultar("from OrdemServico where idCarro="+idCarro+" and status <> 'Encerrada'");
+        Object objOs = super.consultar("from OrdemServico where status <> 'Encerrada'");
         List<Object> lstOs = (List<Object>) objOs;
 
         if (!lstOs.isEmpty()) 

@@ -2,25 +2,26 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package visao;
+package visao.consulta;
 
-import controle.AdminFactory;
+import visao.consulta.ConsPadrao;
+import controle.PecaFactory;
+import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Vector;
-import static javax.swing.JFrame.EXIT_ON_CLOSE;
 import javax.swing.table.DefaultTableModel;
-import modelo.bean.Administrador;
+import modelo.bean.Peca;
 
 /**
  *
  * @author Bruno Reinicke
  */
-public class ConsAdministrador extends ConsPadrao {
+public class ConsPeca extends ConsPadrao {
 
     /**
-     * Creates new form ConsAdministrador
+     * Creates new form ConsPeca
      */
-    public ConsAdministrador() {
+    public ConsPeca() {
         initComponents();
         super.setSize();
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -36,7 +37,7 @@ public class ConsAdministrador extends ConsPadrao {
     private void initComponents() {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Consulta de administradores");
+        setTitle("Consulta de peças");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -69,63 +70,60 @@ public class ConsAdministrador extends ConsPadrao {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ConsAdministrador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConsPeca.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ConsAdministrador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConsPeca.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ConsAdministrador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConsPeca.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ConsAdministrador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConsPeca.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ConsAdministrador().setVisible(true);
+                new ConsPeca().setVisible(true);
             }
         });
     }
 
     @Override
     public void listar(String info) {
-        List<Administrador> list;
+        List<Peca> list;
         
         if (info.equals(""))
-           list = (List<Administrador>) new AdminFactory().consultar("");
+           list = (List<Peca>) new PecaFactory().consultar("");
         else
-           list = (List<Administrador>) new AdminFactory().consultar(" where nome like '"+info+"%'");      
-        String colunas[]   = {"ID", "Cidade", "CPF", "Dt. nascimento", 
-                            "Idade", "Nome", "País", "RG",
-                            "Sexo", "UF", "Usuário"};
+           list = (List<Peca>) new PecaFactory().consultar(" where nome like '"+info+"%'");      
+        String colunas[]   = {"ID", "Ano", "Categoria", "Marca", "Nome", 
+                            "Preço", "Quantidade", "Fornecedor"};
         DefaultTableModel modelo = new DefaultTableModel(colunas, 0);
         
         for (int i = 0; i < list.size(); i++) {
             modelo.addRow(new String[]{
                 list.get(i).getId().toString(), 
-                list.get(i).getCidade(), 
-                list.get(i).getCpf(),
-                super.formatarData(list.get(i).getDataNasc().toString()),
-                String.valueOf(list.get(i).getIdade()),
+                list.get(i).getAno() + "", 
+                list.get(i).getCategoria(),
+                list.get(i).getMarca(),
                 list.get(i).getNome(),
-                list.get(i).getPais(),
-                list.get(i).getRg(),
-                list.get(i).getSexo(),
-                list.get(i).getUf(),
-                list.get(i).getUsu().getUsuario()
+                "R$ " + new DecimalFormat("#,##0.00").format(list.get(i).getPreco()),
+                list.get(i).getQtde()+ "",
+                list.get(i).getForn().getNome(),
             });
         }
         super.getTable().setModel(modelo);
-    }
+    }    
 
     @Override
     public void excluir() {
-        super.excluirPadrao(new AdminFactory());
+        super.excluirPadrao(new PecaFactory());           
     }
 
     @Override
     public void preencherCad(Vector vect) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if (super.ehNome)
+            super.jTFNome.setText(vect.get(4).toString());
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

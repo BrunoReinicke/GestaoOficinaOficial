@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package visao;
+package visao.consulta;
 
 import controle.Factory;
 import java.awt.Button;
@@ -10,6 +10,7 @@ import java.util.Vector;
 import javax.persistence.RollbackException;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -19,7 +20,9 @@ import javax.swing.table.DefaultTableModel;
 public abstract class ConsPadrao extends javax.swing.JFrame {
 
     protected int row;
-    private boolean cadastro;
+    protected boolean cadastro;
+    protected boolean ehNome;
+    protected JTextField jTFNome;
     
     /**
      * Creates new form ConsPadrao
@@ -29,6 +32,7 @@ public abstract class ConsPadrao extends javax.swing.JFrame {
         this.row = -1;
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         this.cadastro = false;
+        this.ehNome = false;
         this.setResizable(true);
     }
     
@@ -112,12 +116,12 @@ public abstract class ConsPadrao extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(lbPesquisar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jtfPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jtfPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnAtualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnExcluir1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(537, Short.MAX_VALUE))
+                .addContainerGap(562, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jScrollPane1)
                 .addContainerGap())
@@ -163,7 +167,7 @@ public abstract class ConsPadrao extends javax.swing.JFrame {
     }//GEN-LAST:event_jTbPadraoMouseClicked
 
     private void jTbPadraoMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTbPadraoMouseReleased
-        if ((this.row == this.jTbPadrao.getSelectedRow()) && this.cadastro) {
+        if ((this.row == this.jTbPadrao.getSelectedRow()) && (this.cadastro || this.ehNome)) {
             DefaultTableModel modelo = (DefaultTableModel) this.jTbPadrao.getModel();
             Vector vect = (Vector) modelo.getDataVector().get(this.jTbPadrao.getSelectedRow());
             this.preencherCad(vect);
@@ -181,6 +185,10 @@ public abstract class ConsPadrao extends javax.swing.JFrame {
     
     public void setCadastro(boolean cadastro) {
         this.cadastro = cadastro;
+    }
+    
+    public void setEhNome(boolean ehNome) {
+        this.ehNome = ehNome;
     }
     
     protected void excluirPadrao(Factory fact) {
@@ -213,6 +221,10 @@ public abstract class ConsPadrao extends javax.swing.JFrame {
         return data.substring(8, 10) + '/' +
                data.substring(5, 7) + '/' +
                data.substring(0, 4);
+    }
+    
+    public void setJTFNome(JTextField jTFNome) {
+        this.jTFNome = jTFNome;
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
