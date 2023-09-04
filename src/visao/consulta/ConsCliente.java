@@ -5,6 +5,7 @@
 package visao.consulta;
 
 import controle.ClienteFactory;
+import java.awt.TextField;
 import java.util.List;
 import java.util.Vector;
 import javax.swing.JTextField;
@@ -17,10 +18,11 @@ import modelo.bean.Cliente;
  */
 public class ConsCliente extends ConsPadrao {
 
+    private JTextField jTFIdCliente;
+    
     /**
      * Creates new form ConsCliente
-     */
-    
+     */    
     public ConsCliente() {
         initComponents();
         super.setSize();
@@ -88,6 +90,10 @@ public class ConsCliente extends ConsPadrao {
         });
     }
 
+    public void setJTFIdCliente(JTextField jTFIdCliente) {
+        this.jTFIdCliente = jTFIdCliente;
+    }
+    
     @Override
     public void excluir() {
         super.excluirPadrao(new ClienteFactory());
@@ -124,8 +130,10 @@ public class ConsCliente extends ConsPadrao {
 
     @Override
     public void preencherCad(Vector vect) {
-        if (super.ehNome)
+        if (super.ehNome) {
             super.jTFNome.setText(vect.get(5).toString());
+            this.jTFIdCliente.setText(vect.get(0).toString());
+        }
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

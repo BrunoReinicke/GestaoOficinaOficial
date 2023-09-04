@@ -9,6 +9,7 @@ import controle.PecaFactory;
 import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Vector;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import modelo.bean.Peca;
 
@@ -18,6 +19,8 @@ import modelo.bean.Peca;
  */
 public class ConsPeca extends ConsPadrao {
 
+    private JTextField jTFIdPeca;
+    
     /**
      * Creates new form ConsPeca
      */
@@ -115,6 +118,10 @@ public class ConsPeca extends ConsPadrao {
         super.getTable().setModel(modelo);
     }    
 
+    public void setJTFIdPeca(JTextField jTFIdPeca) {
+        this.jTFIdPeca = jTFIdPeca;
+    }
+    
     @Override
     public void excluir() {
         super.excluirPadrao(new PecaFactory());           
@@ -122,8 +129,10 @@ public class ConsPeca extends ConsPadrao {
 
     @Override
     public void preencherCad(Vector vect) {
-        if (super.ehNome)
+        if (super.ehNome) {
             super.jTFNome.setText(vect.get(4).toString());
+            this.jTFIdPeca.setText(vect.get(0).toString());
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

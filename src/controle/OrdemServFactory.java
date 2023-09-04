@@ -18,9 +18,8 @@ import util.HibernateUtil;
  */
 public class OrdemServFactory extends Factory {
 
-    @Override
-    public void salvar(Object obj, String pers ) {
-        Object objOs = super.consultar("from OrdemServico where status <> 'Encerrada'");
+    public void salvar(Object obj, String pers, String sql) {
+        Object objOs = super.consultar(sql);
         List<Object> lstOs = (List<Object>) objOs;
 
         if (!lstOs.isEmpty()) 

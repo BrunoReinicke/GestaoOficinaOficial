@@ -33,7 +33,9 @@ import visao.consulta.ConsPeca;
  */
 public class CadOrdemServico extends CadPadrao {
 
-    private List<Integer> lstIds;
+    private Carro car;
+    private List<Cliente> cli;
+    private Peca pec;
     
     /**
      * Creates new form CadOremServico
@@ -43,7 +45,9 @@ public class CadOrdemServico extends CadPadrao {
         this.jFTFDtAbertura.setValue(super.formatarData(LocalDate.now().toString()));
         this.jFTFDtAbertura.setEnabled(false);
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        this.lstIds = null;
+        this.jTFIdPeca.setVisible(false);
+        this.jTFIdCliente.setVisible(false);
+        this.jTFIdCarro.setVisible(false);
     }
 
     /**
@@ -76,6 +80,9 @@ public class CadOrdemServico extends CadPadrao {
         jBtnPesqPeca = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
         jTFNumero = new javax.swing.JTextField();
+        jTFIdPeca = new javax.swing.JTextField();
+        jTFIdCliente = new javax.swing.JTextField();
+        jTFIdCarro = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de ordens de serviço");
@@ -99,6 +106,8 @@ public class CadOrdemServico extends CadPadrao {
         jTextField1.setEditable(false);
         jTextField1.setBackground(new java.awt.Color(255, 255, 255));
         jTextField1.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        jTextField1.setMinimumSize(new java.awt.Dimension(64, 25));
+        jTextField1.setPreferredSize(new java.awt.Dimension(64, 25));
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);
@@ -114,6 +123,11 @@ public class CadOrdemServico extends CadPadrao {
 
         jFTFDtAbertura.setEditable(false);
         jFTFDtAbertura.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        jFTFDtAbertura.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jFTFDtAberturaActionPerformed(evt);
+            }
+        });
 
         jFTFDtPrevisao.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -176,6 +190,12 @@ public class CadOrdemServico extends CadPadrao {
         jTFNumero.setBackground(java.awt.SystemColor.controlHighlight);
         jTFNumero.setDisabledTextColor(new java.awt.Color(0, 0, 0));
 
+        jTFIdPeca.setEditable(false);
+
+        jTFIdCliente.setEditable(false);
+
+        jTFIdCarro.setEditable(false);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -192,12 +212,15 @@ public class CadOrdemServico extends CadPadrao {
                             .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jTFIdCarro, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel1))
                             .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING))))
+                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTFIdPeca, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jFTFDtAbertura, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jFTFDtPrevisao, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jCbTrPeca, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -206,38 +229,48 @@ public class CadOrdemServico extends CadPadrao {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jTextField10, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)
                             .addComponent(jTextField9)
-                            .addComponent(jTextField1))
+                            .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jBtnPesqPeca)
-                            .addComponent(jBtnPesqCar)
-                            .addComponent(jBtnPesqCli1)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jBtnPesqPeca, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jBtnPesqCli1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jBtnPesqCar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addComponent(jFTFDtEncerramento1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTFNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(105, Short.MAX_VALUE))
+                .addContainerGap(109, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(25, 25, 25)
+                    .addComponent(jTFIdCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(401, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(60, 60, 60)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTFIdPeca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTFIdCarro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(48, 48, 48)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTFNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jBtnPesqCli1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jBtnPesqCli1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel9))
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jBtnPesqCar, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
+                    .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2)
+                    .addComponent(jBtnPesqCar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jBtnPesqPeca, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
+                    .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3)
+                    .addComponent(jBtnPesqPeca, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jFTFDtAbertura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -258,7 +291,12 @@ public class CadOrdemServico extends CadPadrao {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jCbStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8))
-                .addContainerGap(125, Short.MAX_VALUE))
+                .addContainerGap(57, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(16, 16, 16)
+                    .addComponent(jTFIdCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(379, Short.MAX_VALUE)))
         );
 
         pack();
@@ -297,6 +335,7 @@ public class CadOrdemServico extends CadPadrao {
             conCli.setEhNome(true);
             conCli.listar("");
             conCli.setJTFNome(this.jTextField1);
+            conCli.setJTFIdCliente(this.jTFIdCliente);
         });
     }//GEN-LAST:event_jBtnPesqCli1MouseClicked
 
@@ -307,6 +346,7 @@ public class CadOrdemServico extends CadPadrao {
             conCar.setEhNome(true);
             conCar.listar("");
             conCar.setJTFNome(this.jTextField9);
+            conCar.setJTFIdCarro(this.jTFIdCarro);
         });
     }//GEN-LAST:event_jBtnPesqCarMouseClicked
 
@@ -317,8 +357,13 @@ public class CadOrdemServico extends CadPadrao {
             conPeca.setEhNome(true);
             conPeca.listar("");
             conPeca.setJTFNome(this.jTextField10);
+            conPeca.setJTFIdPeca(this.jTFIdPeca);
         });
     }//GEN-LAST:event_jBtnPesqPecaMouseClicked
+
+    private void jFTFDtAberturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFTFDtAberturaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jFTFDtAberturaActionPerformed
     
     /**
      * @param args the command line arguments
@@ -374,6 +419,9 @@ public class CadOrdemServico extends CadPadrao {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JTextField jTFIdCarro;
+    private javax.swing.JTextField jTFIdCliente;
+    private javax.swing.JTextField jTFIdPeca;
     private javax.swing.JTextField jTFNumero;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField10;
@@ -385,25 +433,24 @@ public class CadOrdemServico extends CadPadrao {
         if (!this.jTextField1.getText().equals("") &&
             !this.jTextField9.getText().equals("") &&
             !this.jTextField10.getText().equals("")) {
-            OrdemServico os = new OrdemServico();
+            OrdemServico os = new OrdemServico(); 
+            
+            os.setCliente(((Cliente) ((List<Cliente>) 
+                new ClienteFactory().consultar(
+                 Integer.valueOf(jTFIdCliente.getText()))).get(0)));
+            os.setCarro(((Carro) ((List<Carro>) 
+                new CarroFactory().consultar(
+                 Integer.valueOf(jTFIdCarro.getText()))).get(0)));
+            os.setPeca(((Peca) ((List<Peca>) 
+                new PecaFactory().consultar(
+                 Integer.valueOf(jTFIdPeca.getText()))).get(0)));
 
-            os.setCliente(
-                ((Cliente) ((List<Cliente>) new ClienteFactory()
-                    .consultar("where idCliente = " + this.lstIds.get(0))).get(0)));
-            os.setCarro(
-                ((Carro) ((List<Carro>) new CarroFactory()
-                    .consultar("where idCarro = " + this.lstIds.get(1))).get(0)));
-            os.setPeca(
-                ((Peca) ((List<Peca>) new PecaFactory()
-                    .consultar("where idPeca = " + this.lstIds.get(2))).get(0)));
- 
-            List<OrdemServico> lstOs = 
-                (List<OrdemServico>) new OrdemServFactory().consultar(
-                                                            "from OrdemServico "+
-                                                            "where idCliente = "+os.getCliente().getId()+
-                                                            " and idCarro = "+os.getCarro().getId()+
-                                                            " and idPeca = "+os.getPeca().getId()+
-                                                            " and status <> 'Encerrada'");
+            List<OrdemServico> lstOs = (List<OrdemServico>) new OrdemServFactory()
+                                                            .consultar("from OrdemServico "+
+                                                                 "where idCliente = "+this.jTFIdCliente.getText()+
+                                                                 " and idCarro = "+this.jTFIdCarro.getText()+
+                                                                 " and idPeca = "+this.jTFIdPeca.getText()+
+                                                                 " and status <> 'Encerrada'");
 
             if (!getJtfID().getText().equals("") && !lstOs.isEmpty())
                 lstOs.remove(0);
@@ -435,7 +482,10 @@ public class CadOrdemServico extends CadPadrao {
                         }
                     }
                     if (peDisp) 
-                        super.confirmar(new OrdemServFactory(), os, "OrdemServicoPU");
+                        this.confirmar(os, "OrdemServicoPU", 
+                                                    "from OrdemServico "+
+                                                    "where idCliente = "+this.jTFIdCliente.getText()+
+                                                    " and status <> 'Encerrada'");
                 }
             } else
                 JOptionPane.showMessageDialog(null, 
@@ -469,7 +519,9 @@ public class CadOrdemServico extends CadPadrao {
             conos.setjTextField9(this.jTextField9);
             conos.setjTextFieldIdOS(super.getJtfID());
             conos.setjTFNumero(this.jTFNumero);
-            conos.setLstIds(this.lstIds);
+            conos.setjTFIdCarro(this.jTFIdCarro);
+            conos.setjTFIdCliente(this.jTFIdCliente);
+            conos.setjTFIdPeca(this.jTFIdPeca);
         });
     }
 
@@ -483,5 +535,22 @@ public class CadOrdemServico extends CadPadrao {
         this.jCbTrPeca.setSelectedIndex(0);
         this.jTextField9.setText("");
         getJtfID().setText("");
+        this.jTFIdCliente.setText("");
+        this.jTFIdCarro.setText("");
+        this.jTFIdPeca.setText("");
+    }
+    
+    public void confirmar(Object obj, String pers, String sql) {  
+        if (getJtfID().getText().equals("")) {
+            if (JOptionPane.showConfirmDialog(null, "Deseja confirmar o cadastro?") == 0) {
+                new OrdemServFactory().salvar(obj, pers, sql);
+                this.dispose();
+            }
+        } else {
+            if (JOptionPane.showConfirmDialog(null, "Deseja confirmar a alteração?") == 0) {   
+                new OrdemServFactory().alterar(obj);
+                this.dispose();
+            }
+        }
     }
 }

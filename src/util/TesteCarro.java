@@ -37,30 +37,16 @@ public class TesteCarro {
         new CarroFactory().salvar(car);*/
         
         Carro car = new Carro();
-        car.setNome("C4");
+        car.setNome("Palio");
         car.setAno(2008);
-        car.setDono(new Cliente(2, "Bruno Luiz Reinicke", 27, "Masculino", "***.***.***-**", "*.***.***", 
+        car.setDono(new Cliente(3, "Teste 123", 27, "Masculino", "***.***.***-**", "*.***.***", 
             formato.parse("14/02/1996"), "Pomerode", "SC", "Brasil", 
-            new Usuario(5, "bruno", "123", "Comum")));
-        car.setPlaca("BBB-0001");
+            new Usuario(6, "adm", "adm", "Comum")));
+        car.setPlaca("XLY-0001");
         car.setCidade("Blumenau");
         car.setUf("SC");
         car.setPais("Brasil");
-        car.setMarca("Citroen");
+        car.setMarca("Fiat");
         new CarroFactory().salvar(car);
-       
-        // Consulta
-        /*List<Carro> lstCarro = (List<Carro>) new CarroFactory().consultar();
-        System.out.println("Consulta sem filtro:");
-        lstCarro.forEach((carro) -> {
-            System.out.println(carro.toString());
-        });
-        
-        // Consulta
-        List<Carro> lstCarro3 = (List<Carro>) new CarroFactory().consultar();
-        System.out.println("Consulta sem filtro:");
-        lstCarro3.forEach((carro) -> {
-            System.out.println(carro.toString());
-        });*/
     }
 }

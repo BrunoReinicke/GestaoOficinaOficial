@@ -19,8 +19,10 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+import modelo.bean.Carro;
 import modelo.bean.Cliente;
 import modelo.bean.OrdemServico;
+import modelo.bean.Peca;
 import modelo.bean.Usuario;
 
 /**
@@ -44,7 +46,9 @@ public class ConsOrdemServico extends ConsPadrao {
     private JTextField jTextField10;
     private JTextField jTextFieldIdOS;
     private JTextField jTFNumero;
-    private List<Integer> lstIds;
+    private JTextField jTFIdCliente;
+    private JTextField jTFIdCarro;
+    private JTextField jTFIdPeca;
     
     public ConsOrdemServico() {
         initComponents();
@@ -151,10 +155,18 @@ public class ConsOrdemServico extends ConsPadrao {
         this.idUsuario = idUsuario;
     }
 
-    public void setLstIds(List<Integer> lstIds) {
-        this.lstIds = lstIds;
+    public void setjTFIdCliente(JTextField jTFIdCliente) {
+        this.jTFIdCliente = jTFIdCliente;
     }
-  
+
+    public void setjTFIdCarro(JTextField jTFIdCarro) {
+        this.jTFIdCarro = jTFIdCarro;
+    }
+
+    public void setjTFIdPeca(JTextField jTFIdPeca) {
+        this.jTFIdPeca = jTFIdPeca;
+    }
+
     @Override
     public void listar(String info) {
         String numero = "";
@@ -227,12 +239,12 @@ public class ConsOrdemServico extends ConsPadrao {
         this.jTextFieldIdOS.setText(vect.get(0).toString());
         this.jTFNumero.setText(vect.get(1).toString());
         
-        Object obj = new OrdemServFactory().consultar(" where id = " + vect.get(0).toString());
-        OrdemServico os = ((List<OrdemServico>) obj).get(0);
-        this.lstIds = null;
-        this.lstIds.add(os.getCliente().getId());
-        this.lstIds.add(os.getCarro().getId());
-        this.lstIds.add(os.getPeca().getId());
+        int idCarro = ((OrdemServico) this.lstOS.get(super.row)).getCarro().getId();
+        this.jTFIdCarro.setText(idCarro + "");
+        int idCliente = ((OrdemServico) this.lstOS.get(super.row)).getCliente().getId();
+        this.jTFIdCliente.setText(idCliente + "");
+        int idPeca = ((OrdemServico) this.lstOS.get(super.row)).getPeca().getId();
+        this.jTFIdPeca.setText(idPeca + "");
     }
 
     public void setjCbStatus(JComboBox<String> jCbStatus) {

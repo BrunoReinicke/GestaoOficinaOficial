@@ -7,6 +7,7 @@ package visao.consulta;
 import controle.CarroFactory;
 import java.util.List;
 import java.util.Vector;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import modelo.bean.Carro;
 
@@ -19,6 +20,8 @@ public class ConsCarro extends ConsPadrao {
     /**
      * Creates new form ConsCarro
      */
+    private JTextField jTFIdCarro;
+    
     public ConsCarro() {
         initComponents();
         super.setSize();
@@ -86,6 +89,10 @@ public class ConsCarro extends ConsPadrao {
         });
     }
 
+    public void setJTFIdCarro(JTextField jTFIdCarro) {
+        this.jTFIdCarro = jTFIdCarro;
+    }
+    
     @Override
     public void listar(String info) {
         List<Carro> list;
@@ -119,8 +126,10 @@ public class ConsCarro extends ConsPadrao {
 
     @Override
     public void preencherCad(Vector vect) {
-        if (super.ehNome)
+        if (super.ehNome) {
             super.jTFNome.setText(vect.get(4).toString());
+            this.jTFIdCarro.setText(vect.get(0).toString());
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
