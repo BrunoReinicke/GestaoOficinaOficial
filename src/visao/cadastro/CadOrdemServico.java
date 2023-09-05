@@ -433,65 +433,72 @@ public class CadOrdemServico extends CadPadrao {
         if (!this.jTextField1.getText().equals("") &&
             !this.jTextField9.getText().equals("") &&
             !this.jTextField10.getText().equals("")) {
-            OrdemServico os = new OrdemServico(); 
-            
-            os.setCliente(((Cliente) ((List<Cliente>) 
-                new ClienteFactory().consultar(
-                 Integer.valueOf(jTFIdCliente.getText()))).get(0)));
-            os.setCarro(((Carro) ((List<Carro>) 
-                new CarroFactory().consultar(
-                 Integer.valueOf(jTFIdCarro.getText()))).get(0)));
-            os.setPeca(((Peca) ((List<Peca>) 
-                new PecaFactory().consultar(
-                 Integer.valueOf(jTFIdPeca.getText()))).get(0)));
+            Object carro = new CarroFactory().consultar("where id="+jTFIdCarro.getText()+" and idCliente="+jTFIdCliente.getText());
+            if (!((List<Carro>) carro).isEmpty()) {
+                OrdemServico os = new OrdemServico(); 
 
-            List<OrdemServico> lstOs = (List<OrdemServico>) new OrdemServFactory()
-                                                            .consultar("from OrdemServico "+
-                                                                 "where idCliente = "+this.jTFIdCliente.getText()+
-                                                                 " and idCarro = "+this.jTFIdCarro.getText()+
-                                                                 " and idPeca = "+this.jTFIdPeca.getText()+
-                                                                 " and status <> 'Encerrada'");
+                os.setCliente(((Cliente) ((List<Cliente>) 
+                    new ClienteFactory().consultar(
+                     Integer.valueOf(jTFIdCliente.getText()))).get(0)));
+                os.setCarro(((Carro) ((List<Carro>) 
+                    new CarroFactory().consultar(
+                     Integer.valueOf(jTFIdCarro.getText()))).get(0)));
+                os.setPeca(((Peca) ((List<Peca>) 
+                    new PecaFactory().consultar(
+                     Integer.valueOf(jTFIdPeca.getText()))).get(0)));
 
-            if (!getJtfID().getText().equals("") && !lstOs.isEmpty())
-                lstOs.remove(0);
-            if (lstOs.isEmpty()) {
-                os.setDtAbertura(super.validarData("abertura", jFTFDtAbertura.getText(), ""));
-                os.setDtEncerramento(super.validarData("encerramento", jFTFDtEncerramento1.getText(), "igual"));
-                os.setPrazoEntrega(super.validarData("previsão", jFTFDtPrevisao.getText(), "maior"));
-                os.setTrocPeca(this.jCbTrPeca.getSelectedItem().toString());
-                os.setStatus(this.jCbStatus.getSelectedItem().toString());
+                List<OrdemServico> lstOs = (List<OrdemServico>) 
+                                            new OrdemServFactory()
+                                            .consultar("from OrdemServico "+
+                                                       "where idCliente = "+this.jTFIdCliente.getText()+
+                                                       " and idCarro = "+this.jTFIdCarro.getText()+
+                                                       " and idPeca = "+this.jTFIdPeca.getText()+
+                                                       " and status <> 'Encerrada'");
 
-                if (!getJtfID().getText().equals("")) {
-                    os.setId(Integer.valueOf(getJtfID().getText()));
-                    os.setNumero(Integer.valueOf(this.jTFNumero.getText()));
-                }
+                if (!getJtfID().getText().equals("") && !lstOs.isEmpty())
+                    lstOs.remove(0);
+                if (lstOs.isEmpty()) {
+                    os.setDtAbertura(super.validarData("abertura", jFTFDtAbertura.getText(), ""));
+                    os.setDtEncerramento(super.validarData("encerramento", jFTFDtEncerramento1.getText(), "igual"));
+                    os.setPrazoEntrega(super.validarData("previsão", jFTFDtPrevisao.getText(), "maior"));
+                    os.setTrocPeca(this.jCbTrPeca.getSelectedItem().toString());
+                    os.setStatus(this.jCbStatus.getSelectedItem().toString());
 
-                if (!bErro) {
-                    boolean peDisp = true;
-
-                    if (os.getTrocPeca().equalsIgnoreCase("Sim")) {
-                        int idPeca = os.getPeca().getId();
-                        List<Peca> lstPeca = (List<Peca>) (new PecaFactory().consultar(idPeca));
-                        if (lstPeca.get(0).getQtde() > 0) {
-                            Peca peca = ((List<Peca>) (new PecaFactory().consultar(idPeca))).get(0);
-                            peca.setQtde(peca.getQtde() - 1);
-                            new PecaFactory().alterar(peca);
-                        } else {
-                            peDisp = false;
-                            JOptionPane.showMessageDialog(null, "Peça indisponível no estoque, para dar continuidade à OS realize a compra.");
-                        }
+                    if (!getJtfID().getText().equals("")) {
+                        os.setId(Integer.valueOf(getJtfID().getText()));
+                        os.setNumero(Integer.valueOf(this.jTFNumero.getText()));
                     }
-                    if (peDisp) 
-                        this.confirmar(os, "OrdemServicoPU", 
-                                                    "from OrdemServico "+
-                                                    "where idCliente = "+this.jTFIdCliente.getText()+
-                                                    " and status <> 'Encerrada'");
-                }
+
+                    if (!bErro) {
+                        boolean peDisp = true;
+
+                        if (os.getTrocPeca().equalsIgnoreCase("Sim")) {
+                            int idPeca = os.getPeca().getId();
+                            List<Peca> lstPeca = (List<Peca>) (new PecaFactory().consultar(idPeca));
+                            if (lstPeca.get(0).getQtde() > 0) {
+                                Peca peca = ((List<Peca>) (new PecaFactory().consultar(idPeca))).get(0);
+                                peca.setQtde(peca.getQtde() - 1);
+                                new PecaFactory().alterar(peca);
+                            } else {
+                                peDisp = false;
+                                JOptionPane.showMessageDialog(null, "Peça indisponível no estoque, para dar continuidade à OS realize a compra.");
+                            }
+                        }
+                        if (peDisp) 
+                            this.confirmar(
+                                os, 
+                                "OrdemServicoPU", 
+                                "from OrdemServico "+
+                                "where idCliente = "+this.jTFIdCliente.getText()+
+                                " and status <> 'Encerrada'");
+                    }
+                } else
+                    JOptionPane.showMessageDialog(null, 
+                        "A peça "+os.getPeca().getNome()+ " do carro placa "+os.getCarro().getPlaca()+
+                        " já está sendo tratada na OS "+lstOs.get(0).getNumero()+".");
+                this.bErro = false;
             } else
-                JOptionPane.showMessageDialog(null, 
-                    "A peça "+os.getPeca().getNome()+ " do carro placa "+os.getCarro().getPlaca()+
-                    " já está sendo tratada na OS "+lstOs.get(0).getNumero()+".");
-            this.bErro = false;
+                JOptionPane.showMessageDialog(null, "Não é permitido cadastrar uma OS em que o carro não seja do cliente selecionado.");
         } else
             JOptionPane.showMessageDialog(null, "Campos cliente, carro e peça são obrigatórios.");
     }
