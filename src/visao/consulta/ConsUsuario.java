@@ -30,6 +30,8 @@ public class ConsUsuario extends ConsPadrao {
     private JPasswordField jtfSenha;
     private JComboBox jcbTipo;
     private JTextField jtfIdUsuario;
+    private boolean comum;
+    private boolean admin;
     
     public ConsUsuario() {
         initComponents();
@@ -44,6 +46,14 @@ public class ConsUsuario extends ConsPadrao {
     public void setJtfIdfUsuario(JTextField jtfIdUsuario) {
         this.jtfIdUsuario = jtfIdUsuario;
     }
+
+    public void setComum(boolean comum) {
+        this.comum = comum;
+    }
+
+    public void setAdmin(boolean admin) {
+        this.admin = admin;
+    }
     
     public void setJtfSenha(JPasswordField jtfSenha) {
         this.jtfSenha = jtfSenha;
@@ -56,10 +66,16 @@ public class ConsUsuario extends ConsPadrao {
     @Override
     public void listar(String info) {
         List<Usuario> list;
+        String sql = "";
+        if (this.admin) 
+            sql = " and (tipo = 'Administrador') ";
+        if (this.comum) 
+            sql = " and (tipo = 'Comum') ";
+        
         if (info.equals(""))
-           list = (List<Usuario>) new UsuaFactory().consultar("");
+           list = (List<Usuario>) new UsuaFactory().consultar(" where 1=1 "+sql);
         else
-           list = (List<Usuario>) new UsuaFactory().consultar(" where usuario like '"+info+"%'");      
+           list = (List<Usuario>) new UsuaFactory().consultar(" where usuario like '"+info+"%' "+sql);      
         String colunas[]   = {"ID", "Usuário", "Senha", "Tipo"};
         DefaultTableModel modelo = new DefaultTableModel(colunas, 0);
         
@@ -80,13 +96,18 @@ public class ConsUsuario extends ConsPadrao {
     
     @Override
     public void preencherCad(Vector vect) {
-        this.jtfIdUsuario.setText(vect.get(0).toString());
-        this.jtfUsuario.setText(vect.get(1).toString());
-        this.jtfSenha.setText(vect.get(2).toString());
-        if (vect.get(3).toString().equalsIgnoreCase("Administrador")) 
-            this.jcbTipo.setSelectedIndex(0);
-        else
-            this.jcbTipo.setSelectedIndex(1);
+        if (super.ehNome) {
+            super.jTFNome.setText(vect.get(1).toString());
+            this.jtfIdUsuario.setText(vect.get(0).toString());
+        } else {
+            this.jtfIdUsuario.setText(vect.get(0).toString());
+            this.jtfUsuario.setText(vect.get(1).toString());
+            this.jtfSenha.setText(vect.get(2).toString());
+            if (vect.get(3).toString().equalsIgnoreCase("Administrador")) 
+                this.jcbTipo.setSelectedIndex(0);
+            else
+                this.jcbTipo.setSelectedIndex(1);
+        }
     }
     
     /**

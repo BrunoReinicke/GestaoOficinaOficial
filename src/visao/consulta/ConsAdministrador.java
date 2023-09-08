@@ -8,6 +8,7 @@ import controle.AdminFactory;
 import java.util.List;
 import java.util.Vector;
 import static javax.swing.JFrame.EXIT_ON_CLOSE;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import modelo.bean.Administrador;
 
@@ -17,6 +18,19 @@ import modelo.bean.Administrador;
  */
 public class ConsAdministrador extends ConsPadrao {
 
+    private JTextField jTFIdUsuario;
+    private JTextField jTFIdAdmin;
+    private JTextField jTFCidade;
+    private JTextField jTFCpf;
+    private JTextField jTFDtNascimento;
+    private JTextField jTFIdade;
+    private JTextField jTFNome;
+    private JTextField jTFPais;
+    private JTextField jTFRg;
+    private JTextField jTFSexo;
+    private JTextField jTFUf;
+    private JTextField jTFUsuario;
+    
     /**
      * Creates new form ConsAdministrador
      */
@@ -118,6 +132,54 @@ public class ConsAdministrador extends ConsPadrao {
         super.getTable().setModel(modelo);
     }
 
+    public void setjTFIdUsuario(JTextField jTFIdUsuario) {
+        this.jTFIdUsuario = jTFIdUsuario;
+    }
+
+    public void setjTFIdAdmin(JTextField jTFIdAdmin) {
+        this.jTFIdAdmin = jTFIdAdmin;
+    }
+
+    public void setjTFCidade(JTextField jTFCidade) {
+        this.jTFCidade = jTFCidade;
+    }
+
+    public void setjTFCpf(JTextField jTFCpf) {
+        this.jTFCpf = jTFCpf;
+    }
+
+    public void setjTFDtNascimento(JTextField jTFDtNascimento) {
+        this.jTFDtNascimento = jTFDtNascimento;
+    }
+
+    public void setjTFIdade(JTextField jTFIdade) {
+        this.jTFIdade = jTFIdade;
+    }
+
+    public void setjTFNome(JTextField jTFNome) {
+        this.jTFNome = jTFNome;
+    }
+
+    public void setjTFPais(JTextField jTFPais) {
+        this.jTFPais = jTFPais;
+    }
+
+    public void setjTFRg(JTextField jTFRg) {
+        this.jTFRg = jTFRg;
+    }
+
+    public void setjTFSexo(JTextField jTFSexo) {
+        this.jTFSexo = jTFSexo;
+    }
+
+    public void setjTFUf(JTextField jTFUf) {
+        this.jTFUf = jTFUf;
+    }
+
+    public void setjTFUsuario(JTextField jTFUsuario) {
+        this.jTFUsuario = jTFUsuario;
+    }
+    
     @Override
     public void excluir() {
         super.excluirPadrao(new AdminFactory());
@@ -125,7 +187,10 @@ public class ConsAdministrador extends ConsPadrao {
 
     @Override
     public void preencherCad(Vector vect) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        this.jTFCidade.setText(vect.get(1).toString());
+        this.jTFCpf.setText(vect.get(2).toString());
+      
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

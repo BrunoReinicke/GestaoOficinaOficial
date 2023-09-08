@@ -18,6 +18,7 @@ import visao.cadastro.CadPadrao;
 import visao.cadastro.CadOrdemServico;
 import java.awt.event.KeyListener;
 import javax.swing.JButton;
+import visao.cadastro.CadAdministrador;
 
 /**
  *
@@ -36,6 +37,7 @@ public class Principal extends javax.swing.JFrame {
     private ConsCliente conClie;
     private ConsFornecedor conForn;
     private ConsPeca conPeca;
+    private CadAdministrador cadAdm;
     protected Object obj;
     
     /**
@@ -53,6 +55,7 @@ public class Principal extends javax.swing.JFrame {
         this.jBtnConsCli.setVisible(false);
         this.jBtnConsForn.setVisible(false);
         this.jBtnConsPeca.setVisible(false);
+        this.jBtnCadAdmin.setVisible(false);
     }
 
     /**
@@ -75,6 +78,7 @@ public class Principal extends javax.swing.JFrame {
         jBtnConsCli = new javax.swing.JButton();
         jBtnConsForn = new javax.swing.JButton();
         jBtnConsPeca = new javax.swing.JButton();
+        jBtnCadAdmin = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("OSTPA");
@@ -227,6 +231,19 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
+        jBtnCadAdmin.setText("Cadastrar admin.");
+        jBtnCadAdmin.setName("btnCadastrar"); // NOI18N
+        jBtnCadAdmin.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jBtnCadAdminMouseClicked(evt);
+            }
+        });
+        jBtnCadAdmin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnCadAdminActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -255,7 +272,8 @@ public class Principal extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jBtnConsForn)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jBtnConsPeca)))
+                        .addComponent(jBtnConsPeca))
+                    .addComponent(jBtnCadAdmin))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -276,7 +294,9 @@ public class Principal extends javax.swing.JFrame {
                     .addComponent(jBtnConsCli)
                     .addComponent(jBtnConsForn)
                     .addComponent(jBtnConsPeca))
-                .addContainerGap(235, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jBtnCadAdmin)
+                .addContainerGap(207, Short.MAX_VALUE))
         );
 
         pack();
@@ -312,6 +332,7 @@ public class Principal extends javax.swing.JFrame {
         this.log.setBtnConsClie(this.jBtnConsCli);
         this.log.setBtnConsForn(this.jBtnConsForn);
         this.log.setBtnConsPeca(this.jBtnConsPeca);
+        this.log.setBtnCadAdm(this.jBtnCadAdmin);
         this.log.setVisible(true);
     }//GEN-LAST:event_jButton4MouseClicked
 
@@ -335,6 +356,7 @@ public class Principal extends javax.swing.JFrame {
         this.jBtnConsCli.setVisible(false);
         this.jBtnConsForn.setVisible(false);
         this.jBtnConsPeca.setVisible(false);
+        this.jBtnCadAdmin.setVisible(false);
         this.jButton4.setVisible(true);
         
         this.fecharTelaCons(this.conUs);
@@ -344,6 +366,7 @@ public class Principal extends javax.swing.JFrame {
         this.fecharTelaCad(this.cadOS);
      
         this.fecharTelaCons(this.conAdm);
+        this.fecharTelaCad(this.cadAdm);
         
         this.fecharTelaCons(this.conCar);
         
@@ -437,6 +460,15 @@ public class Principal extends javax.swing.JFrame {
     private void jBtnConsPecaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConsPecaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jBtnConsPecaActionPerformed
+
+    private void jBtnCadAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCadAdminActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBtnCadAdminActionPerformed
+
+    private void jBtnCadAdminMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnCadAdminMouseClicked
+        this.cadAdm = new CadAdministrador();
+        this.cadAdm.setVisible(true);
+    }//GEN-LAST:event_jBtnCadAdminMouseClicked
     
     /**
      * @param args the command line arguments
@@ -474,6 +506,7 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBtnCadAdmin;
     private javax.swing.JButton jBtnConsAdm;
     private javax.swing.JButton jBtnConsCarros;
     private javax.swing.JButton jBtnConsCli;

@@ -33,6 +33,11 @@ public abstract class CadPadrao extends javax.swing.JFrame {
      */
     private int idUsuario;
     protected boolean bErro;
+
+    public abstract void salvar();
+    public abstract void excluir();
+    public abstract void selecionar();
+    public abstract void limpar();
     
     public CadPadrao() {
         initComponents();
@@ -176,11 +181,6 @@ public abstract class CadPadrao extends javax.swing.JFrame {
         this.limpar();
     }//GEN-LAST:event_btLimparActionPerformed
 
-    public abstract void salvar();
-    public abstract void excluir();
-    public abstract void selecionar();
-    public abstract void limpar();
-
     public void confirmar(Factory fact, Object obj, String pers) {  
         if (getJtfID().getText().equals("")) {
             if (JOptionPane.showConfirmDialog(null, "Deseja confirmar o cadastro?") == 0) {
@@ -199,15 +199,27 @@ public abstract class CadPadrao extends javax.swing.JFrame {
         return this.jTfID;
     }
     
-    protected MaskFormatter getMascData() {
-        MaskFormatter mascaraData = null;
+    private MaskFormatter getMascara(String mascara) {
+        MaskFormatter masc = null;
         try {
-            mascaraData = new MaskFormatter("##/##/####");
-            mascaraData.setPlaceholderCharacter(' ');
+            masc = new MaskFormatter(mascara);
+            masc.setPlaceholderCharacter(' ');
         } catch(ParseException excp) {
             System.err.println("Erro na formatação: " + excp.getMessage());
         }
-        return mascaraData;
+        return masc;
+    }
+    
+    protected MaskFormatter getMascData() {
+        return this.getMascara("##/##/####");
+    }
+    
+    protected MaskFormatter getMascCPF() {
+        return this.getMascara("###.###.####-##");
+    }
+    
+    protected MaskFormatter getMascRG() {
+        return this.getMascara("#.###.###");
     }
 
     public int getIdUsuario() {
@@ -259,6 +271,19 @@ public abstract class CadPadrao extends javax.swing.JFrame {
             } 
         }
         return dtFormat;
+    }
+    
+    protected String validarInteiro(char caract) {
+        String inteiros = "0123456789";
+        boolean contem = false;
+        String valor = "";
+        for (int i = 0; i < inteiros.length(); i++)
+            if (caract == inteiros.charAt(i))
+                contem = true;
+       
+        if (contem)
+            valor = caract + "";
+        return valor;
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
