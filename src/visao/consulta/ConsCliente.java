@@ -8,6 +8,7 @@ import controle.ClienteFactory;
 import java.awt.TextField;
 import java.util.List;
 import java.util.Vector;
+import javax.swing.JFormattedTextField;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import modelo.bean.Cliente;
@@ -19,6 +20,18 @@ import modelo.bean.Cliente;
 public class ConsCliente extends ConsPadrao {
 
     private JTextField jTFIdCliente;
+    private JTextField jTFIdUsuario;
+    private JTextField jTFCidade;
+    private JFormattedTextField jFTFCpf;
+    private JFormattedTextField jFTFDtNascimento;
+    private JTextField jTFIdade;
+    private JTextField jTFNome;
+    private JTextField jTFPais;
+    private JFormattedTextField jFTFRg;
+    private JTextField jTFSexo;
+    private JTextField jTFUf;
+    private JTextField jTFUsuario;
+    private List<Cliente> list;
     
     /**
      * Creates new form ConsCliente
@@ -101,7 +114,6 @@ public class ConsCliente extends ConsPadrao {
 
     @Override
     public void listar(String info) {
-        List<Cliente> list;
         if (info.equals(""))
            list = (List<Cliente>) new ClienteFactory().consultar("");
         else
@@ -134,6 +146,84 @@ public class ConsCliente extends ConsPadrao {
             super.jTFNome.setText(vect.get(5).toString());
             this.jTFIdCliente.setText(vect.get(0).toString());
         }
+        if (super.cadastro) {
+            this.jTFCidade.setText(vect.get(1).toString());
+        
+            if (!vect.get(2).toString().equals(""))
+                this.jFTFCpf.setValue(vect.get(2).toString());
+            else
+                this.jFTFCpf.setValue(null);
+
+            if (!vect.get(3).toString().equals(""))
+                this.jFTFDtNascimento.setValue(vect.get(3).toString());
+            else
+                this.jFTFDtNascimento.setValue(null);
+
+            this.jTFIdade.setText(vect.get(4).toString());
+            this.jTFNome.setText(vect.get(5).toString());
+            this.jTFPais.setText(vect.get(6).toString());
+
+            if (!vect.get(7).toString().equals(""))
+                this.jFTFRg.setValue(vect.get(7).toString());
+            else
+                this.jFTFRg.setValue(null);
+
+            this.jTFSexo.setText(vect.get(8).toString());
+            this.jTFUf.setText(vect.get(9).toString());
+            this.jTFUsuario.setText(vect.get(10).toString());
+
+            int idUsuario = ((Cliente) this.list.get(super.row)).getUsu().getId();
+            this.jTFIdUsuario.setText(idUsuario + "");
+            this.jTFIdCliente.setText(vect.get(0).toString());
+        }
+    }
+
+    public void setjTFIdCliente(JTextField jTFIdCliente) {
+        this.jTFIdCliente = jTFIdCliente;
+    }
+
+    public void setjTFIdUsuario(JTextField jTFIdUsuario) {
+        this.jTFIdUsuario = jTFIdUsuario;
+    }
+
+    public void setjTFCidade(JTextField jTFCidade) {
+        this.jTFCidade = jTFCidade;
+    }
+
+    public void setjFTFCpf(JFormattedTextField jFTFCpf) {
+        this.jFTFCpf = jFTFCpf;
+    }
+
+    public void setjFTFDtNascimento(JFormattedTextField jFTFDtNascimento) {
+        this.jFTFDtNascimento = jFTFDtNascimento;
+    }
+
+    public void setjTFIdade(JTextField jTFIdade) {
+        this.jTFIdade = jTFIdade;
+    }
+
+    public void setjTFNome(JTextField jTFNome) {
+        this.jTFNome = jTFNome;
+    }
+
+    public void setjTFPais(JTextField jTFPais) {
+        this.jTFPais = jTFPais;
+    }
+
+    public void setjFTFRg(JFormattedTextField jFTFRg) {
+        this.jFTFRg = jFTFRg;
+    }
+
+    public void setjTFSexo(JTextField jTFSexo) {
+        this.jTFSexo = jTFSexo;
+    }
+
+    public void setjTFUf(JTextField jTFUf) {
+        this.jTFUf = jTFUf;
+    }
+
+    public void setjTFUsuario(JTextField jTFUsuario) {
+        this.jTFUsuario = jTFUsuario;
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

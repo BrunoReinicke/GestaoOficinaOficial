@@ -7,10 +7,12 @@ package visao.consulta;
 import controle.AdminFactory;
 import java.util.List;
 import java.util.Vector;
+import javax.swing.JFormattedTextField;
 import static javax.swing.JFrame.EXIT_ON_CLOSE;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import modelo.bean.Administrador;
+import modelo.bean.Usuario;
 
 /**
  *
@@ -21,15 +23,16 @@ public class ConsAdministrador extends ConsPadrao {
     private JTextField jTFIdUsuario;
     private JTextField jTFIdAdmin;
     private JTextField jTFCidade;
-    private JTextField jTFCpf;
-    private JTextField jTFDtNascimento;
+    private JFormattedTextField jFTFCpf;
+    private JFormattedTextField jFTFDtNascimento;
     private JTextField jTFIdade;
     private JTextField jTFNome;
     private JTextField jTFPais;
-    private JTextField jTFRg;
+    private JFormattedTextField jFTFRg;
     private JTextField jTFSexo;
     private JTextField jTFUf;
     private JTextField jTFUsuario;
+    private List<Administrador> lstAdm;
     
     /**
      * Creates new form ConsAdministrador
@@ -103,30 +106,28 @@ public class ConsAdministrador extends ConsPadrao {
 
     @Override
     public void listar(String info) {
-        List<Administrador> list;
-        
         if (info.equals(""))
-           list = (List<Administrador>) new AdminFactory().consultar("");
+           this.lstAdm = (List<Administrador>) new AdminFactory().consultar("");
         else
-           list = (List<Administrador>) new AdminFactory().consultar(" where nome like '"+info+"%'");      
+           this.lstAdm = (List<Administrador>) new AdminFactory().consultar(" where nome like '"+info+"%'");      
         String colunas[]   = {"ID", "Cidade", "CPF", "Dt. nascimento", 
                             "Idade", "Nome", "País", "RG",
                             "Sexo", "UF", "Usuário"};
         DefaultTableModel modelo = new DefaultTableModel(colunas, 0);
         
-        for (int i = 0; i < list.size(); i++) {
+        for (int i = 0; i < this.lstAdm.size(); i++) {
             modelo.addRow(new String[]{
-                list.get(i).getId().toString(), 
-                list.get(i).getCidade(), 
-                list.get(i).getCpf(),
-                super.formatarData(list.get(i).getDataNasc().toString()),
-                String.valueOf(list.get(i).getIdade()),
-                list.get(i).getNome(),
-                list.get(i).getPais(),
-                list.get(i).getRg(),
-                list.get(i).getSexo(),
-                list.get(i).getUf(),
-                list.get(i).getUsu().getUsuario()
+                this.lstAdm.get(i).getId().toString(), 
+                this.lstAdm.get(i).getCidade(), 
+                this.lstAdm.get(i).getCpf(),
+                super.formatarData(this.lstAdm.get(i).getDataNasc().toString()),
+                String.valueOf(this.lstAdm.get(i).getIdade()),
+                this.lstAdm.get(i).getNome(),
+                this.lstAdm.get(i).getPais(),
+                this.lstAdm.get(i).getRg(),
+                this.lstAdm.get(i).getSexo(),
+                this.lstAdm.get(i).getUf(),
+                this.lstAdm.get(i).getUsu().getUsuario()
             });
         }
         super.getTable().setModel(modelo);
@@ -144,12 +145,12 @@ public class ConsAdministrador extends ConsPadrao {
         this.jTFCidade = jTFCidade;
     }
 
-    public void setjTFCpf(JTextField jTFCpf) {
-        this.jTFCpf = jTFCpf;
+    public void setjFTFCpf(JFormattedTextField jFTFCpf) {
+        this.jFTFCpf = jFTFCpf;
     }
 
-    public void setjTFDtNascimento(JTextField jTFDtNascimento) {
-        this.jTFDtNascimento = jTFDtNascimento;
+    public void setjFTFDtNascimento(JFormattedTextField jFTFDtNascimento) {
+        this.jFTFDtNascimento = jFTFDtNascimento;
     }
 
     public void setjTFIdade(JTextField jTFIdade) {
@@ -164,8 +165,8 @@ public class ConsAdministrador extends ConsPadrao {
         this.jTFPais = jTFPais;
     }
 
-    public void setjTFRg(JTextField jTFRg) {
-        this.jTFRg = jTFRg;
+    public void setjFTFRg(JFormattedTextField jFTFRg) {
+        this.jFTFRg = jFTFRg;
     }
 
     public void setjTFSexo(JTextField jTFSexo) {
@@ -188,9 +189,33 @@ public class ConsAdministrador extends ConsPadrao {
     @Override
     public void preencherCad(Vector vect) {
         this.jTFCidade.setText(vect.get(1).toString());
-        this.jTFCpf.setText(vect.get(2).toString());
-      
         
+        if (!vect.get(2).toString().equals(""))
+            this.jFTFCpf.setValue(vect.get(2).toString());
+        else
+            this.jFTFCpf.setValue(null);
+        
+        if (!vect.get(3).toString().equals(""))
+            this.jFTFDtNascimento.setValue(vect.get(3).toString());
+        else
+            this.jFTFDtNascimento.setValue(null);
+    
+        this.jTFIdade.setText(vect.get(4).toString());
+        this.jTFNome.setText(vect.get(5).toString());
+        this.jTFPais.setText(vect.get(6).toString());
+        
+        if (!vect.get(7).toString().equals(""))
+            this.jFTFRg.setValue(vect.get(7).toString());
+        else
+            this.jFTFRg.setValue(null);
+        
+        this.jTFSexo.setText(vect.get(8).toString());
+        this.jTFUf.setText(vect.get(9).toString());
+        this.jTFUsuario.setText(vect.get(10).toString());
+        
+        int idUsuario = ((Administrador) this.lstAdm.get(super.row)).getUsu().getId();
+        this.jTFIdUsuario.setText(idUsuario + "");
+        this.jTFIdAdmin.setText(vect.get(0).toString());
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

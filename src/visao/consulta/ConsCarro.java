@@ -17,11 +17,21 @@ import modelo.bean.Carro;
  */
 public class ConsCarro extends ConsPadrao {
 
+    private JTextField jTFAno;
+    private JTextField jTFCidade;
+    private JTextField jTFCliente;
+    private JTextField jTFIdCliente;
+    private JTextField jTFMarca;
+    private JTextField jTFNomeCar;
+    private JTextField jTFPais;
+    private JTextField jTFPlaca;
+    private JTextField jTFUF;
+    private JTextField jTFIdCarro;
+    private List<Carro> list;
+    
     /**
      * Creates new form ConsCarro
-     */
-    private JTextField jTFIdCarro;
-    
+     */    
     public ConsCarro() {
         initComponents();
         super.setSize();
@@ -95,7 +105,6 @@ public class ConsCarro extends ConsPadrao {
     
     @Override
     public void listar(String info) {
-        List<Carro> list;
         if (info.equals(""))
            list = (List<Carro>) new CarroFactory().consultar("");
         else
@@ -130,8 +139,60 @@ public class ConsCarro extends ConsPadrao {
             super.jTFNome.setText(vect.get(4).toString());
             this.jTFIdCarro.setText(vect.get(0).toString());
         }
+        if (super.cadastro) {
+            this.jTFIdCarro.setText(vect.get(0).toString());
+            this.jTFAno.setText(vect.get(1).toString());
+            this.jTFCidade.setText(vect.get(2).toString());
+            this.jTFMarca.setText(vect.get(3).toString());
+            this.jTFNomeCar.setText(vect.get(4).toString());
+            this.jTFPais.setText(vect.get(5).toString());
+            this.jTFPlaca.setText(vect.get(6).toString());
+            this.jTFUF.setText(vect.get(7).toString());
+            this.jTFCliente.setText(vect.get(8).toString());
+            this.jTFIdCliente.setText(((Carro) list.get(super.row)).getDono().getId()+"");
+        }
     }
 
+    public void setjTFAno(JTextField jTFAno) {
+        this.jTFAno = jTFAno;
+    }
+
+    public void setjTFCidade(JTextField jTFCidade) {
+        this.jTFCidade = jTFCidade;
+    }
+
+    public void setjTFCliente(JTextField jTFCliente) {
+        this.jTFCliente = jTFCliente;
+    }
+
+    public void setjTFIdCliente(JTextField jTFIdCliente) {
+        this.jTFIdCliente = jTFIdCliente;
+    }
+
+    public void setjTFMarca(JTextField jTFMarca) {
+        this.jTFMarca = jTFMarca;
+    }
+
+    public void setjTFNomeCar(JTextField jTFNomeCar) {
+        this.jTFNomeCar = jTFNomeCar;
+    }
+
+    public void setjTFPais(JTextField jTFPais) {
+        this.jTFPais = jTFPais;
+    }
+
+    public void setjTFPlaca(JTextField jTFPlaca) {
+        this.jTFPlaca = jTFPlaca;
+    }
+
+    public void setjTFUF(JTextField jTFUF) {
+        this.jTFUF = jTFUF;
+    }
+
+    public void setjTFIdCarro(JTextField jTFIdCarro) {
+        this.jTFIdCarro = jTFIdCarro;
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
 }

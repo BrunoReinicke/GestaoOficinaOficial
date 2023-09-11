@@ -215,7 +215,7 @@ public abstract class CadPadrao extends javax.swing.JFrame {
     }
     
     protected MaskFormatter getMascCPF() {
-        return this.getMascara("###.###.####-##");
+        return this.getMascara("###.###.###-##");
     }
     
     protected MaskFormatter getMascRG() {
@@ -284,6 +284,14 @@ public abstract class CadPadrao extends javax.swing.JFrame {
         if (contem)
             valor = caract + "";
         return valor;
+    }
+    
+    protected String getNumFormatado(JTextField jTFCampo) {
+        String numero = "";
+        for (int i = 0; i < jTFCampo.getText().length(); i++)
+            if (!this.validarInteiro(jTFCampo.getText().charAt(i)).equals(""))
+                numero = numero + jTFCampo.getText().charAt(i);
+        return numero;
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -60,7 +60,7 @@
                                       <Group type="103" groupAlignment="1" max="-2" attributes="0">
                                           <Component id="jTFSexo" alignment="0" pref="101" max="32767" attributes="0"/>
                                           <Component id="jTFPais" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="fFTFRg" alignment="0" min="-2" pref="90" max="-2" attributes="0"/>
+                                          <Component id="jfFTFRg" alignment="0" min="-2" pref="90" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                   </Group>
@@ -115,7 +115,7 @@
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="fFTFRg" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jfFTFRg" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -257,7 +257,7 @@
     </Component>
     <Component class="javax.swing.JFormattedTextField" name="jFTFDtNasc">
     </Component>
-    <Component class="javax.swing.JFormattedTextField" name="fFTFRg">
+    <Component class="javax.swing.JFormattedTextField" name="jfFTFRg">
     </Component>
   </SubComponents>
 </Form>

@@ -27,6 +27,8 @@ public class Login extends JFrame {
     private JButton btnConsForn;
     private JButton btnConsPeca;
     private JButton btnCadAdm;
+    private JButton btnCadCarro;
+    private JButton btnCadCli;
     private int idUsuario;
     
     /**
@@ -144,15 +146,13 @@ public class Login extends JFrame {
                 this.btnConsForn.setVisible(true);
                 this.btnConsPeca.setVisible(true);
                 this.btnCadAdm.setVisible(true);
+                this.btnCadCarro.setVisible(true);
+                this.btnCadCli.setVisible(true);
             }
             this.btnConsOS.setVisible(true);
             this.btnLogin.setVisible(false);
         }
     }//GEN-LAST:event_jButton1MouseClicked
-
-    /**
-     * @param args the command line arguments
-     */
 
     public void setBtnCadUsu(JButton btnCadUsu) {
         this.btnCadUsu = btnCadUsu;
@@ -162,9 +162,6 @@ public class Login extends JFrame {
         this.btnConsUsu = btnConsUsu;
     }
 
-    /**
-     * @param args the command line arguments
-     */
     public void setBtnConsOS(JButton btnConsOS) {
         this.btnConsOS = btnConsOS;
     }
@@ -236,7 +233,15 @@ public class Login extends JFrame {
     public void setBtnCadAdm(JButton btnCadAdm) {
         this.btnCadAdm = btnCadAdm;
     }
-      
+
+    public void setBtnCadCarro(JButton btnCadCarro) {
+        this.btnCadCarro = btnCadCarro;
+    }
+
+    public void setBtnCadCli(JButton btnCadCli) {
+        this.btnCadCli = btnCadCli;
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;

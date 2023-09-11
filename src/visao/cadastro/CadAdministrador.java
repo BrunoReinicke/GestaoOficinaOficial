@@ -61,9 +61,9 @@ public class CadAdministrador extends CadPadrao {
         jTFUF = new javax.swing.JTextField();
         jBtnPesqUsuar = new javax.swing.JButton();
         jTFUsuario = new javax.swing.JTextField();
-        jFTFCpf = new javax.swing.JFormattedTextField();
-        jFTFDtNasc = new javax.swing.JFormattedTextField();
-        fFTFRg = new javax.swing.JFormattedTextField();
+        jFTFCpf = new javax.swing.JFormattedTextField(super.getMascCPF());
+        jFTFDtNasc = new javax.swing.JFormattedTextField(super.getMascData());
+        jfFTFRg = new javax.swing.JFormattedTextField(super.getMascRG());
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Cadastro de administradores");
@@ -173,7 +173,7 @@ public class CadAdministrador extends CadPadrao {
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                             .addComponent(jTFSexo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE)
                                             .addComponent(jTFPais, javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(fFTFRg, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(jfFTFRg, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGap(0, 0, Short.MAX_VALUE)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jBtnPesqUsuar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -213,7 +213,7 @@ public class CadAdministrador extends CadPadrao {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(fFTFRg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jfFTFRg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTFSexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -268,8 +268,12 @@ public class CadAdministrador extends CadPadrao {
     private void jTFIdadeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFIdadeKeyReleased
         if (evt.getKeyCode() != 8)
             this.idade = this.idade + super.validarInteiro(evt.getKeyChar());
-        else
-            this.idade = this.idade.substring(0, this.idade.length() - 1);
+        else {
+            if (this.idade.equals("")) 
+                this.idade = super.getNumFormatado(jTFIdade);
+            else
+                this.idade = this.idade.substring(0, this.idade.length() - 1);
+        }
         jTFIdade.setText(this.idade);
     }//GEN-LAST:event_jTFIdadeKeyReleased
 
@@ -313,21 +317,26 @@ public class CadAdministrador extends CadPadrao {
         if (!this.jTFUsuario.getText().equals("")) {
             Object objAdm = new AdminFactory().consultar(" where idUsuario = " + Integer.valueOf(jTFIdUsuario.getText()));
         
-            if (((List<Administrador>) objAdm).isEmpty()) {
+            if (((List<Administrador>) objAdm).isEmpty() || (!getJtfID().getText().equals(""))) {
                 Administrador adm = new Administrador();
                 adm.setCidade(this.jTFCidade.getText());
-            //    adm.setCpf(this.jTFCpf.getText());
-            //    adm.setDataNasc(this.validarData("", this.jTFDtNasc.getText(), ""));
+                adm.setCpf(this.jFTFCpf.getText());
+                adm.setDataNasc(this.validarData("nascimento", this.jFTFDtNasc.getText(), ""));
                 adm.setIdade(Integer.valueOf(this.jTFIdade.getText()).intValue());
                 adm.setNome(this.jTFNome.getText());
                 adm.setPais(this.jTFPais.getText());
-              //  adm.setRg(this.jTFRG.getText());
+                adm.setRg(this.jfFTFRg.getText());
                 adm.setSexo(this.jTFSexo.getText());
                 adm.setUf(this.jTFUF.getText());
 
                 Object objUsu = new UsuaFactory().consultar(Integer.valueOf(jTFIdUsuario.getText()));
                 adm.setUsu((Usuario) ((List<Usuario>) objUsu).get(0));
-                super.confirmar(new AdminFactory(), adm, "AdministradorPU");
+                
+                if (!getJtfID().getText().equals(""))
+                    adm.setId(Integer.valueOf(getJtfID().getText()));
+                if (!super.bErro)
+                    super.confirmar(new AdminFactory(), adm, "AdministradorPU");
+                super.bErro = false;
             } else
                 JOptionPane.showMessageDialog(null, "Não é possível cadastrar: administrador já cadastrado para o usuário selecionado.");
         } else
@@ -349,14 +358,16 @@ public class CadAdministrador extends CadPadrao {
                 conAdm.setjTFIdAdmin(getJtfID());
                 conAdm.setJTFNome(jTFNome);
                 conAdm.setjTFCidade(jTFCidade);
-             //   conAdm.setjTFCpf(jTFCpf);
-             //   conAdm.setjTFDtNascimento(jTFDtNasc);
-                conAdm.setjTFIdUsuario(jTFUsuario);
+                conAdm.setjFTFCpf(jFTFCpf);
+                conAdm.setjFTFDtNascimento(jFTFDtNasc);
+                conAdm.setjTFIdUsuario(jTFIdUsuario);
                 conAdm.setjTFIdade(jTFIdade);
                 conAdm.setjTFPais(jTFPais);
-              //  conAdm.setjTFRg(jTFRG);
+                conAdm.setjFTFRg(jfFTFRg);
                 conAdm.setjTFUf(jTFUF);
                 conAdm.setjTFUsuario(jTFUsuario);
+                conAdm.setjTFNome(jTFNome);
+                conAdm.setjTFSexo(jTFSexo);
                 conAdm.listar("");
             }
         });
@@ -366,13 +377,13 @@ public class CadAdministrador extends CadPadrao {
     public void limpar() {
         getJtfID().setText("");
         this.jTFCidade.setText("");
-        //this.jTFCpf.setText("");
-        //this.jTFDtNasc.setText("");
+        this.jFTFCpf.setValue(null);
+        this.jFTFDtNasc.setValue(null);
         this.jTFIdUsuario.setText("");
         this.jTFIdade.setText("");
         this.jTFNome.setText("");
         this.jTFPais.setText("");
-        //this.jTFRG.setText("");
+        this.jfFTFRg.setValue(null);
         this.jTFSexo.setText("");
         this.jTFUF.setText("");
         this.jTFUsuario.setText("");
@@ -380,7 +391,6 @@ public class CadAdministrador extends CadPadrao {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JFormattedTextField fFTFRg;
     private javax.swing.JButton jBtnPesqUsuar;
     private javax.swing.JFormattedTextField jFTFCpf;
     private javax.swing.JFormattedTextField jFTFDtNasc;
@@ -402,5 +412,6 @@ public class CadAdministrador extends CadPadrao {
     private javax.swing.JTextField jTFSexo;
     private javax.swing.JTextField jTFUF;
     private javax.swing.JTextField jTFUsuario;
+    private javax.swing.JFormattedTextField jfFTFRg;
     // End of variables declaration//GEN-END:variables
 }
