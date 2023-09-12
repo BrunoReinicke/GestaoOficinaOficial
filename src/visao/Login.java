@@ -29,6 +29,8 @@ public class Login extends JFrame {
     private JButton btnCadAdm;
     private JButton btnCadCarro;
     private JButton btnCadCli;
+    private JButton btnCadForn;
+    private JButton btnCadPeca;
     private int idUsuario;
     
     /**
@@ -148,6 +150,8 @@ public class Login extends JFrame {
                 this.btnCadAdm.setVisible(true);
                 this.btnCadCarro.setVisible(true);
                 this.btnCadCli.setVisible(true);
+                this.btnCadForn.setVisible(true);
+                this.btnCadPeca.setVisible(true);
             }
             this.btnConsOS.setVisible(true);
             this.btnLogin.setVisible(false);
@@ -240,6 +244,14 @@ public class Login extends JFrame {
 
     public void setBtnCadCli(JButton btnCadCli) {
         this.btnCadCli = btnCadCli;
+    }
+
+    public void setBtnCadForn(JButton btnCadForn) {
+        this.btnCadForn = btnCadForn;
+    }
+
+    public void setBtnCadPeca(JButton btnCadPeca) {
+        this.btnCadPeca = btnCadPeca;
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -21,6 +21,8 @@ import java.awt.event.KeyListener;
 import javax.swing.JButton;
 import visao.cadastro.CadAdministrador;
 import visao.cadastro.CadClientes;
+import visao.cadastro.CadFornecedor;
+import visao.cadastro.CadPeca;
 
 /**
  *
@@ -42,6 +44,8 @@ public class Principal extends javax.swing.JFrame {
     private CadAdministrador cadAdm;
     private CadCarros cadCar;
     private CadClientes cadCli;
+    private CadFornecedor cadForn;
+    private CadPeca cadPeca;
     protected Object obj;
     
     /**
@@ -62,6 +66,8 @@ public class Principal extends javax.swing.JFrame {
         this.jBtnCadAdmin.setVisible(false);
         this.jBtnCadCarros.setVisible(false);
         this.jBtnCadClientes.setVisible(false);
+        this.jBtnCadFornec.setVisible(false);
+        this.jBtnCadPecas.setVisible(false);
     }
 
     /**
@@ -87,6 +93,8 @@ public class Principal extends javax.swing.JFrame {
         jBtnCadAdmin = new javax.swing.JButton();
         jBtnCadCarros = new javax.swing.JButton();
         jBtnCadClientes = new javax.swing.JButton();
+        jBtnCadFornec = new javax.swing.JButton();
+        jBtnCadPecas = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("OSTPA");
@@ -278,6 +286,32 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
+        jBtnCadFornec.setText(" Cad. fornecedor");
+        jBtnCadFornec.setName("btnCadastrar"); // NOI18N
+        jBtnCadFornec.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jBtnCadFornecMouseClicked(evt);
+            }
+        });
+        jBtnCadFornec.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnCadFornecActionPerformed(evt);
+            }
+        });
+
+        jBtnCadPecas.setText("Cadastrar peças");
+        jBtnCadPecas.setName("btnCadastrar"); // NOI18N
+        jBtnCadPecas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jBtnCadPecasMouseClicked(evt);
+            }
+        });
+        jBtnCadPecas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnCadPecasActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -312,7 +346,11 @@ public class Principal extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jBtnCadCarros)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jBtnCadClientes)))
+                        .addComponent(jBtnCadClientes)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jBtnCadFornec)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jBtnCadPecas)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -337,7 +375,9 @@ public class Principal extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBtnCadAdmin)
                     .addComponent(jBtnCadCarros)
-                    .addComponent(jBtnCadClientes))
+                    .addComponent(jBtnCadClientes)
+                    .addComponent(jBtnCadFornec)
+                    .addComponent(jBtnCadPecas))
                 .addContainerGap(207, Short.MAX_VALUE))
         );
 
@@ -377,6 +417,8 @@ public class Principal extends javax.swing.JFrame {
         this.log.setBtnCadAdm(this.jBtnCadAdmin);
         this.log.setBtnCadCarro(this.jBtnCadCarros);
         this.log.setBtnCadCli(this.jBtnCadClientes);
+        this.log.setBtnCadForn(this.jBtnCadFornec);
+        this.log.setBtnCadPeca(this.jBtnCadPecas);
         this.log.setVisible(true);
     }//GEN-LAST:event_jButton4MouseClicked
 
@@ -403,6 +445,8 @@ public class Principal extends javax.swing.JFrame {
         this.jBtnCadAdmin.setVisible(false);
         this.jBtnCadCarros.setVisible(false);
         this.jBtnCadClientes.setVisible(false);
+        this.jBtnCadFornec.setVisible(false);
+        this.jBtnCadPecas.setVisible(false);
         this.jButton4.setVisible(true);
         
         this.fecharTelaCons(this.conUs);
@@ -421,8 +465,10 @@ public class Principal extends javax.swing.JFrame {
         this.fecharTelaCad(this.cadCli);
         
         this.fecharTelaCons(this.conForn);
+        this.fecharTelaCad(this.cadForn);
         
         this.fecharTelaCons(this.conPeca);
+        this.fecharTelaCad(this.cadPeca);
     }//GEN-LAST:event_jButton5MouseClicked
 
     private void jButton2ComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jButton2ComponentShown
@@ -535,6 +581,24 @@ public class Principal extends javax.swing.JFrame {
     private void jBtnCadClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCadClientesActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jBtnCadClientesActionPerformed
+
+    private void jBtnCadFornecMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnCadFornecMouseClicked
+        this.cadForn = new CadFornecedor();
+        this.cadForn.setVisible(true);
+    }//GEN-LAST:event_jBtnCadFornecMouseClicked
+
+    private void jBtnCadFornecActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCadFornecActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBtnCadFornecActionPerformed
+
+    private void jBtnCadPecasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnCadPecasMouseClicked
+        this.cadPeca = new CadPeca();
+        this.cadPeca.setVisible(true);
+    }//GEN-LAST:event_jBtnCadPecasMouseClicked
+
+    private void jBtnCadPecasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCadPecasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBtnCadPecasActionPerformed
     
     /**
      * @param args the command line arguments
@@ -575,6 +639,8 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton jBtnCadAdmin;
     private javax.swing.JButton jBtnCadCarros;
     private javax.swing.JButton jBtnCadClientes;
+    private javax.swing.JButton jBtnCadFornec;
+    private javax.swing.JButton jBtnCadPecas;
     private javax.swing.JButton jBtnConsAdm;
     private javax.swing.JButton jBtnConsCarros;
     private javax.swing.JButton jBtnConsCli;

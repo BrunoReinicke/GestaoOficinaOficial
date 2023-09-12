@@ -9,8 +9,10 @@ import controle.PecaFactory;
 import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Vector;
+import javax.swing.JFormattedTextField;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+import modelo.bean.Fornecedor;
 import modelo.bean.Peca;
 
 /**
@@ -20,6 +22,15 @@ import modelo.bean.Peca;
 public class ConsPeca extends ConsPadrao {
 
     private JTextField jTFIdPeca;
+    private JFormattedTextField jFTFAno;
+    private JTextField jTFCategoria;
+    private JTextField jTFMarca;
+    private JTextField jTFNomPeca;
+    private JTextField jTFPreco;
+    private JFormattedTextField jFTFQtde;
+    private JTextField jTFIdFornec;
+    private JTextField jTFNomFornec;
+    private List<Peca> list;
     
     /**
      * Creates new form ConsPeca
@@ -93,8 +104,6 @@ public class ConsPeca extends ConsPadrao {
 
     @Override
     public void listar(String info) {
-        List<Peca> list;
-        
         if (info.equals(""))
            list = (List<Peca>) new PecaFactory().consultar("");
         else
@@ -130,9 +139,68 @@ public class ConsPeca extends ConsPadrao {
     @Override
     public void preencherCad(Vector vect) {
         if (super.ehNome) {
-            super.jTFNome.setText(vect.get(4).toString());
+            this.jTFNomFornec.setText(vect.get(4).toString());
             this.jTFIdPeca.setText(vect.get(0).toString());
         }
+        if (super.cadastro) {
+            this.jTFIdPeca.setText(vect.get(0).toString());
+            
+            if (!vect.get(1).toString().equals(""))
+                this.jFTFAno.setValue(vect.get(1).toString());
+            else
+                this.jFTFAno.setValue(null);
+            
+            this.jTFCategoria.setText(vect.get(2).toString());
+            this.jTFMarca.setText(vect.get(3).toString());
+            this.jTFNomPeca.setText(vect.get(4).toString());
+            this.jTFPreco.setText(vect.get(5).toString());
+            
+            if (!vect.get(6).toString().equals(""))
+                this.jFTFQtde.setText(vect.get(6).toString());
+            else
+                this.jFTFQtde.setText(null);
+            
+            this.jTFNomFornec.setText(vect.get(7).toString());
+            
+            int idFornec = ((Peca) list.get(super.row)).getForn().getId();
+            this.jTFIdFornec.setText(idFornec + "");
+        }
+    }
+
+    public void setjTFIdPeca(JTextField jTFIdPeca) {
+        this.jTFIdPeca = jTFIdPeca;
+    }
+
+    public void setjFTFAno(JFormattedTextField jFTFAno) {
+        this.jFTFAno = jFTFAno;
+    }
+
+    public void setjTFCategoria(JTextField jTFCategoria) {
+        this.jTFCategoria = jTFCategoria;
+    }
+
+    public void setjTFMarca(JTextField jTFMarca) {
+        this.jTFMarca = jTFMarca;
+    }
+
+    public void setjTFNomPeca(JTextField jTFNomPeca) {
+        this.jTFNomPeca = jTFNomPeca;
+    }
+
+    public void setjTFPreco(JTextField jTFPreco) {
+        this.jTFPreco = jTFPreco;
+    }
+
+    public void setjFTFQtde(JFormattedTextField jFTFQtde) {
+        this.jFTFQtde = jFTFQtde;
+    }
+
+    public void setjTFIdFornec(JTextField jTFIdFornec) {
+        this.jTFIdFornec = jTFIdFornec;
+    }
+
+    public void setjTFNomFornec(JTextField jTFNomFornec) {
+        this.jTFNomFornec = jTFNomFornec;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

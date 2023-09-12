@@ -222,6 +222,10 @@ public abstract class CadPadrao extends javax.swing.JFrame {
         return this.getMascara("#.###.###");
     }
 
+    protected MaskFormatter getMascNum(String masc) {
+        return this.getMascara(masc);
+    }
+    
     public int getIdUsuario() {
         return idUsuario;
     }

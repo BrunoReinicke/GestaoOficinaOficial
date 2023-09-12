@@ -57,6 +57,10 @@
                       <Component id="jBtnCadCarros" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jBtnCadClientes" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jBtnCadFornec" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jBtnCadPecas" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
@@ -88,6 +92,8 @@
                   <Component id="jBtnCadAdmin" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jBtnCadCarros" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jBtnCadClientes" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jBtnCadFornec" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jBtnCadPecas" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="207" max="32767" attributes="0"/>
           </Group>
@@ -234,6 +240,26 @@
       <Events>
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jBtnCadClientesMouseClicked"/>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBtnCadClientesActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="jBtnCadFornec">
+      <Properties>
+        <Property name="text" type="java.lang.String" value=" Cad. fornecedor"/>
+        <Property name="name" type="java.lang.String" value="btnCadastrar" noResource="true"/>
+      </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jBtnCadFornecMouseClicked"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBtnCadFornecActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="jBtnCadPecas">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Cadastrar pe&#xe7;as"/>
+        <Property name="name" type="java.lang.String" value="btnCadastrar" noResource="true"/>
+      </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jBtnCadPecasMouseClicked"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBtnCadPecasActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
