@@ -60,19 +60,26 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="jTFAno" min="-2" pref="55" max="-2" attributes="0"/>
-                              <Component id="jTFCidade" pref="105" max="32767" attributes="0"/>
-                              <Component id="jTFMarca" alignment="0" max="32767" attributes="0"/>
-                              <Component id="jTFNome" max="32767" attributes="0"/>
-                              <Component id="jTFPais" max="32767" attributes="0"/>
-                              <Component id="jTFPlaca" max="32767" attributes="0"/>
-                              <Component id="jTFUF" alignment="0" min="-2" pref="45" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="jTFCidade" pref="105" max="32767" attributes="0"/>
+                                      <Component id="jTFMarca" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="jTFNome" max="32767" attributes="0"/>
+                                      <Component id="jTFPais" max="32767" attributes="0"/>
+                                      <Component id="jTFPlaca" max="32767" attributes="0"/>
+                                      <Component id="jTFUF" alignment="0" min="-2" pref="45" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Component id="jTFCliente" min="-2" pref="145" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jBtnPesqCliente" max="32767" attributes="0"/>
                           </Group>
-                          <Component id="jTFCliente" min="-2" pref="145" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Component id="jTFAno" min="-2" pref="63" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          </Group>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jBtnPesqCliente" max="32767" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace min="-2" pref="138" max="-2" attributes="0"/>
@@ -176,11 +183,6 @@
         <Property name="text" type="java.lang.String" value="Cliente:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTFAno">
-      <Events>
-        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTFAnoKeyReleased"/>
-      </Events>
-    </Component>
     <Component class="javax.swing.JTextField" name="jTFCidade">
     </Component>
     <Component class="javax.swing.JTextField" name="jTFMarca">
@@ -211,6 +213,8 @@
       <Events>
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jBtnPesqClienteMouseClicked"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JFormattedTextField" name="jTFAno">
     </Component>
   </SubComponents>
 </Form>

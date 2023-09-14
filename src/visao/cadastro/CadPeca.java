@@ -18,6 +18,8 @@ import visao.consulta.ConsPeca;
  */
 public class CadPeca extends CadPadrao {
 
+    private String qtde;
+    
     /**
      * Creates new form CadPeca
      */
@@ -26,6 +28,7 @@ public class CadPeca extends CadPadrao {
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         this.jTFIdFornec.setVisible(false);
         super.bErro = false;
+        this.qtde = "";
     }
 
     /**
@@ -49,10 +52,10 @@ public class CadPeca extends CadPadrao {
         jTFMarca = new javax.swing.JTextField();
         jTFNome = new javax.swing.JTextField();
         jFTFAno1 = new javax.swing.JFormattedTextField(super.getMascNum("####"));
-        jFTFQtde = new javax.swing.JFormattedTextField(super.getMascNum("#####"));
         jTFNome1 = new javax.swing.JTextField();
         jBtnPesqFornec = new javax.swing.JButton();
         jTFPreco = new javax.swing.JTextField();
+        jFTFQtde = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Cadastro de peças");
@@ -101,6 +104,17 @@ public class CadPeca extends CadPadrao {
             }
         });
 
+        jFTFQtde.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jFTFQtdeFocusLost(evt);
+            }
+        });
+        jFTFQtde.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jFTFQtdeKeyReleased(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -134,8 +148,9 @@ public class CadPeca extends CadPadrao {
                                         .addComponent(jTFCategoria, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
                                         .addComponent(jTFMarca, javax.swing.GroupLayout.Alignment.LEADING))
                                     .addComponent(jFTFAno1, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jFTFQtde, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTFPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(jFTFQtde, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jTFPreco, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE)))
                                 .addGap(0, 0, Short.MAX_VALUE)))))
                 .addGap(110, 110, 110))
         );
@@ -202,51 +217,30 @@ public class CadPeca extends CadPadrao {
         });
     }//GEN-LAST:event_jBtnPesqFornecMouseClicked
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CadPeca.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CadPeca.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CadPeca.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CadPeca.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void jFTFQtdeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jFTFQtdeFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jFTFQtdeFocusLost
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new CadPeca().setVisible(true);
-            }
-        });
-    }
+    private void jFTFQtdeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jFTFQtdeKeyReleased
+        this.qtde = super.getApenasNros(this.qtde, evt, jFTFQtde);
+        jFTFQtde.setText(this.qtde);
+    }//GEN-LAST:event_jFTFQtdeKeyReleased
 
     @Override
     public void salvar() {
         Peca pec = new Peca();
-        pec.setAno(Integer.valueOf(jFTFAno1.getText()));
+        if (!super.strTrim(this.jFTFAno1.getText()).equals(""))
+            pec.setAno(Integer.valueOf(jFTFAno1.getText()));
+        else
+            pec.setAno(0);
         pec.setCategoria(jTFCategoria.getText());
         pec.setMarca(jTFMarca.getText());
         pec.setNome(jTFNome.getText());
         pec.setPreco(Float.valueOf(jTFPreco.getText()));
-        pec.setQtde(Integer.valueOf(jFTFQtde.getText()));
-        
+        if (!super.strTrim(this.jFTFQtde.getText()).equals(""))
+            pec.setQtde(Integer.valueOf(jFTFQtde.getText()));
+    else
+            pec.setQtde(0);
         Object objForn = new FornecFactory().consultar(Integer.valueOf(jTFIdFornec.getText()));
         pec.setForn((Fornecedor) ((List<Fornecedor>) objForn).get(0));
 
@@ -293,13 +287,14 @@ public class CadPeca extends CadPadrao {
         this.jTFNome1.setText("");
         this.jTFPreco.setText("");
         this.jFTFAno1.setValue(null);
-        this.jFTFQtde.setValue(null);
+        this.jFTFQtde.setText("");
+        this.qtde = "";
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtnPesqFornec;
     private javax.swing.JFormattedTextField jFTFAno1;
-    private javax.swing.JFormattedTextField jFTFQtde;
+    private javax.swing.JTextField jFTFQtde;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

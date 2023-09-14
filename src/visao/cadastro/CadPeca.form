@@ -58,8 +58,10 @@
                                       <Component id="jTFMarca" alignment="0" max="32767" attributes="0"/>
                                   </Group>
                                   <Component id="jFTFAno1" min="-2" pref="68" max="-2" attributes="0"/>
-                                  <Component id="jFTFQtde" alignment="0" min="-2" pref="75" max="-2" attributes="0"/>
-                                  <Component id="jTFPreco" alignment="0" min="-2" pref="92" max="-2" attributes="0"/>
+                                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                                      <Component id="jFTFQtde" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="jTFPreco" alignment="0" pref="92" max="32767" attributes="0"/>
+                                  </Group>
                               </Group>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
@@ -171,8 +173,6 @@
     </Component>
     <Component class="javax.swing.JFormattedTextField" name="jFTFAno1">
     </Component>
-    <Component class="javax.swing.JFormattedTextField" name="jFTFQtde">
-    </Component>
     <Component class="javax.swing.JTextField" name="jTFNome1">
       <Properties>
         <Property name="editable" type="boolean" value="false"/>
@@ -196,6 +196,12 @@
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="jTFPreco">
+    </Component>
+    <Component class="javax.swing.JTextField" name="jFTFQtde">
+      <Events>
+        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jFTFQtdeFocusLost"/>
+        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jFTFQtdeKeyReleased"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

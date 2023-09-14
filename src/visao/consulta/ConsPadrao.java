@@ -175,6 +175,14 @@ public abstract class ConsPadrao extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jTbPadraoMouseReleased
     
+    public String strTrim(String str) {
+        String trim = "";
+        for (int i = 0; i < str.length(); i++) 
+            if (str.charAt(i) != ' ')
+                trim = trim + str.charAt(i);
+        return trim;
+    }
+    
     public void setTable(JTable jTbPadrao) {
         this.jTbPadrao = jTbPadrao;
     }

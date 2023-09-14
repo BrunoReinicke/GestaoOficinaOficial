@@ -266,51 +266,9 @@ public class CadAdministrador extends CadPadrao {
     }//GEN-LAST:event_jTFIdadeKeyPressed
 
     private void jTFIdadeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFIdadeKeyReleased
-        if (evt.getKeyCode() != 8)
-            this.idade = this.idade + super.validarInteiro(evt.getKeyChar());
-        else {
-            if (this.idade.equals("")) 
-                this.idade = super.getNumFormatado(jTFIdade);
-            else
-                this.idade = this.idade.substring(0, this.idade.length() - 1);
-        }
+        this.idade = super.getApenasNros(this.idade, evt, jTFIdade);
         jTFIdade.setText(this.idade);
     }//GEN-LAST:event_jTFIdadeKeyReleased
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CadAdministrador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CadAdministrador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CadAdministrador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CadAdministrador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new CadAdministrador().setVisible(true);
-            }
-        });
-    }
 
     @Override
     public void salvar() {
@@ -322,7 +280,10 @@ public class CadAdministrador extends CadPadrao {
                 adm.setCidade(this.jTFCidade.getText());
                 adm.setCpf(this.jFTFCpf.getText());
                 adm.setDataNasc(this.validarData("nascimento", this.jFTFDtNasc.getText(), ""));
-                adm.setIdade(Integer.valueOf(this.jTFIdade.getText()).intValue());
+                if (!super.strTrim(this.jTFIdade.getText()).equals(""))
+                    adm.setIdade(Integer.valueOf(this.jTFIdade.getText()).intValue());
+                else
+                    adm.setIdade(0);
                 adm.setNome(this.jTFNome.getText());
                 adm.setPais(this.jTFPais.getText());
                 adm.setRg(this.jfFTFRg.getText());

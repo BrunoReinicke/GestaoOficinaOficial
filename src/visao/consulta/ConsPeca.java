@@ -27,7 +27,7 @@ public class ConsPeca extends ConsPadrao {
     private JTextField jTFMarca;
     private JTextField jTFNomPeca;
     private JTextField jTFPreco;
-    private JFormattedTextField jFTFQtde;
+    private JTextField jFTFQtde;
     private JTextField jTFIdFornec;
     private JTextField jTFNomFornec;
     private List<Peca> list;
@@ -153,13 +153,12 @@ public class ConsPeca extends ConsPadrao {
             this.jTFCategoria.setText(vect.get(2).toString());
             this.jTFMarca.setText(vect.get(3).toString());
             this.jTFNomPeca.setText(vect.get(4).toString());
-            this.jTFPreco.setText(vect.get(5).toString());
             
-            if (!vect.get(6).toString().equals(""))
-                this.jFTFQtde.setText(vect.get(6).toString());
-            else
-                this.jFTFQtde.setText(null);
+            String strPreco = vect.get(5).toString();
+            strPreco = strPreco.substring(3, strPreco.length());
+            this.jTFPreco.setText(super.strTrim(strPreco.replace('.',' ').replace(',','.')));
             
+            this.jFTFQtde.setText(vect.get(6).toString());
             this.jTFNomFornec.setText(vect.get(7).toString());
             
             int idFornec = ((Peca) list.get(super.row)).getForn().getId();
@@ -191,7 +190,7 @@ public class ConsPeca extends ConsPadrao {
         this.jTFPreco = jTFPreco;
     }
 
-    public void setjFTFQtde(JFormattedTextField jFTFQtde) {
+    public void setjFTFQtde(JTextField jFTFQtde) {
         this.jFTFQtde = jFTFQtde;
     }
 

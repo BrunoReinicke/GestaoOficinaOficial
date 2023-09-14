@@ -49,7 +49,6 @@ public class CadCarros extends CadPadrao {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jTFAno = new javax.swing.JTextField();
         jTFCidade = new javax.swing.JTextField();
         jTFMarca = new javax.swing.JTextField();
         jTFNome = new javax.swing.JTextField();
@@ -58,6 +57,7 @@ public class CadCarros extends CadPadrao {
         jTFUF = new javax.swing.JTextField();
         jTFCliente = new javax.swing.JTextField();
         jBtnPesqCliente = new javax.swing.JButton();
+        jTFAno = new javax.swing.JFormattedTextField(super.getMascNum("####"));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Cadastro de carros");
@@ -79,12 +79,6 @@ public class CadCarros extends CadPadrao {
         jLabel7.setText("UF:");
 
         jLabel8.setText("Cliente:");
-
-        jTFAno.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jTFAnoKeyReleased(evt);
-            }
-        });
 
         jTFCliente.setEditable(false);
         jTFCliente.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
@@ -128,17 +122,21 @@ public class CadCarros extends CadPadrao {
                             .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jTFAno, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jTFCidade, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE)
-                                .addComponent(jTFMarca)
-                                .addComponent(jTFNome)
-                                .addComponent(jTFPais)
-                                .addComponent(jTFPlaca)
-                                .addComponent(jTFUF, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jTFCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jBtnPesqCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(jTFCidade, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE)
+                                        .addComponent(jTFMarca)
+                                        .addComponent(jTFNome)
+                                        .addComponent(jTFPais)
+                                        .addComponent(jTFPlaca)
+                                        .addComponent(jTFUF, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jTFCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jBtnPesqCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jTFAno, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addGap(138, 138, 138))
         );
         layout.setVerticalGroup(
@@ -184,18 +182,6 @@ public class CadCarros extends CadPadrao {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jTFAnoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFAnoKeyReleased
-        if (evt.getKeyCode() != 8)
-            this.ano = this.ano + super.validarInteiro(evt.getKeyChar());
-        else {
-            if (this.ano.equals("")) 
-                this.ano = super.getNumFormatado(jTFAno);
-            else
-                this.ano = this.ano.substring(0, this.ano.length() - 1);
-        }
-        jTFAno.setText(this.ano);
-    }//GEN-LAST:event_jTFAnoKeyReleased
 
     private void jBtnPesqClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnPesqClienteMouseClicked
         java.awt.EventQueue.invokeLater(() -> {
@@ -247,7 +233,10 @@ public class CadCarros extends CadPadrao {
     public void salvar() {
         if (!this.jTFCliente.getText().equals("")) {
             Carro car = new Carro();
-            car.setAno(Integer.valueOf(this.jTFAno.getText()));
+            if (!super.strTrim(this.jTFAno.getText()).equals(""))
+                car.setAno(Integer.valueOf(this.jTFAno.getText()));
+            else
+                car.setAno(0);
             car.setCidade(this.jTFCidade.getText());
             car.setMarca(this.jTFMarca.getText());
             car.setNome(this.jTFNome.getText());
@@ -305,6 +294,7 @@ public class CadCarros extends CadPadrao {
         this.jTFPlaca.setText("");
         this.jTFUF.setText("");
         this.jTFCliente.setText("");
+        this.ano = "";
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -317,7 +307,7 @@ public class CadCarros extends CadPadrao {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JTextField jTFAno;
+    private javax.swing.JFormattedTextField jTFAno;
     private javax.swing.JTextField jTFCidade;
     private javax.swing.JTextField jTFCliente;
     private javax.swing.JTextField jTFIdCliente;

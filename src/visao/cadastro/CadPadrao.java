@@ -5,6 +5,7 @@
 package visao.cadastro;
 
 import controle.Factory;
+import java.awt.event.KeyEvent;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -71,6 +72,11 @@ public abstract class CadPadrao extends javax.swing.JFrame {
         jSeparator1.setPreferredSize(new java.awt.Dimension(50, 3));
 
         btConfirmar.setText("Confirmar");
+        btConfirmar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btConfirmarMouseClicked(evt);
+            }
+        });
         btConfirmar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btConfirmarActionPerformed(evt);
@@ -152,17 +158,17 @@ public abstract class CadPadrao extends javax.swing.JFrame {
 
     private void btExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btExcluirActionPerformed
         if (!getJtfID().getText().equals("")) {
-            if (JOptionPane.showConfirmDialog(null, "Deseja confirmar a exclusão?") == 0) {
+            if (JOptionPane.showConfirmDialog(this, "Deseja confirmar a exclusão?") == 0) {
                 try {
                     this.excluir();
                     this.dispose();
                 } catch (RollbackException ex) {
-                    JOptionPane.showMessageDialog(null,
+                    JOptionPane.showMessageDialog(this,
                                                   "Não é possível excluir, há algum outro cadastro que depende do cadastro desta tela.");
                 }
             }
         } else
-            JOptionPane.showMessageDialog(null, "Não há nada selecionado para exclusão.");
+            JOptionPane.showMessageDialog(this, "Não há nada selecionado para exclusão.");
     }//GEN-LAST:event_btExcluirActionPerformed
 
     private void btSelecionarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btSelecionarMouseClicked
@@ -181,14 +187,18 @@ public abstract class CadPadrao extends javax.swing.JFrame {
         this.limpar();
     }//GEN-LAST:event_btLimparActionPerformed
 
+    private void btConfirmarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btConfirmarMouseClicked
+        
+    }//GEN-LAST:event_btConfirmarMouseClicked
+
     public void confirmar(Factory fact, Object obj, String pers) {  
         if (getJtfID().getText().equals("")) {
-            if (JOptionPane.showConfirmDialog(null, "Deseja confirmar o cadastro?") == 0) {
+            if (JOptionPane.showConfirmDialog(this, "Deseja confirmar o cadastro?") == 0) {
                 fact.salvar(obj, pers);
                 this.dispose();
             }
         } else {
-            if (JOptionPane.showConfirmDialog(null, "Deseja confirmar a alteração?") == 0) {   
+            if (JOptionPane.showConfirmDialog(this, "Deseja confirmar a alteração?") == 0) {   
                 fact.alterar(obj);
                 this.dispose();
             }
@@ -232,6 +242,14 @@ public abstract class CadPadrao extends javax.swing.JFrame {
 
     public void setIdUsuario(int idUsuario) {
         this.idUsuario = idUsuario;
+    }
+    
+    public String strTrim(String str) {
+        String trim = "";
+        for (int i = 0; i < str.length(); i++) 
+            if (str.charAt(i) != ' ')
+                trim = trim + str.charAt(i);
+        return trim;
     }
     
     protected String formatarData(String data) {
@@ -288,6 +306,16 @@ public abstract class CadPadrao extends javax.swing.JFrame {
         if (contem)
             valor = caract + "";
         return valor;
+    }
+    
+    public String getApenasNros(String var, KeyEvent evt, JTextField jTF) {
+        if (var.equals(""))
+            return this.getNumFormatado(jTF);
+        else 
+        if (evt.getKeyCode() != 8)
+            return var + this.validarInteiro(evt.getKeyChar());
+        else
+            return var.substring(0, var.length() - 1);
     }
     
     protected String getNumFormatado(JTextField jTFCampo) {

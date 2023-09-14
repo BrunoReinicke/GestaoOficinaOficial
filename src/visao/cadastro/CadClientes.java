@@ -64,9 +64,10 @@ public class CadClientes extends CadPadrao {
         jTFIdUsuario = new javax.swing.JTextField();
         jBtnPesqUsuar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de clientes");
         setAlwaysOnTop(true);
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jLabel1.setText("Cidade:");
 
@@ -224,14 +225,7 @@ public class CadClientes extends CadPadrao {
     }//GEN-LAST:event_jBtnPesqUsuarActionPerformed
 
     private void jTFIdadeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFIdadeKeyReleased
-        if (evt.getKeyCode() != 8)
-            this.idade = this.idade + super.validarInteiro(evt.getKeyChar());
-        else {
-            if (this.idade.equals("")) 
-                this.idade = super.getNumFormatado(jTFIdade);
-            else
-                this.idade = this.idade.substring(0, this.idade.length() - 1);
-        }
+        this.idade = super.getApenasNros(this.idade, evt, jTFIdade);
         jTFIdade.setText(this.idade);
     }//GEN-LAST:event_jTFIdadeKeyReleased
 
@@ -280,7 +274,10 @@ public class CadClientes extends CadPadrao {
                 cli.setCidade(this.jTFCidade.getText());
                 cli.setCpf(this.jFTFCpf.getText());
                 cli.setDataNasc(this.validarData("nascimento", this.jFTFDtNasc.getText(), ""));
-                cli.setIdade(Integer.valueOf(this.jTFIdade.getText()).intValue());
+                if (!super.strTrim(this.jTFIdade.getText()).equals(""))
+                    cli.setIdade(Integer.valueOf(this.jTFIdade.getText()).intValue());
+                else
+                    cli.setIdade(0);
                 cli.setNome(this.jTFNome.getText());
                 cli.setPais(this.jTFPais.getText());
                 cli.setRg(this.jTFFRg.getText());
@@ -296,9 +293,9 @@ public class CadClientes extends CadPadrao {
                     super.confirmar(new ClienteFactory(), cli, "ClientePU");
                 super.bErro = false;
             } else
-                JOptionPane.showMessageDialog(null, "Não é possível cadastrar: cliente já cadastrado para o usuário selecionado.");
+                JOptionPane.showMessageDialog(this, "Não é possível cadastrar: cliente já cadastrado para o usuário selecionado.");
         } else
-            JOptionPane.showMessageDialog(null, "Não é possível cadastrar: campo usuário é obrigatório e não está preenchido.");
+            JOptionPane.showMessageDialog(this, "Não é possível cadastrar: campo usuário é obrigatório e não está preenchido.");
     }
 
     @Override

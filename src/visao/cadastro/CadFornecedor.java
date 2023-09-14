@@ -59,12 +59,12 @@ public class CadFornecedor extends CadPadrao {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jTFCidade = new javax.swing.JTextField();
-        jFTFCpf = new javax.swing.JFormattedTextField();
-        jFTFDtNasc = new javax.swing.JFormattedTextField();
+        jFTFCpf = new javax.swing.JFormattedTextField(super.getMascCPF());
+        jFTFDtNasc = new javax.swing.JFormattedTextField(super.getMascData());
         jTFIdade = new javax.swing.JTextField();
         jTFNome = new javax.swing.JTextField();
         jTFPais = new javax.swing.JTextField();
-        jTFFRg = new javax.swing.JFormattedTextField();
+        jTFFRg = new javax.swing.JFormattedTextField(super.getMascRG());
         jTFSexo = new javax.swing.JTextField();
         jTFUf = new javax.swing.JTextField();
 
@@ -173,14 +173,7 @@ public class CadFornecedor extends CadPadrao {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTFIdadeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFIdadeKeyReleased
-        if (evt.getKeyCode() != 8)
-            this.idade = this.idade + super.validarInteiro(evt.getKeyChar());
-        else {
-            if (this.idade.equals("")) 
-                this.idade = super.getNumFormatado(jTFIdade);
-            else
-                this.idade = this.idade.substring(0, this.idade.length() - 1);
-        }
+        this.idade = super.getApenasNros(this.idade, evt, jTFIdade);
         jTFIdade.setText(this.idade);
     }//GEN-LAST:event_jTFIdadeKeyReleased
 
@@ -226,15 +219,18 @@ public class CadFornecedor extends CadPadrao {
         forn.setCidade(this.jTFCidade.getText());
         forn.setCpf(this.jFTFCpf.getText());
         forn.setDataNasc(this.validarData("nascimento", this.jFTFDtNasc.getText(), ""));
-        forn.setIdade(Integer.valueOf(this.jTFIdade.getText()).intValue());
+        if (!super.strTrim(this.jTFIdade.getText()).equals(""))
+            forn.setIdade(Integer.valueOf(this.jTFIdade.getText()).intValue());
+        else
+            forn.setIdade(0);
         forn.setNome(this.jTFNome.getText());
         forn.setPais(this.jTFPais.getText());
         forn.setRg(this.jTFFRg.getText());
         forn.setSexo(this.jTFSexo.getText());
         forn.setUf(this.jTFUf.getText());
-
         if (!getJtfID().getText().equals(""))
             forn.setId(Integer.valueOf(getJtfID().getText()));
+        
         if (!super.bErro)
             super.confirmar(new FornecFactory(), forn, "FornecedorPU");
         super.bErro = false;
