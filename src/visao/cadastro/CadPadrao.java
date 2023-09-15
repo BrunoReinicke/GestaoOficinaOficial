@@ -15,7 +15,10 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.format.ResolverStyle;
 import java.time.temporal.TemporalAccessor;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.RollbackException;
 import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
@@ -90,7 +93,7 @@ public abstract class CadPadrao extends javax.swing.JFrame {
             }
         });
 
-        btSelecionar.setText("Selecionar");
+        btSelecionar.setText("Consultar");
         btSelecionar.setName("btnSalvar"); // NOI18N
         btSelecionar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -124,7 +127,7 @@ public abstract class CadPadrao extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(28, 28, 28)
                 .addComponent(jTfID, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 83, Short.MAX_VALUE)
                 .addComponent(btSelecionar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btLimpar)
@@ -308,6 +311,18 @@ public abstract class CadPadrao extends javax.swing.JFrame {
         return valor;
     }
     
+    protected String validarDecimal(char caract) {
+        String decimal = "0123456789.";
+        boolean contem = false;
+        String valor = "";
+        for (int i = 0; i < decimal.length(); i++)
+            if (caract == decimal.charAt(i))
+                contem = true;  
+        if (contem)
+            valor = caract + "";
+        return valor;
+    }
+    
     public String getApenasNros(String var, KeyEvent evt, JTextField jTF) {
         if (var.equals(""))
             return this.getNumFormatado(jTF);
@@ -318,12 +333,65 @@ public abstract class CadPadrao extends javax.swing.JFrame {
             return var.substring(0, var.length() - 1);
     }
     
+    public String getDecimais(String var, KeyEvent evt, JTextField jTF) {
+        if ((!var.contains(".")) || (evt.getKeyCode() != '.')) { 
+            if (var.equals(""))
+                var = this.getDeciamlFormat(jTF);
+            else 
+            if (evt.getKeyCode() != 8)
+                var = this.validarDecimal(evt.getKeyChar());
+            else
+                var = var.substring(0, var.length() - 1);
+        } else
+            var = this.validarDecimal(evt.getKeyChar());
+        if (var.charAt(0) == '.')
+            var = var.substring(1);
+        return var;
+    }
+    
     protected String getNumFormatado(JTextField jTFCampo) {
         String numero = "";
         for (int i = 0; i < jTFCampo.getText().length(); i++)
             if (!this.validarInteiro(jTFCampo.getText().charAt(i)).equals(""))
                 numero = numero + jTFCampo.getText().charAt(i);
         return numero;
+    }
+    
+    protected String getDeciamlFormat(JTextField jTFCampo) {
+        String numero = "";
+        for (int i = 0; i < jTFCampo.getText().length(); i++)
+            if (!this.validarDecimal(jTFCampo.getText().charAt(i)).equals(""))
+                numero = numero + jTFCampo.getText().charAt(i);
+        return numero;
+    }
+    
+    public int getAnosEntDt(String data) {
+        String formDtHoje = this.formatarData(LocalDate.now().toString());
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        Calendar data1 = Calendar.getInstance();
+        Calendar data2 = Calendar.getInstance();
+        try {
+            data1.setTime(sdf.parse(data));
+            data2.setTime(sdf.parse(formDtHoje));
+            int idade = data2.get(Calendar.YEAR) - data1.get(Calendar.YEAR);
+            
+            boolean bissexto = false;
+            if (data1.get(Calendar.YEAR) % 400 == 0)
+                bissexto = true;
+            if ((data1.get(Calendar.YEAR) % 4 == 0) && (data1.get(Calendar.YEAR) % 100 != 0))
+                bissexto = true;
+            if (bissexto)
+                if ((data2.get(Calendar.MONTH) >= data1.get(Calendar.MONTH)) && 
+                    ((data2.get(Calendar.DAY_OF_YEAR) + 1) < data1.get(Calendar.DAY_OF_YEAR)))
+                    idade = idade - 1;
+            else
+                if ((data2.get(Calendar.MONTH) >= data1.get(Calendar.MONTH)) && 
+                    (data2.get(Calendar.DAY_OF_YEAR) < data1.get(Calendar.DAY_OF_YEAR)))
+                    idade = idade - 1;
+            return idade;
+        } catch (ParseException e) {
+            return -1;
+        }
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

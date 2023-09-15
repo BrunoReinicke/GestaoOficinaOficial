@@ -196,6 +196,9 @@
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="jTFPreco">
+      <Events>
+        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTFPrecoKeyReleased"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="jFTFQtde">
       <Events>

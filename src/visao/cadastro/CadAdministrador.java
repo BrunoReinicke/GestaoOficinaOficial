@@ -7,6 +7,8 @@ package visao.cadastro;
 import controle.AdminFactory;
 import controle.UsuaFactory;
 import java.awt.event.FocusEvent;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 import javax.swing.JOptionPane;
 import modelo.bean.Administrador;
@@ -61,9 +63,9 @@ public class CadAdministrador extends CadPadrao {
         jTFUF = new javax.swing.JTextField();
         jBtnPesqUsuar = new javax.swing.JButton();
         jTFUsuario = new javax.swing.JTextField();
-        jFTFCpf = new javax.swing.JFormattedTextField(super.getMascCPF());
-        jFTFDtNasc = new javax.swing.JFormattedTextField(super.getMascData());
-        jfFTFRg = new javax.swing.JFormattedTextField(super.getMascRG());
+        jFTFCpf = new javax.swing.JFormattedTextField();
+        jFTFDtNasc = new javax.swing.JFormattedTextField();
+        jfFTFRg = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Cadastro de administradores");
@@ -90,6 +92,7 @@ public class CadAdministrador extends CadPadrao {
 
         jLabel10.setText("Usuário:");
 
+        jTFIdade.setEditable(false);
         jTFIdade.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 jTFIdadeFocusLost(evt);
@@ -135,6 +138,12 @@ public class CadAdministrador extends CadPadrao {
         jTFUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTFUsuarioActionPerformed(evt);
+            }
+        });
+
+        jFTFDtNasc.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jFTFDtNascFocusLost(evt);
             }
         });
 
@@ -269,6 +278,11 @@ public class CadAdministrador extends CadPadrao {
         this.idade = super.getApenasNros(this.idade, evt, jTFIdade);
         jTFIdade.setText(this.idade);
     }//GEN-LAST:event_jTFIdadeKeyReleased
+
+    private void jFTFDtNascFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jFTFDtNascFocusLost
+        int idade = super.getAnosEntDt(jFTFDtNasc.getText());
+        this.jTFIdade.setText(String.valueOf(idade));
+    }//GEN-LAST:event_jFTFDtNascFocusLost
 
     @Override
     public void salvar() {

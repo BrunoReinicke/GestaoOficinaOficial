@@ -28,7 +28,7 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
               <Component id="jTfID" min="-2" pref="48" max="-2" attributes="0"/>
-              <EmptySpace pref="80" max="32767" attributes="0"/>
+              <EmptySpace pref="83" max="32767" attributes="0"/>
               <Component id="btSelecionar" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="btLimpar" min="-2" max="-2" attributes="0"/>
@@ -98,7 +98,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="btSelecionar">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Selecionar"/>
+        <Property name="text" type="java.lang.String" value="Consultar"/>
         <Property name="name" type="java.lang.String" value="btnSalvar" noResource="true"/>
       </Properties>
       <Events>

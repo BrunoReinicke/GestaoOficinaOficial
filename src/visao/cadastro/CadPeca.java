@@ -19,6 +19,7 @@ import visao.consulta.ConsPeca;
 public class CadPeca extends CadPadrao {
 
     private String qtde;
+    private String preco;
     
     /**
      * Creates new form CadPeca
@@ -29,6 +30,7 @@ public class CadPeca extends CadPadrao {
         this.jTFIdFornec.setVisible(false);
         super.bErro = false;
         this.qtde = "";
+        this.preco = "";
     }
 
     /**
@@ -101,6 +103,12 @@ public class CadPeca extends CadPadrao {
         jBtnPesqFornec.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jBtnPesqFornecMouseClicked(evt);
+            }
+        });
+
+        jTFPreco.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTFPrecoKeyReleased(evt);
             }
         });
 
@@ -226,6 +234,11 @@ public class CadPeca extends CadPadrao {
         jFTFQtde.setText(this.qtde);
     }//GEN-LAST:event_jFTFQtdeKeyReleased
 
+    private void jTFPrecoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFPrecoKeyReleased
+        this.preco = super.getDecimais(this.preco, evt, jTFPreco);
+        jTFPreco.setText(this.preco);
+    }//GEN-LAST:event_jTFPrecoKeyReleased
+
     @Override
     public void salvar() {
         Peca pec = new Peca();
@@ -236,11 +249,20 @@ public class CadPeca extends CadPadrao {
         pec.setCategoria(jTFCategoria.getText());
         pec.setMarca(jTFMarca.getText());
         pec.setNome(jTFNome.getText());
-        pec.setPreco(Float.valueOf(jTFPreco.getText()));
+        
+        if (!super.strTrim(this.jFTFQtde.getText()).equals("")) {
+            String preco = jTFPreco.getText();
+            if (preco.charAt(preco.length() - 1) == '.')
+                preco = preco.substring(0, preco.length() - 1);
+            pec.setPreco(Float.valueOf(jTFPreco.getText()));
+        } else
+            pec.setPreco(0);
+            
         if (!super.strTrim(this.jFTFQtde.getText()).equals(""))
             pec.setQtde(Integer.valueOf(jFTFQtde.getText()));
-    else
+        else
             pec.setQtde(0);
+        
         Object objForn = new FornecFactory().consultar(Integer.valueOf(jTFIdFornec.getText()));
         pec.setForn((Fornecedor) ((List<Fornecedor>) objForn).get(0));
 
@@ -288,7 +310,8 @@ public class CadPeca extends CadPadrao {
         this.jTFPreco.setText("");
         this.jFTFAno1.setValue(null);
         this.jFTFQtde.setText("");
-        this.qtde = "";
+        this.qtde  = "";
+        this.preco = "";
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
