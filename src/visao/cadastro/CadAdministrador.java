@@ -33,6 +33,7 @@ public class CadAdministrador extends CadPadrao {
         this.jTFIdUsuario.setVisible(false);
         this.jTFUsuario.setEnabled(false);
         this.idade = "";
+        this.jTFIdade.setEnabled(false);
     }
 
     /**
@@ -63,9 +64,9 @@ public class CadAdministrador extends CadPadrao {
         jTFUF = new javax.swing.JTextField();
         jBtnPesqUsuar = new javax.swing.JButton();
         jTFUsuario = new javax.swing.JTextField();
-        jFTFCpf = new javax.swing.JFormattedTextField();
-        jFTFDtNasc = new javax.swing.JFormattedTextField();
-        jfFTFRg = new javax.swing.JFormattedTextField();
+        jFTFCpf = new javax.swing.JFormattedTextField(super.getMascCPF());
+        jFTFDtNasc = new javax.swing.JFormattedTextField(super.getMascData());
+        jfFTFRg = new javax.swing.JFormattedTextField(super.getMascRG());
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Cadastro de administradores");
@@ -93,6 +94,7 @@ public class CadAdministrador extends CadPadrao {
         jLabel10.setText("Usuário:");
 
         jTFIdade.setEditable(false);
+        jTFIdade.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         jTFIdade.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 jTFIdadeFocusLost(evt);

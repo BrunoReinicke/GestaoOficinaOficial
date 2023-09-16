@@ -30,6 +30,7 @@ public class CadClientes extends CadPadrao {
         this.jTFIdUsuario.setVisible(false);
         this.idade = "";
         super.bErro = false;
+        this.jTFIdade.setEnabled(false);
     }
 
     /**
@@ -89,7 +90,15 @@ public class CadClientes extends CadPadrao {
 
         jLabel10.setText("Usuário:");
 
+        jFTFDtNasc.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jFTFDtNascFocusLost(evt);
+            }
+        });
+
+        jTFIdade.setEditable(false);
         jTFIdade.setToolTipText("");
+        jTFIdade.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         jTFIdade.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jTFIdadeKeyReleased(evt);
@@ -228,6 +237,11 @@ public class CadClientes extends CadPadrao {
         this.idade = super.getApenasNros(this.idade, evt, jTFIdade);
         jTFIdade.setText(this.idade);
     }//GEN-LAST:event_jTFIdadeKeyReleased
+
+    private void jFTFDtNascFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jFTFDtNascFocusLost
+        int idade = super.getAnosEntDt(jFTFDtNasc.getText());
+        this.jTFIdade.setText(String.valueOf(idade));
+    }//GEN-LAST:event_jFTFDtNascFocusLost
 
     /**
      * @param args the command line arguments

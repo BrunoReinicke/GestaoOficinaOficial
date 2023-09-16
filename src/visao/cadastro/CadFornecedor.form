@@ -160,10 +160,17 @@
     <Component class="javax.swing.JFormattedTextField" name="jFTFCpf">
     </Component>
     <Component class="javax.swing.JFormattedTextField" name="jFTFDtNasc">
+      <Events>
+        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jFTFDtNascFocusLost"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="jTFIdade">
       <Properties>
+        <Property name="editable" type="boolean" value="false"/>
         <Property name="toolTipText" type="java.lang.String" value=""/>
+        <Property name="disabledTextColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="0" green="0" red="0" type="rgb"/>
+        </Property>
       </Properties>
       <Events>
         <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTFIdadeKeyReleased"/>

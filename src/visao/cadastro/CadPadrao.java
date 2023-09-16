@@ -334,19 +334,22 @@ public abstract class CadPadrao extends javax.swing.JFrame {
     }
     
     public String getDecimais(String var, KeyEvent evt, JTextField jTF) {
-        if ((!var.contains(".")) || (evt.getKeyCode() != '.')) { 
-            if (var.equals(""))
-                var = this.getDeciamlFormat(jTF);
-            else 
-            if (evt.getKeyCode() != 8)
-                var = this.validarDecimal(evt.getKeyChar());
-            else
-                var = var.substring(0, var.length() - 1);
-        } else
-            var = this.validarDecimal(evt.getKeyChar());
-        if (var.charAt(0) == '.')
-            var = var.substring(1);
-        return var;
+        if (var.equals("") && !jTF.getText().equals("."))
+            return this.getDeciamlFormat(jTF);
+        else 
+        if (evt.getKeyCode() != 8) {
+            if (!var.contains(".")) {
+                if (!(var + this.validarDecimal(evt.getKeyChar())).equals("."))
+                    return var + this.validarDecimal(evt.getKeyChar());
+                else
+                    return "";
+            } else
+                if (evt.getKeyChar() != '.')
+                    return var + this.validarDecimal(evt.getKeyChar());
+                else
+                    return var;
+        } else 
+            return var.substring(0, var.length() - 1);
     }
     
     protected String getNumFormatado(JTextField jTFCampo) {
@@ -373,21 +376,23 @@ public abstract class CadPadrao extends javax.swing.JFrame {
         try {
             data1.setTime(sdf.parse(data));
             data2.setTime(sdf.parse(formDtHoje));
-            int idade = data2.get(Calendar.YEAR) - data1.get(Calendar.YEAR);
             
+            int idade = data2.get(Calendar.YEAR) - data1.get(Calendar.YEAR);
             boolean bissexto = false;
             if (data1.get(Calendar.YEAR) % 400 == 0)
                 bissexto = true;
             if ((data1.get(Calendar.YEAR) % 4 == 0) && (data1.get(Calendar.YEAR) % 100 != 0))
                 bissexto = true;
-            if (bissexto)
+            
+            if (bissexto) {
                 if ((data2.get(Calendar.MONTH) >= data1.get(Calendar.MONTH)) && 
                     ((data2.get(Calendar.DAY_OF_YEAR) + 1) < data1.get(Calendar.DAY_OF_YEAR)))
                     idade = idade - 1;
-            else
+            } else {
                 if ((data2.get(Calendar.MONTH) >= data1.get(Calendar.MONTH)) && 
                     (data2.get(Calendar.DAY_OF_YEAR) < data1.get(Calendar.DAY_OF_YEAR)))
                     idade = idade - 1;
+            }
             return idade;
         } catch (ParseException e) {
             return -1;

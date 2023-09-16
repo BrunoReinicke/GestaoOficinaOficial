@@ -250,7 +250,7 @@ public class CadPeca extends CadPadrao {
         pec.setMarca(jTFMarca.getText());
         pec.setNome(jTFNome.getText());
         
-        if (!super.strTrim(this.jFTFQtde.getText()).equals("")) {
+        if (!super.strTrim(this.jTFPreco.getText()).equals("")) {
             String preco = jTFPreco.getText();
             if (preco.charAt(preco.length() - 1) == '.')
                 preco = preco.substring(0, preco.length() - 1);
