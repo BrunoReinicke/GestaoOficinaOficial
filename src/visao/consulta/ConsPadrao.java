@@ -34,6 +34,7 @@ public abstract class ConsPadrao extends javax.swing.JFrame {
         this.cadastro = false;
         this.ehNome = false;
         this.setResizable(true);
+        this.setLocationRelativeTo(null);
     }
     
     public abstract void listar(String info);

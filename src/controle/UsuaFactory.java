@@ -25,12 +25,13 @@ public class UsuaFactory extends Factory {
     
     public List<Usuario> isLogged(Usuario u) {
         Object usuar = super.consultar(
-                            "from Usuario " +
-                            "where usuario = '"+u.getUsuario()+"'"+
-                            " and senha = '"+u.getSenha()+"'");
+                                "from Usuario " +
+                                "where usuario = '"+u.getUsuario()+"'"+
+                                " and senha = '"+u.getSenha()+"'");
         List<Usuario> lstUsu = (List<Usuario>) usuar;
-        if (lstUsu.get(0).getUsuario().equals(u.getUsuario()) &&
-            lstUsu.get(0).getSenha().equals(u.getSenha()))    
+        if ((!lstUsu.isEmpty()) &&
+            (lstUsu.get(0).getUsuario().equals(u.getUsuario()) &&
+             lstUsu.get(0).getSenha().equals(u.getSenha())))    
             return (List<Usuario>) usuar;
         else
             return null;
