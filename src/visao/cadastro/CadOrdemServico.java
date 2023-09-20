@@ -356,7 +356,7 @@ public class CadOrdemServico extends CadPadrao {
             conPeca.setVisible(true);
             conPeca.setEhNome(true);
             conPeca.listar("");
-            conPeca.setJTFNome(this.jTextField10);
+            conPeca.setjTFNomFornec(this.jTextField10);
             conPeca.setJTFIdPeca(this.jTFIdPeca);
         });
     }//GEN-LAST:event_jBtnPesqPecaMouseClicked
@@ -509,6 +509,7 @@ public class CadOrdemServico extends CadPadrao {
         this.jTFIdCliente.setText("");
         this.jTFIdCarro.setText("");
         this.jTFIdPeca.setText("");
+        this.jTFNumero.setText("");
     }
     
     public void confirmar(Object obj, String pers, String sql) {  

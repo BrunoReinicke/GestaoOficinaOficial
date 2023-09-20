@@ -66,7 +66,7 @@ public class CadPeca extends CadPadrao {
 
         jLabel1.setText("Ano:");
 
-        jLabel2.setText("Caregoria:");
+        jLabel2.setText("Categoria:");
 
         jLabel3.setText("Marca:");
 
