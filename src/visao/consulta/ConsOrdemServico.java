@@ -49,11 +49,13 @@ public class ConsOrdemServico extends ConsPadrao {
     private JTextField jTFIdCliente;
     private JTextField jTFIdCarro;
     private JTextField jTFIdPeca;
+    private boolean temInfo;
     
     public ConsOrdemServico() {
         initComponents();
         super.setSize();    
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        temInfo = false;
     }
 
     /**
@@ -189,8 +191,16 @@ public class ConsOrdemServico extends ConsPadrao {
             if (!lstOS.isEmpty()) {
                 this.listarOrdensServ(modelo);
                 this.setVisible(true);
-            } else
-                JOptionPane.showMessageDialog(null, "Você não possui nenhuma OS em execução no momento.");
+                temInfo = true;
+            } else {
+                if (!temInfo) {
+                    JOptionPane.showMessageDialog(null, "Você não possui nenhuma OS em execução no momento.");
+                    this.dispose();
+                } else {
+                    this.listarOrdensServ(modelo);
+                    this.setVisible(true);
+                }
+            }
         } else {
             String colunas[] = {"ID", "Número", "Cliente", "Carro", "Peça", "Dt. abertura", 
                                 "Dt. encerramento", "Dt. previsão", "Troca de peça", "Status"};

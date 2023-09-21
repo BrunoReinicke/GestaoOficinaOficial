@@ -451,7 +451,8 @@ public class CadOrdemServico extends CadPadrao {
                                 "OrdemServicoPU", 
                                 "from OrdemServico "+
                                 "where idCliente = "+this.jTFIdCliente.getText()+
-                                " and status <> 'Encerrada'");
+                                " and status <> 'Encerrada' "+
+                                " and idCarro = "+this.jTFIdCarro.getText());
                     }
                 } else
                     JOptionPane.showMessageDialog(null, 

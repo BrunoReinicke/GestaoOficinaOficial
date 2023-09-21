@@ -7,8 +7,6 @@ package controle;
 
 import modelo.bean.OrdemServico;
 import java.util.List;
-import javax.swing.JOptionPane;
-import modelo.bean.Peca;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Order;
 import util.HibernateUtil;
@@ -54,11 +52,4 @@ public class OrdemServFactory extends Factory {
     public void excluir(Integer id) {
         super.excluir("OrdemServicoPU", id, new OrdemServico());
     }
-    /*@Override
-    public void excluir(Integer numero) {
-        List<OrdemServico> lstOS = (List<OrdemServico>) this.consultar(numero);
-        lstOS.forEach((os) -> {
-            super.excluir("OrdemServicoPU", os.getId(), new OrdemServico());
-        });
-    }*/
 }
