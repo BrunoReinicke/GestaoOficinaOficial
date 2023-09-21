@@ -9,15 +9,9 @@ import controle.CarroFactory;
 import controle.ClienteFactory;
 import controle.OrdemServFactory;
 import controle.PecaFactory;
-import controle.UsuaFactory;
-import java.sql.Date;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.List;
-import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
-import javax.swing.text.MaskFormatter;
 import modelo.bean.Carro;
 import modelo.bean.Cliente;
 import modelo.bean.OrdemServico;
@@ -336,6 +330,7 @@ public class CadOrdemServico extends CadPadrao {
             conCli.listar("");
             conCli.setJTFNome(this.jTextField1);
             conCli.setJTFIdCliente(this.jTFIdCliente);
+            addLstCons(conCli);
         });
     }//GEN-LAST:event_jBtnPesqCli1MouseClicked
 
@@ -347,6 +342,7 @@ public class CadOrdemServico extends CadPadrao {
             conCar.listar("");
             conCar.setJTFNome(this.jTextField9);
             conCar.setJTFIdCarro(this.jTFIdCarro);
+            addLstCons(conCar);
         });
     }//GEN-LAST:event_jBtnPesqCarMouseClicked
 
@@ -358,6 +354,7 @@ public class CadOrdemServico extends CadPadrao {
             conPeca.listar("");
             conPeca.setjTFNomFornec(this.jTextField10);
             conPeca.setJTFIdPeca(this.jTFIdPeca);
+            addLstCons(conPeca);
         });
     }//GEN-LAST:event_jBtnPesqPecaMouseClicked
 
@@ -493,6 +490,7 @@ public class CadOrdemServico extends CadPadrao {
             conos.setjTFIdCarro(this.jTFIdCarro);
             conos.setjTFIdCliente(this.jTFIdCliente);
             conos.setjTFIdPeca(this.jTFIdPeca);
+            addLstCons(conos);
         });
     }
 

@@ -9,19 +9,16 @@ package visao.cadastro;
  *
  * @author bruno
  */
-import visao.cadastro.CadPadrao;
+import visao.consulta.ConsUsuario;
 import modelo.bean.Usuario;
 import controle.UsuaFactory;
-import java.util.Arrays;
 import javax.swing.JComboBox;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.JOptionPane;
-import visao.consulta.ConsUsuario;
 
 public class CadtUsuario extends CadPadrao {
     
-    private int idUsuario;
     protected Object usua;
     protected int id;
     
@@ -30,7 +27,6 @@ public class CadtUsuario extends CadPadrao {
      */
     public CadtUsuario() {
         initComponents();
-        this.idUsuario = 0;
         this.id = 0;
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
@@ -170,6 +166,7 @@ public class CadtUsuario extends CadPadrao {
                 cous.setJtfSenha(getJpfSenha());
                 cous.setJcbTipo(getJcbTipo());
                 cous.listar("");
+                addLstCons(cous);
             }
         });
     }
@@ -210,7 +207,7 @@ public class CadtUsuario extends CadPadrao {
     public JComboBox getJcbTipo() {
         return this.jcbTipo;
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

@@ -18,6 +18,8 @@ import visao.cadastro.CadPadrao;
 import visao.cadastro.CadOrdemServico;
 import visao.cadastro.CadCarros;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JButton;
 import visao.cadastro.CadAdministrador;
 import visao.cadastro.CadClientes;
@@ -46,6 +48,8 @@ public class Principal extends javax.swing.JFrame {
     private CadClientes cadCli;
     private CadFornecedor cadForn;
     private CadPeca cadPeca;
+    private final List<CadPadrao> lstCad;
+    private final List<ConsPadrao> lstCons;
     protected Object obj;
     
     /**
@@ -69,6 +73,8 @@ public class Principal extends javax.swing.JFrame {
         this.jBtnCadFornec.setVisible(false);
         this.jBtnCadPecas.setVisible(false);
         this.jLabel2.setVisible(true);
+        this.lstCad  = new ArrayList<>();
+        this.lstCons = new ArrayList<>();
     }
 
     /**
@@ -435,19 +441,21 @@ public class Principal extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         this.caUs = new CadtUsuario();
         this.caUs.setVisible(true);
+        this.lstCad.add(this.caUs);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         this.conOS = new ConsOrdemServico();
         this.conOS.setIdUsuario(this.log.getIdUsuario());
         this.conOS.listar("");
+        this.lstCons.add(this.conOS);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         this.conUs = new ConsUsuario();
         this.conUs.listar("");
         this.conUs.setVisible(true);
-        this.conUs.addKeyListener((KeyListener) this);
+        this.lstCons.add(this.conUs);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
@@ -470,14 +478,17 @@ public class Principal extends javax.swing.JFrame {
         this.log.setVisible(true);
     }//GEN-LAST:event_jButton4MouseClicked
 
-    private void fecharTelaCons(ConsPadrao cons) {
-        if (cons != null)
-            cons.dispose();
+    private void fecharTelaCons() {
+        for (int i = 0; i < this.lstCons.size(); i++)
+            this.lstCons.get(i).dispose();
     }
     
-    private void fecharTelaCad(CadPadrao cad) {
-        if (cad != null)
-            cad.dispose();
+    private void fecharTelaCad() {
+        for (int i = 0; i < this.lstCad.size(); i++) {
+            for (int y = 0; y < this.lstCad.get(i).getLstCons().size(); y++)
+                this.lstCad.get(i).getLstCons().get(y).dispose();
+            this.lstCad.get(i).dispose();
+        }
     }
     
     private void jButton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseClicked
@@ -497,26 +508,8 @@ public class Principal extends javax.swing.JFrame {
         this.jBtnCadPecas.setVisible(false);
         this.jButton4.setEnabled(true);
         
-        this.fecharTelaCons(this.conUs);
-        this.fecharTelaCad(this.caUs);
-        
-        this.fecharTelaCons(this.conOS);
-        this.fecharTelaCad(this.cadOS);
-     
-        this.fecharTelaCons(this.conAdm);
-        this.fecharTelaCad(this.cadAdm);
-        
-        this.fecharTelaCons(this.conCar);
-        this.fecharTelaCad(this.cadCar);
-        
-        this.fecharTelaCons(this.conClie);
-        this.fecharTelaCad(this.cadCli);
-        
-        this.fecharTelaCons(this.conForn);
-        this.fecharTelaCad(this.cadForn);
-        
-        this.fecharTelaCons(this.conPeca);
-        this.fecharTelaCad(this.cadPeca);
+        this.fecharTelaCad();
+        this.fecharTelaCons();
     }//GEN-LAST:event_jButton5MouseClicked
 
     private void jButton2ComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jButton2ComponentShown
@@ -527,6 +520,7 @@ public class Principal extends javax.swing.JFrame {
         this.cadOS = new CadOrdemServico();
         this.cadOS.setVisible(true);
         this.cadOS.setIdUsuario(this.log.getIdUsuario());
+        this.lstCad.add(this.cadOS);
     }//GEN-LAST:event_jButton6MouseClicked
     
     private void jBtnConsAdmComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jBtnConsAdmComponentShown
@@ -541,6 +535,7 @@ public class Principal extends javax.swing.JFrame {
         this.conAdm = new ConsAdministrador();
         this.conAdm.listar("");
         this.conAdm.setVisible(true);
+        this.lstCons.add(this.conAdm);
     }//GEN-LAST:event_jBtnConsAdmMouseClicked
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
@@ -551,6 +546,7 @@ public class Principal extends javax.swing.JFrame {
         this.conCar = new ConsCarro();
         this.conCar.listar("");
         this.conCar.setVisible(true);
+        this.lstCons.add(this.conCar);
     }//GEN-LAST:event_jBtnConsCarrosMouseClicked
 
     private void jBtnConsCarrosComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jBtnConsCarrosComponentShown
@@ -565,6 +561,7 @@ public class Principal extends javax.swing.JFrame {
         this.conClie = new ConsCliente();
         this.conClie.listar("");
         this.conClie.setVisible(true);
+        this.lstCons.add(this.conClie);
     }//GEN-LAST:event_jBtnConsCliMouseClicked
 
     private void jBtnConsCliComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jBtnConsCliComponentShown
@@ -579,6 +576,7 @@ public class Principal extends javax.swing.JFrame {
         this.conForn = new ConsFornecedor();
         this.conForn.listar("");
         this.conForn.setVisible(true);
+        this.lstCons.add(this.conForn);
     }//GEN-LAST:event_jBtnConsFornMouseClicked
 
     private void jBtnConsFornComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jBtnConsFornComponentShown
@@ -593,6 +591,7 @@ public class Principal extends javax.swing.JFrame {
         this.conPeca = new ConsPeca();
         this.conPeca.listar("");
         this.conPeca.setVisible(true);
+        this.lstCons.add(this.conPeca);
     }//GEN-LAST:event_jBtnConsPecaMouseClicked
 
     private void jBtnConsPecaComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jBtnConsPecaComponentShown
@@ -610,11 +609,13 @@ public class Principal extends javax.swing.JFrame {
     private void jBtnCadAdminMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnCadAdminMouseClicked
         this.cadAdm = new CadAdministrador();
         this.cadAdm.setVisible(true);
+        this.lstCad.add(this.cadAdm);
     }//GEN-LAST:event_jBtnCadAdminMouseClicked
 
     private void jBtnCadCarrosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnCadCarrosMouseClicked
         this.cadCar = new CadCarros();
         this.cadCar.setVisible(true);
+        this.lstCad.add(this.cadCar);
     }//GEN-LAST:event_jBtnCadCarrosMouseClicked
 
     private void jBtnCadCarrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCadCarrosActionPerformed
@@ -624,6 +625,7 @@ public class Principal extends javax.swing.JFrame {
     private void jBtnCadClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnCadClientesMouseClicked
         this.cadCli = new CadClientes();
         this.cadCli.setVisible(true);
+        this.lstCad.add(this.cadCli);
     }//GEN-LAST:event_jBtnCadClientesMouseClicked
 
     private void jBtnCadClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCadClientesActionPerformed
@@ -633,6 +635,7 @@ public class Principal extends javax.swing.JFrame {
     private void jBtnCadFornecMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnCadFornecMouseClicked
         this.cadForn = new CadFornecedor();
         this.cadForn.setVisible(true);
+        this.lstCad.add(this.cadForn);
     }//GEN-LAST:event_jBtnCadFornecMouseClicked
 
     private void jBtnCadFornecActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCadFornecActionPerformed
@@ -642,6 +645,7 @@ public class Principal extends javax.swing.JFrame {
     private void jBtnCadPecasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnCadPecasMouseClicked
         this.cadPeca = new CadPeca();
         this.cadPeca.setVisible(true);
+        this.lstCad.add(this.cadPeca);
     }//GEN-LAST:event_jBtnCadPecasMouseClicked
 
     private void jBtnCadPecasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCadPecasActionPerformed

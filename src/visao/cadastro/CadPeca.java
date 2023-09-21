@@ -222,6 +222,7 @@ public class CadPeca extends CadPadrao {
             conForn.listar("");
             conForn.setjTFNomFornec(this.jTFNome1);
             conForn.setjTFIdFornec(this.jTFIdFornec);
+            addLstCons(conForn);
         });
     }//GEN-LAST:event_jBtnPesqFornecMouseClicked
 
@@ -295,6 +296,7 @@ public class CadPeca extends CadPadrao {
                 consPec.listar("");
                 consPec.setVisible(true);
                 consPec.setCadastro(true);
+                addLstCons(consPec);
             }
         });
     }

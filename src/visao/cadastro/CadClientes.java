@@ -226,6 +226,7 @@ public class CadClientes extends CadPadrao {
             conUsua.listar("");
             conUsua.setJTFNome(this.jTFUsuario);
             conUsua.setJtfIdfUsuario(this.jTFIdUsuario);
+            addLstCons(conUsua);
         });
     }//GEN-LAST:event_jBtnPesqUsuarMouseClicked
 
@@ -338,6 +339,7 @@ public class CadClientes extends CadPadrao {
                 conCli.setjTFNome(jTFNome);
                 conCli.setjTFSexo(jTFSexo);
                 conCli.listar("");
+                addLstCons(conCli);
             }
         });
     }

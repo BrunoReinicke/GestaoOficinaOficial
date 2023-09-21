@@ -274,6 +274,7 @@ public class CadFornecedor extends CadPadrao {
                 conFornec.setjTFSexo(jTFSexo);
                 conFornec.setjTFIdFornec(getJtfID());
                 conFornec.listar("");
+                addLstCons(conFornec);
             }
         });
     }

@@ -191,6 +191,7 @@ public class CadCarros extends CadPadrao {
             conClie.listar("");
             conClie.setJTFNome(this.jTFCliente);
             conClie.setJTFIdCliente(this.jTFIdCliente);
+            addLstCons(conClie);
         });
     }//GEN-LAST:event_jBtnPesqClienteMouseClicked
 
@@ -279,6 +280,7 @@ public class CadCarros extends CadPadrao {
                 consCar.setCadastro(true);
                 consCar.setVisible(true);
                 consCar.listar("");
+                addLstCons(consCar);
             }
         });
     }

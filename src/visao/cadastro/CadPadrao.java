@@ -15,8 +15,10 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.format.ResolverStyle;
 import java.time.temporal.TemporalAccessor;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.RollbackException;
@@ -25,6 +27,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.text.MaskFormatter;
 import org.hibernate.exception.ConstraintViolationException;
+import visao.consulta.ConsPadrao;
 
 /**
  *
@@ -37,6 +40,7 @@ public abstract class CadPadrao extends javax.swing.JFrame {
      */
     private int idUsuario;
     protected boolean bErro;
+    private final List<ConsPadrao> lstCons;
 
     public abstract void salvar();
     public abstract void excluir();
@@ -49,6 +53,7 @@ public abstract class CadPadrao extends javax.swing.JFrame {
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         this.bErro = false;
         this.setLocationRelativeTo(null);
+        this.lstCons = new ArrayList<>();
     }
 
     /**
@@ -398,6 +403,14 @@ public abstract class CadPadrao extends javax.swing.JFrame {
         } catch (ParseException e) {
             return -1;
         }
+    }
+    
+    public List<ConsPadrao> getLstCons() {
+        return this.lstCons;
+    }
+    
+    protected void addLstCons(ConsPadrao conPad) {
+        this.lstCons.add(conPad);
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

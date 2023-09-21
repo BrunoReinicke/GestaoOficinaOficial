@@ -6,9 +6,6 @@ package visao.cadastro;
 
 import controle.AdminFactory;
 import controle.UsuaFactory;
-import java.awt.event.FocusEvent;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.List;
 import javax.swing.JOptionPane;
 import modelo.bean.Administrador;
@@ -261,6 +258,7 @@ public class CadAdministrador extends CadPadrao {
             conUsua.listar("");
             conUsua.setJTFNome(this.jTFUsuario);
             conUsua.setJtfIdfUsuario(this.jTFIdUsuario);
+            addLstCons(conUsua);
         });
     }//GEN-LAST:event_jBtnPesqUsuarMouseClicked
 
@@ -346,6 +344,7 @@ public class CadAdministrador extends CadPadrao {
                 conAdm.setjTFNome(jTFNome);
                 conAdm.setjTFSexo(jTFSexo);
                 conAdm.listar("");
+                addLstCons(conAdm);
             }
         });
     }
@@ -366,7 +365,7 @@ public class CadAdministrador extends CadPadrao {
         this.jTFUsuario.setText("");
         this.idade = "";
     }
-
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtnPesqUsuar;
     private javax.swing.JFormattedTextField jFTFCpf;
