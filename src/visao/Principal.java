@@ -481,6 +481,7 @@ public class Principal extends javax.swing.JFrame {
     private void fecharTelaCons() {
         for (int i = 0; i < this.lstCons.size(); i++)
             this.lstCons.get(i).dispose();
+        this.lstCons.clear();
     }
     
     private void fecharTelaCad() {
@@ -489,6 +490,7 @@ public class Principal extends javax.swing.JFrame {
                 this.lstCad.get(i).getLstCons().get(y).dispose();
             this.lstCad.get(i).dispose();
         }
+        this.lstCad.clear();
     }
     
     private void jButton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseClicked
