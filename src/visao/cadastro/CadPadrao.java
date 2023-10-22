@@ -318,7 +318,7 @@ public abstract class CadPadrao extends javax.swing.JFrame {
     }
     
     protected String validarDecimal(char caract) {
-        String decimal = "0123456789.";
+        String decimal = "0123456789,";
         boolean contem = false;
         String valor = "";
         for (int i = 0; i < decimal.length(); i++)
@@ -339,23 +339,70 @@ public abstract class CadPadrao extends javax.swing.JFrame {
             return var.substring(0, var.length() - 1);
     }
     
+    public String getDecimaisAux(String getDecim) {
+        ArrayList<String> lstNum = new ArrayList();
+        String posVirg = "";
+        String antVirgAux;
+        String antVirg = "";
+        
+        if (getDecim.contains(",")) {
+            antVirgAux = getDecim.substring(0,getDecim.indexOf(","));
+            posVirg = getDecim.substring(getDecim.indexOf(","));
+        } else
+            antVirgAux = getDecim;
+        String decim = "";
+
+        for (int i = 0; i < antVirgAux.length(); i++) 
+            if (antVirgAux.charAt(i) != '.')
+                antVirg = antVirg + antVirgAux.charAt(i);
+            
+        for (int i = antVirg.length() - 1; i >= 0; i--) {
+            decim = antVirg.charAt(i) + decim;
+            if ((decim.length() == 3) || i == 0) {
+                lstNum.add(decim);
+                decim = "";
+            }
+        }
+        for (int i = lstNum.size()-1; i >= 0; i--) {
+            if (lstNum.get(i).length() == 3)
+                decim = decim + '.' + lstNum.get(i);
+            else
+                decim = decim + lstNum.get(i);
+        }
+        if (decim.charAt(0) != '.')
+            return decim.substring(0, decim.length()) + posVirg;
+        else
+            return decim.substring(1, decim.length()) + posVirg;
+    }
+
     public String getDecimais(String var, KeyEvent evt, JTextField jTF) {
-        if (var.equals("") && !jTF.getText().equals("."))
-            return this.getDeciamlFormat(jTF);
+        if (evt.getKeyCode() != 8)
+            return this.getDecimaisFrmt(var, evt, jTF);
+        else {
+            if (jTF.getText().length() > 1) 
+                return this.getDecimaisFrmt(var, evt, jTF);
+            else
+                return "";
+        }
+    }
+    
+    public String getDecimaisFrmt(String var, KeyEvent evt, JTextField jTF) {
+        if (var.equals("") && !jTF.getText().equals(","))
+            return this.getDecimaisAux(this.getDeciamlFormat(jTF));
         else 
         if (evt.getKeyCode() != 8) {
-            if (!var.contains(".")) {
-                if (!(var + this.validarDecimal(evt.getKeyChar())).equals("."))
-                    return var + this.validarDecimal(evt.getKeyChar());
+            if (!var.contains(",")) {
+                if (!(var + this.validarDecimal(evt.getKeyChar())).equals(","))
+                    return this.getDecimaisAux(var + this.validarDecimal(evt.getKeyChar()));
                 else
                     return "";
             } else
-                if (evt.getKeyChar() != '.')
-                    return var + this.validarDecimal(evt.getKeyChar());
+                if (evt.getKeyChar() != ',')
+                    return this.getDecimaisAux(var + this.validarDecimal(evt.getKeyChar()));
                 else
-                    return var;
+                    return this.getDecimaisAux(var);
         } else 
-            return var.substring(0, var.length() - 1);
+            return this.getDecimaisAux(var.substring(0, var.length() - 1));
     }
     
     protected String getNumFormatado(JTextField jTFCampo) {

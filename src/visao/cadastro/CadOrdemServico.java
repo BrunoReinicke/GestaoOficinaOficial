@@ -509,6 +509,7 @@ public class CadOrdemServico extends CadPadrao {
         this.jTFIdCarro.setText("");
         this.jTFIdPeca.setText("");
         this.jTFNumero.setText("");
+        this.jFTFDtAbertura.setValue(super.formatarData(LocalDate.now().toString()));
     }
     
     public void confirmar(Object obj, String pers, String sql) {  

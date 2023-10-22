@@ -253,9 +253,10 @@ public class CadPeca extends CadPadrao {
         
         if (!super.strTrim(this.jTFPreco.getText()).equals("")) {
             String preco = jTFPreco.getText();
-            if (preco.charAt(preco.length() - 1) == '.')
+            if (preco.charAt(preco.length() - 1) == ',')
                 preco = preco.substring(0, preco.length() - 1);
-            pec.setPreco(Float.valueOf(jTFPreco.getText()));
+            preco = super.strTrim(preco.replace("."," "));
+            pec.setPreco(Float.valueOf(preco.replace(",", ".")));
         } else
             pec.setPreco(0);
             

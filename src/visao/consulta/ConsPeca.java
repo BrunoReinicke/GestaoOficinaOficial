@@ -153,11 +153,7 @@ public class ConsPeca extends ConsPadrao {
             this.jTFCategoria.setText(vect.get(2).toString());
             this.jTFMarca.setText(vect.get(3).toString());
             this.jTFNomPeca.setText(vect.get(4).toString());
-            
-            String strPreco = vect.get(5).toString();
-            strPreco = strPreco.substring(3, strPreco.length());
-            this.jTFPreco.setText(super.strTrim(strPreco.replace('.',' ').replace(',','.')));
-            
+            this.jTFPreco.setText(vect.get(5).toString().substring(3));
             this.jFTFQtde.setText(vect.get(6).toString());
             this.jTFNomFornec.setText(vect.get(7).toString());
             
