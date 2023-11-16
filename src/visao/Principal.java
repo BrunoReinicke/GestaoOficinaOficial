@@ -109,7 +109,7 @@ public class Principal extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("OSTPA");
+        setTitle("SCOS");
 
         jButton1.setLabel("Cadastrar usuário");
         jButton1.setName("btnCadastrar"); // NOI18N
